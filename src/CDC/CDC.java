@@ -1,7 +1,6 @@
 package CDC;
 
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class CDC {
@@ -10,7 +9,7 @@ public class CDC {
     private GameController gameController;
     private PlayController playController;
     private BombController bombController;
-    private Map map;
+    private GameMap gameMap;
 
     public void addVirtualCharacter(int clientNo) {
 
@@ -24,11 +23,16 @@ public class CDC {
 
     }
 
-    public void getUpdatingThread() {
+    public static void getUpdatingThread() {
 
     }
 
-    public void getUpdatingInfo() {
-
+    public static ArrayList<JSONObject> getUpdatingInfo() {
+        return new ArrayList<JSONObject>() {{
+            JSONObject info = new JSONObject();
+            info.append("Character", "Jason Wu");
+            info.append("Item", "Bomb");
+            add(info);
+        }};
     }
 }

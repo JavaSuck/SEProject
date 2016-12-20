@@ -5,13 +5,30 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CDC {
+    private GameMode gameMode;
+    private GameState gameState;
+    private GameController gameController;
+    private PlayController playController;
+    private BombController bombController;
+    private Map map;
 
-    public static ArrayList<JSONObject> getUpdateInfo() {
-        return new ArrayList<JSONObject>() {{
-            JSONObject info = new JSONObject();
-            info.append("Character", "Jason Wu");
-            info.append("Item", "Bomb");
-            add(info);
-        }};
+    public void addVirtualCharacter(int clientNo) {
+
+    }
+
+    public void addBomb(int clientNo, int x, int y) {
+
+    }
+
+    public void updateDirection(int clientNo, int moveCode) {
+
+    }
+
+    public void getUpdatingThread() {
+
+    }
+
+    public void getUpdatingInfo() {
+
     }
 }

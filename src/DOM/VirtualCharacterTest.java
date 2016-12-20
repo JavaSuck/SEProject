@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 
 import java.awt.*;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.*;
 

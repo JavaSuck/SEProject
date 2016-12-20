@@ -2,26 +2,25 @@ package UDPClient;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.*;
 
 class UpdateServerTest {
     private UpdateServer updateServer;
 
-    @BeforeEach
+    @Before
     void setUp() {
         updateServer = new UpdateServer();
     }
 
-    @AfterEach
+    @After
     void tearDown() {
         updateServer = null;
     }

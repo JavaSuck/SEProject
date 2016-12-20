@@ -3,25 +3,24 @@ package UDPServer;
 import CDC.CDC;
 import TCPServerModule.TCPServerModule;
 import org.json.JSONObject;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.*;
 
 class BroadcastClientTest {
     private BroadcastClient broadcastClient;
 
-    @BeforeEach
+    @Before
     void setUp() {
         broadcastClient = new BroadcastClient();
     }
 
-    @AfterEach
+    @After
     void tearDown() {
         broadcastClient = null;
     }

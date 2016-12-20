@@ -1,6 +1,5 @@
 package UDPClient;
 
-import DOM.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,13 +35,13 @@ public class UpdateServer extends Thread {
             for (int i = 0; i < messages.length(); i++) {
                 JSONObject message = new JSONObject(messages.get(i).toString());
                 Object command = ((JSONArray) message.get("Command")).get(0);
-                if (command.equals("ADD")) {
+                /*if (command.equals("ADD")) {
                     DOM.addVirtualCharacter(message.get("Character"));
                     DOM.addItem(message.get("Item"));
                 } else if (command.equals("UPDATE")) {
                     DOM.updateVirtualCharacter(message.get("Character"));
                     DOM.updateItem(message.get("Item"));
-                }
+                }*/
             }
             socket.close();
         }

@@ -9,13 +9,8 @@ import java.util.ArrayList;
 
 public class UDPServer extends Thread {
 
-    int playerCount = 1;
+    int playerCount = 4;
     TCPServer TCPServer;
-
-    public static void main(String[] args) throws Exception {
-        UDPServer UDPServer = new UDPServer();
-        UDPServer.start();
-    }
 
     public void run() {
         try {

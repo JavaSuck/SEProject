@@ -24,7 +24,6 @@ public class Client extends JFrame implements KeyListener {
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-//        setBackground(Color.BLUE);
         setForeground(Color.RED);
         setTitle("SEProject");
     }
@@ -33,7 +32,6 @@ public class Client extends JFrame implements KeyListener {
         backgroundCanvas = new BackgroundCanvas();
         SDM sdm = new SDM(backgroundCanvas);
         sdm.loadMap();
-//        add(backgroundCanvas);
 
         initUI();
 
@@ -45,14 +43,11 @@ public class Client extends JFrame implements KeyListener {
         character.stop();
 
         Sidebar sidebar = new Sidebar();
-//        JButton btn = new JButton("123");
-//
-//        sidebar.add(btn);
+
         JLayeredPane content = new JLayeredPane();
         content.setLayout(null);
         content.setPreferredSize(new Dimension(720, 720));
         backgroundCanvas.setLocation(0, 0);
-//        backgroundCanvas.setPreferredSize(new Dimension(816,816));
 
         content.add(backgroundCanvas);
         backgroundCanvas.setBounds(0, 0, 816, 816);
@@ -97,18 +92,18 @@ public class Client extends JFrame implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
                 character.walk(1);
-                backgroundCanvas.moveCanvas(48,0);
+                backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
                 character.walk(2);
-                backgroundCanvas.moveCanvas(-48,0);
+                backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
                 character.walk(3);
-                backgroundCanvas.moveCanvas(0,48);
+                backgroundCanvas.moveCanvas(0, 48);
                 break;
             case KeyEvent.VK_DOWN:
-                backgroundCanvas.moveCanvas(0,-48);
+                backgroundCanvas.moveCanvas(0, -48);
                 character.walk(0);
                 break;
             case KeyEvent.VK_SPACE:

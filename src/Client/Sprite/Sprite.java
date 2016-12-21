@@ -12,7 +12,7 @@ public class Sprite {
     private BufferedImage spriteSheet;
     private int tileSize = 48;
 
-    protected BufferedImage loadSprite(String file) {
+    public BufferedImage loadSprite(String file) {
 
 //        BufferedImage sprite = null;
 
@@ -35,7 +35,7 @@ public class Sprite {
         return spriteSheet.getSubimage(yGrid * tileSize, xGrid * tileSize, tileSize, tileSize);
     }
 
-    public void setTileSize(int size) {
+    public void setSplitSize(int size) {
         tileSize = size;
     }
 

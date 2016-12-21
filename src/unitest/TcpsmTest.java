@@ -3,10 +3,9 @@ package unitest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tcpModule.Tcpsm;
-import tcpModule.Tcpcm;
+import Server.TCPServer.Tcpsm;
+import Client.Tcpcm;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 

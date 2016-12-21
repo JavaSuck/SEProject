@@ -5,13 +5,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import Client.Assets.Images.images;
+
 public class ImagePanel extends JPanel {
 
     private BufferedImage image;
 
     public ImagePanel(String fileName) {
         try {
-            image = ImageIO.read(images.images.class.getResource(fileName));
+            image = ImageIO.read(images.class.getResource(fileName));
         } catch (IOException ex) {
             // handle exception...
         }

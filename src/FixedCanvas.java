@@ -2,7 +2,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import DOM.VirtualCharacter;
+import Client.DOM.VirtualCharacter;
 
 public class FixedCanvas extends JPanel {
     private final int width = 720;

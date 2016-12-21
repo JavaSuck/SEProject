@@ -19,6 +19,7 @@ public class BackgroundCanvas extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(width, height);
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -27,7 +28,8 @@ public class BackgroundCanvas extends JPanel {
 
 
     public void moveCanvas(int xOffsetDelta,int yOffsetDelta){
-        xOffset += xOffsetDelta;
-        yOffset += yOffsetDelta;
+        setLocation(getLocation().x+xOffsetDelta, getLocation().y+yOffsetDelta);
+//        xOffset += xOffsetDelta;
+//        yOffset += yOffsetDelta;
     }
 }

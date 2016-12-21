@@ -18,7 +18,7 @@ public class Client extends JFrame implements KeyListener {
 
     private int WINDOW_WIDTH = 910;
     private int WINDOW_HEIGHT = 720;
-
+    private BackgroundCanvas backgroundCanvas;
     private VirtualCharacter character;
     private int delay = 20; // milliseconds
 
@@ -30,7 +30,7 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-        BackgroundCanvas backgroundCanvas = new BackgroundCanvas();
+        backgroundCanvas = new BackgroundCanvas();
         SDM sdm = new SDM(backgroundCanvas);
         sdm.loadMap();
 //        add(backgroundCanvas);
@@ -97,14 +97,18 @@ public class Client extends JFrame implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
                 character.walk(1);
+                backgroundCanvas.moveCanvas(48,0);
                 break;
             case KeyEvent.VK_RIGHT:
                 character.walk(2);
+                backgroundCanvas.moveCanvas(-48,0);
                 break;
             case KeyEvent.VK_UP:
                 character.walk(3);
+                backgroundCanvas.moveCanvas(0,48);
                 break;
             case KeyEvent.VK_DOWN:
+                backgroundCanvas.moveCanvas(0,-48);
                 character.walk(0);
                 break;
             case KeyEvent.VK_SPACE:

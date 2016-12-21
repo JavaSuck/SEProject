@@ -50,7 +50,7 @@ class BroadcastClientTest {
 
     @Test
     void updateInfo() {
-        ArrayList<JSONObject> updateInfo = CDC.getUpdateInfo();
+        ArrayList<JSONObject> updateInfo = CDC.getUpdatingInfo();
         boolean infoCorrect = true;
         for (JSONObject info : updateInfo) {
             infoCorrect &= info.has("Character");

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.awt.*;
+import DOM.*;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.*;

@@ -43,7 +43,7 @@ public class BroadcastClient extends Thread {
     }
 
     private ArrayList<JSONObject> getEncodeInfo(String command) {
-        ArrayList<JSONObject> updateInfo = CDC.getUpdateInfo();
+        ArrayList<JSONObject> updateInfo = CDC.getUpdatingInfo();
         boolean infoCorrect = true;
         do {
             if (!infoCorrect)

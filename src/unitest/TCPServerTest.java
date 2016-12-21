@@ -1,10 +1,10 @@
 package unitest;
 
+import Client.TCPClient.TCPClient;
 import Server.TCPServer.TCPServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import Client.Tcpcm;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class TCPServerTest {
         int ConnectionNumber = 4;
         
         for(int i=0; i<ConnectionNumber; i++){
-            Tcpcm client = new Tcpcm(40689);
+            TCPClient client = new TCPClient(40689);
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }
@@ -97,7 +97,7 @@ public class TCPServerTest {
         
         
         for(int i=0; i<AddConnectionNumber; i++){
-            Tcpcm client = new Tcpcm(40689);
+            TCPClient client = new TCPClient(40689);
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }

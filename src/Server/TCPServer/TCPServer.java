@@ -91,8 +91,8 @@ public class TCPServer {
                 JSONObject jsonObject = new JSONObject();
 
 
-                jsonObject.put("type", "RESPONSE");
-                jsonObject.put("content", "CONNECTION FULL");
+                jsonObject.put("type", "CONNECT");
+                jsonObject.put("content", Boolean.toString(false));
 
 
                 sender.println(jsonObject);

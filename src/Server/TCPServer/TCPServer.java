@@ -13,7 +13,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 
-public class Tcpsm {
+public class TCPServer {
 
     public volatile static boolean tableFlag = false;
     public volatile static boolean closeFlag = false;
@@ -25,7 +25,7 @@ public class Tcpsm {
     protected ArrayList<InetAddress> connectionList;
 
 
-    public Tcpsm(int port, int connection_limit) throws IOException {
+    public TCPServer(int port, int connection_limit) throws IOException {
 
         this.server = new ServerSocket(port);
         this.connection_limit = connection_limit;

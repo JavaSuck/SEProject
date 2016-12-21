@@ -1,9 +1,9 @@
 package Server.TCPServer.Tool;
 
+import Server.TCPServer.TCPServer;
 import org.json.JSONException;
 import org.json.JSONObject;
 import Server.TCPServer.Instruction;
-import Server.TCPServer.Tcpsm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -169,11 +169,11 @@ public class ServerThread implements Runnable{
 
     protected void connection_close(){
 
-    	while(Tcpsm.closeFlag);
-    	Tcpsm.closeFlag = true;
+    	while(TCPServer.closeFlag);
+    	TCPServer.closeFlag = true;
     	
-    	while(Tcpsm.tableFlag);
-    	Tcpsm.tableFlag = true;
+    	while(TCPServer.tableFlag);
+    	TCPServer.tableFlag = true;
     	
         try{
 
@@ -191,8 +191,8 @@ public class ServerThread implements Runnable{
             error_handle(e);
         }
 
-        Tcpsm.tableFlag = false;
-        Tcpsm.closeFlag = false;
+        TCPServer.tableFlag = false;
+        TCPServer.closeFlag = false;
     }
 
     protected void removeConnectionList(){

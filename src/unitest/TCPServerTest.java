@@ -1,9 +1,9 @@
 package unitest;
 
+import Server.TCPServer.TCPServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import Server.TCPServer.Tcpsm;
 import Client.Tcpcm;
 
 import java.net.InetAddress;
@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
 /**
  * Created by lucienlo on 2016/12/9.
  */
-public class TcpsmTest {
+public class TCPServerTest {
 
-    private Tcpsm _server;
+    private TCPServer _server;
     private String _serverName = "localhost";
     private int _port;
     private int _limitedConnections = 4;
@@ -24,7 +24,7 @@ public class TcpsmTest {
     @Before
     public void setUp() throws Exception {
 		_port = 40689;
-		_server = new Tcpsm(_port, _limitedConnections);
+		_server = new TCPServer(_port, _limitedConnections);
 		_server.initTCPServer();
     }
 
@@ -41,7 +41,7 @@ public class TcpsmTest {
 //        _server.initTCPServer();
 //
 //        _server = null;
-//        _server = new Tcpsm(_port, _limitedConnections);
+//        _server = new TCPServer(_port, _limitedConnections);
 //
 //        
 //    }

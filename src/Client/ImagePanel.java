@@ -14,8 +14,8 @@ public class ImagePanel extends JPanel {
 
     private BufferedImage srcImage;
     private Image resizedImage;
-    private int resizedWidth = 180;
-    private int resizedHeight = 180;
+    private int resizedWidth = 150;
+    private int resizedHeight = 150;
 
     public ImagePanel(String fileName) {
 //        try {

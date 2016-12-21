@@ -2,9 +2,10 @@ package Client;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.DOM.VirtualCharacter;
-import Client.SDM.SDM;
+import Client.SDM.*;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ import java.awt.event.KeyListener;
 public class Client extends JFrame implements KeyListener {
 
 
-    private int WINDOW_WIDTH = 920;
+    private int WINDOW_WIDTH = 910;
     private int WINDOW_HEIGHT = 720;
 
     private VirtualCharacter character;
@@ -49,14 +50,14 @@ public class Client extends JFrame implements KeyListener {
 //        sidebar.add(btn);
         JLayeredPane content = new JLayeredPane();
         content.setLayout(null);
-        content.setPreferredSize(new Dimension(720,720));
-        backgroundCanvas.setLocation(0,0);
+        content.setPreferredSize(new Dimension(720, 720));
+        backgroundCanvas.setLocation(0, 0);
 //        backgroundCanvas.setPreferredSize(new Dimension(816,816));
 
         content.add(backgroundCanvas);
-        backgroundCanvas.setBounds(0,0,816,816);
+        backgroundCanvas.setBounds(0, 0, 816, 816);
         content.add(fixedCanvas);
-        fixedCanvas.setBounds(0,0,720,720);
+        fixedCanvas.setBounds(0, 0, 720, 720);
         content.moveToFront(fixedCanvas);
 
 

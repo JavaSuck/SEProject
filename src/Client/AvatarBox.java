@@ -16,15 +16,19 @@ public class AvatarBox extends JPanel {
     private String text = "";
     private int ICON_SIZE = 200;
     private int SIDEITEM_WIDTH = 180;
-    private int SIDEITEM_HEIGHT = 200;
+    private int SIDEITEM_HEIGHT = 180;
 
     public AvatarBox(String name, String avatarName) {
+
         initUI();
+        setLayout(new BorderLayout());
         ImagePanel avatar = new ImagePanel(avatarName);
-        JLabel label = new JLabel(name);
-        add(avatar);
-        label.setLocation(0, 180);
-        add(label);
+
+        JLabel label = new JLabel(name, SwingConstants.CENTER);
+        label.setFont(new Font("Serif", Font.PLAIN, 24));
+        add(avatar, BorderLayout.CENTER);
+        add(label, BorderLayout.SOUTH);
+
     }
 
     private void initUI() {

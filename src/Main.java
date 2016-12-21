@@ -6,6 +6,8 @@ public class Main {
         GameApp app = new GameApp();
 
         app.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        app.pack();
+        app.setLocationRelativeTo(null);
         app.setVisible(true);
     }
 

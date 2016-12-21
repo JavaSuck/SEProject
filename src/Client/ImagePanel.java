@@ -16,21 +16,15 @@ public class ImagePanel extends JPanel {
     private Image resizedImage;
     private int resizedWidth = 150;
     private int resizedHeight = 150;
+    private int splitSize = 144;
 
     public ImagePanel(String fileName) {
-//        try {
         setPreferredSize(new Dimension(resizedWidth, resizedHeight));
-        //setBackground(Color.RED);
-//            srcImage = ImageIO.read(images.class.getResource(fileName));
         Sprite avatarSprite = new Sprite();
         avatarSprite.loadSprite(fileName);
-        avatarSprite.setSplitSize(144);
+        avatarSprite.setSplitSize(splitSize);
         srcImage = avatarSprite.getSprite(0, 0);
         resizedImage = srcImage.getScaledInstance(resizedWidth, resizedHeight, java.awt.Image.SCALE_SMOOTH);
-//        } catch (IOException ex) {
-//             handle exception...
-//            System.out.print("error");
-//        }
     }
 
     @Override
@@ -39,8 +33,12 @@ public class ImagePanel extends JPanel {
         g.drawImage(resizedImage, 0, 0, this); // see javadoc for more info on the parameters
     }
 
-//    @Override
-//    public Dimension getPreferredSize() {
-//        return new Dimension(resizedWidth, resizedHeight);
-//    }
+    public void setSplitSize(int size) {
+        splitSize = size;
+    }
+
+    public void setResizedSize(int width, int height) {
+        resizedWidth = width;
+        resizedHeight = height;
+    }
 }

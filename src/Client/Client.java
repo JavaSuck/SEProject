@@ -1,50 +1,73 @@
+package Client;
+
+import Client.BackgroundCanvas.BackgroundCanvas;
+import Client.DOM.VirtualCharacter;
+import Client.SDM.SDM;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.*;
 
-import Client.DOM.VirtualCharacter;
+public class Client extends JFrame implements KeyListener {
 
-public class GameApp extends JFrame implements KeyListener {
+
     private int WINDOW_WIDTH = 920;
     private int WINDOW_HEIGHT = 720;
-    JPanel panel;
 
     private VirtualCharacter character;
     private int delay = 20; // milliseconds
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setBackground(Color.WHITE);
-        setForeground(Color.black);
+//        setBackground(Color.BLUE);
+        setForeground(Color.RED);
         setTitle("SEProject");
     }
 
-    public GameApp() {
+    public Client() {
+        BackgroundCanvas backgroundCanvas = new BackgroundCanvas();
+        SDM sdm = new SDM(backgroundCanvas);
+        sdm.loadMap();
+//        add(backgroundCanvas);
+
         initUI();
 
         FixedCanvas fixedCanvas = new FixedCanvas();
 
         character = new VirtualCharacter("player1.png");
         fixedCanvas.setMyCharacter(character);
-        fixedCanvas.setSize(720, 720);
+        fixedCanvas.setSize(360, 360);
         character.stop();
 
         Sidebar sidebar = new Sidebar();
 //        JButton btn = new JButton("123");
 //
 //        sidebar.add(btn);
+        JLayeredPane content = new JLayeredPane();
+        content.setLayout(null);
+        content.setPreferredSize(new Dimension(720,720));
+        backgroundCanvas.setLocation(0,0);
+//        backgroundCanvas.setPreferredSize(new Dimension(816,816));
+
+        content.add(backgroundCanvas);
+        backgroundCanvas.setBounds(0,0,816,816);
+        content.add(fixedCanvas);
+        fixedCanvas.setBounds(0,0,720,720);
+        content.moveToFront(fixedCanvas);
+
 
         add(BorderLayout.EAST, sidebar);
-        add(BorderLayout.CENTER, fixedCanvas);
+        add(BorderLayout.CENTER, content);
 
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 character.updateAnimation();
+                revalidate();
                 repaint();
             }
         };
@@ -90,4 +113,6 @@ public class GameApp extends JFrame implements KeyListener {
                 break;
         }
     }
+
+
 }

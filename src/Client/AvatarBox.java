@@ -1,3 +1,5 @@
+package Client;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -11,7 +13,6 @@ import Client.Assets.Images.images;
 import static com.sun.deploy.ui.AppInfo.ICON_SIZE;
 
 public class AvatarBox extends JPanel {
-
     private String text = "";
     private int ICON_SIZE = 200;
     private int SIDEITEM_WIDTH = 180;
@@ -29,15 +30,5 @@ public class AvatarBox extends JPanel {
     private void initUI() {
         setSize(SIDEITEM_WIDTH, SIDEITEM_HEIGHT);
         setBackground(Color.WHITE);
-//        setBackground(Color.WHITE);
-//        setBorder(new LineBorder(Color.DARK_GRAY, 4));
-//        setContentAreaFilled(false);
-//        setFocusPainted(true);
-//        setOpaque(true);
-//        setSize(SIDEITEM_WIDTH, SIDEITEM_HEIGHT);
-//        setEnabled(false);
-//
-//        setVerticalTextPosition(SwingConstants.BOTTOM);
-//        setHorizontalTextPosition(SwingConstants.CENTER);
     }
 }

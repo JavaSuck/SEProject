@@ -1,9 +1,11 @@
-import javax.swing.*;
+package Client;
 
+import javax.swing.*;
+import Client.Client;
 public class Main {
 
     public static void main(String[] args) {
-        GameApp app = new GameApp();
+        Client app = new Client();
 
         app.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         app.pack();

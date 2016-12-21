@@ -1,6 +1,6 @@
 package unitest;
 
-import Client.Tcpcm;
+import Client.TCPClient.TCPClient;
 
 import java.net.InetAddress;
 
@@ -9,9 +9,9 @@ import static org.junit.Assert.*;
 /**
  * Created by lucienlo on 2016/12/9.
  */
-public class TcpcmTest {
+public class TCPClientTest {
 
-    private Tcpcm _client;
+    private TCPClient _client;
     private int _port;
     private String _correctIP;
 
@@ -19,9 +19,9 @@ public class TcpcmTest {
     @org.junit.Before
     public void setUp() throws Exception {
 
-        _correctIP = "140.115.52.43";
+        _correctIP = "localhost";
         _port = 40689;
-        _client = new Tcpcm(_port);
+        _client = new TCPClient(_port);
 
     }
 
@@ -37,7 +37,6 @@ public class TcpcmTest {
 
         String[] ip={
             _correctIP,
-            "127.0.0.1",
             "8.8.8.8",
             "192.16       8.0.1",
             "localhost",
@@ -58,7 +57,7 @@ public class TcpcmTest {
             if(currentIP.compareTo(_correctIP) == 0) {
                 assertTrue(_client.connectServer(ipAddr));
                 _client = null;
-                _client = new Tcpcm(_port);
+                _client = new TCPClient(_port);
             }
             else{
                 System.out.println(currentIP);
@@ -69,7 +68,7 @@ public class TcpcmTest {
 //        assertTrue(_client.connectServer(ipAddr));
 
         _client = null;
-        _client = new Tcpcm(_port);
+        _client = new TCPClient(_port);
 
 
 
@@ -103,7 +102,7 @@ public class TcpcmTest {
         _client.inputMoves(7);
 
         _client = null;
-        _client = new Tcpcm(_port);
+        _client = new TCPClient(_port);
 
     }
 //

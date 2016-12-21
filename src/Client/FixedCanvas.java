@@ -1,3 +1,5 @@
+package Client;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -10,6 +12,9 @@ public class FixedCanvas extends JPanel {
     private VirtualCharacter myCharacter;
 
     public FixedCanvas() {
+        setBackground(Color.BLUE);
+
+//setOpaque(false);
 
     }
 

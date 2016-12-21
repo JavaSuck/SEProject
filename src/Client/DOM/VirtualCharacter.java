@@ -3,8 +3,8 @@ package Client.DOM;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import Client.Sprite.Sprite;
-import Client.Sprite.Animation;
+import Client.Sprite.*;
+
 
 public class VirtualCharacter extends Sprite {
 
@@ -30,7 +30,7 @@ public class VirtualCharacter extends Sprite {
     public VirtualCharacter(String imageName) {
         loadSprite(imageName);
         for (int i = 0; i < 4; i++) {
-            BufferedImage[] walking = {getSprite(i, 0), getSprite(i, 1), getSprite(i, 2)};
+            BufferedImage[] walking = {getSprite(i, 1), getSprite(i, 0), getSprite(i, 2)};
             walk[i] = new Animation(walking, delay);
         }
         animation = walk[D_DOWN];

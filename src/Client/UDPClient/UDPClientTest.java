@@ -12,27 +12,27 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-class UpdateServerTest {
-    private UpdateServer updateServer;
+class UDPClientTest {
+    private UDPClient UDPClient;
 
     @Before
     void setUp() {
-        updateServer = new UpdateServer();
+        UDPClient = new UDPClient();
     }
 
     @After
     void tearDown() {
-        updateServer = null;
+        UDPClient = null;
     }
 
     @Test
     void main() {
-        assertNotNull(updateServer);
+        assertNotNull(UDPClient);
     }
 
     @Test
     void run() {
-        assertNotNull(updateServer);
+        assertNotNull(UDPClient);
     }
 
     @Test
@@ -41,7 +41,7 @@ class UpdateServerTest {
         byte buffer[] = new byte[SIZE];
         boolean infoCorrect = true;
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        DatagramSocket socket = new DatagramSocket(updateServer.port);
+        DatagramSocket socket = new DatagramSocket(UDPClient.port);
         for (int i = 0; i < 10; i++) {
             socket.receive(packet);
             String receiveMessage = new String(buffer, 0, packet.getLength());

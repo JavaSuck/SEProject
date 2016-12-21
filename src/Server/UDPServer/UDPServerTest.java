@@ -1,23 +1,11 @@
 package Server.UDPServer;
 
-import Server.CDC.CDC;
-import Server.TCPServer.TCPServerModule.TCPServerModule;
-import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.net.InetAddress;
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-
-class BroadcastClientTest {
-//    private BroadcastClient broadcastClient;
+class UDPServerTest {
+//    private UDPServer broadcastClient;
 //
 //    @Before
 //    void setUp() {
-//        broadcastClient = new BroadcastClient();
+//        broadcastClient = new UDPServer();
 //    }
 //
 //    @After

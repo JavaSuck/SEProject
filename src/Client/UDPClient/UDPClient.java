@@ -6,13 +6,13 @@ import org.json.JSONObject;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-public class UpdateServer extends Thread {
+public class UDPClient extends Thread {
 
     int port = 5566;
 
     public static void main(String[] args) throws Exception {
-        UpdateServer updateServer = new UpdateServer();
-        updateServer.start();
+        UDPClient UDPClient = new UDPClient();
+        UDPClient.start();
     }
 
     public void run() {

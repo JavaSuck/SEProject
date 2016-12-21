@@ -7,14 +7,14 @@ import org.json.JSONObject;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
-public class BroadcastClient extends Thread {
+public class UDPServer extends Thread {
 
     int playerCount = 1;
     TCPServer TCPServer;
 
     public static void main(String[] args) throws Exception {
-        BroadcastClient broadcastClient = new BroadcastClient();
-        broadcastClient.start();
+        UDPServer UDPServer = new UDPServer();
+        UDPServer.start();
     }
 
     public void run() {

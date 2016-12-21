@@ -10,11 +10,6 @@ public class UDPClient extends Thread {
 
     int port = 5566;
 
-    public static void main(String[] args) throws Exception {
-        UDPClient UDPClient = new UDPClient();
-        UDPClient.start();
-    }
-
     public void run() {
         try {
             initUPDServer();
@@ -44,6 +39,7 @@ public class UDPClient extends Thread {
                 }*/
             }
             socket.close();
+            sleep(200);
         }
     }
 }

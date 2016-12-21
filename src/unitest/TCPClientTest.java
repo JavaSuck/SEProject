@@ -1,6 +1,6 @@
 package unitest;
 
-import Client.Tcpcm;
+import Client.TCPClient.Tcpcm;
 
 import java.net.InetAddress;
 

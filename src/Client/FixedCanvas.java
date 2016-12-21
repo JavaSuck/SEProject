@@ -13,9 +13,6 @@ public class FixedCanvas extends JPanel {
 
     public FixedCanvas() {
         setBackground(Color.BLUE);
-
-//setOpaque(false);
-
     }
 
     public void setMyCharacter(VirtualCharacter character) {

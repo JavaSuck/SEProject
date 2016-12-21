@@ -13,16 +13,18 @@ import Client.Assets.Images.images;
 import static com.sun.deploy.ui.AppInfo.ICON_SIZE;
 
 public class AvatarBox extends JPanel {
-    private String text = "";
+    private String name = "";
     private int ICON_SIZE = 200;
-    private int SIDEITEM_WIDTH = 180;
-    private int SIDEITEM_HEIGHT = 180;
+    private int SIDEITEM_WIDTH = 160;
+    private int SIDEITEM_HEIGHT = 160;
 
     public AvatarBox(String name, String avatarName) {
 
         initUI();
         setLayout(new BorderLayout());
         ImagePanel avatar = new ImagePanel(avatarName);
+        avatar.setResizedSize(150, 150);
+        avatar.setSplitSize(144);
 
         JLabel label = new JLabel(name, SwingConstants.CENTER);
         label.setFont(new Font("Serif", Font.PLAIN, 24));

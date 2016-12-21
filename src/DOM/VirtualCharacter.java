@@ -8,9 +8,9 @@ import Sprite.Animation;
 
 public class VirtualCharacter extends Sprite {
 
-    private final int D_LEFT = 0,
-            D_RIGHT = 1,
-            D_DOWN = 2,
+    private final int D_LEFT = 1,
+            D_RIGHT = 2,
+            D_DOWN = 0,
             D_UP = 3;
 
     private int currentDirection = D_DOWN;
@@ -30,7 +30,7 @@ public class VirtualCharacter extends Sprite {
     public VirtualCharacter(String imageName) {
         loadSprite(imageName);
         for (int i = 0; i < 4; i++) {
-            BufferedImage[] walking = {getSprite(i, 0), getSprite(i, 1), getSprite(i, 2), getSprite(i, 3), getSprite(i, 4), getSprite(i, 5)};
+            BufferedImage[] walking = {getSprite(i, 0), getSprite(i, 1), getSprite(i, 2)};
             walk[i] = new Animation(walking, delay);
         }
         animation = walk[D_DOWN];

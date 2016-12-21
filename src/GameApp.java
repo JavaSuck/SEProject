@@ -10,40 +10,42 @@ import javax.swing.*;
 import DOM.VirtualCharacter;
 
 public class GameApp extends JFrame implements KeyListener {
-    private int WINDOW_WIDTH = 1000;
-    private int WINDOW_HEIGHT = 1000;
+    private int WINDOW_WIDTH = 920;
+    private int WINDOW_HEIGHT = 720;
     JPanel panel;
 
-    private VirtualCharacter role1 = new VirtualCharacter("sprite.png");
+    private VirtualCharacter character;
+    private int delay = 20; // milliseconds
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setTitle("UML Editor");
+        setBackground(Color.WHITE);
+        setForeground(Color.black);
+        setTitle("SEProject");
     }
 
     public GameApp() {
         initUI();
-        setBackground(Color.black);
-        setForeground(Color.black);
-//        role1.loadSprite("sprite.png");
-        role1.stop();
-        panel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponents(g);
-                g.drawImage(role1.getAnimationFrame(), 384, 416, null);
-            }
 
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(800, 800);
-            }
-        };
-        add(panel);
-        int delay = 12; // milliseconds
+        FixedCanvas fixedCanvas = new FixedCanvas();
+
+        character = new VirtualCharacter("player1.png");
+        fixedCanvas.setMyCharacter(character);
+        fixedCanvas.setSize(720, 720);
+        character.stop();
+
+        Sidebar sidebar = new Sidebar();
+//        JButton btn = new JButton("123");
+//
+//        sidebar.add(btn);
+
+        add(BorderLayout.EAST, sidebar);
+        add(BorderLayout.CENTER, fixedCanvas);
+
+
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                role1.updateAnimation();
+                character.updateAnimation();
                 repaint();
             }
         };
@@ -71,19 +73,19 @@ public class GameApp extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                role1.walk(0);
+                character.walk(1);
                 break;
             case KeyEvent.VK_RIGHT:
-                role1.walk(1);
+                character.walk(2);
                 break;
             case KeyEvent.VK_UP:
-                role1.walk(3);
+                character.walk(3);
                 break;
             case KeyEvent.VK_DOWN:
-                role1.walk(2);
+                character.walk(0);
                 break;
             case KeyEvent.VK_SPACE:
-                role1.stop();
+                character.stop();
                 break;
             default:
                 break;

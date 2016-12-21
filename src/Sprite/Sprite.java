@@ -8,19 +8,19 @@ import javax.imageio.ImageIO;
 public class Sprite {
 
     private BufferedImage spriteSheet;
-    private final int TILE_SIZE = 32;
+    private int tileSize = 48;
 
     protected BufferedImage loadSprite(String file) {
 
-        BufferedImage sprite = null;
+//        BufferedImage sprite = null;
 
         try {
-            sprite = ImageIO.read(images.images.class.getResource(file));
+            spriteSheet = ImageIO.read(images.images.class.getResource(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return sprite;
+        return spriteSheet;
     }
 
     public BufferedImage getSprite(int xGrid, int yGrid) {
@@ -30,7 +30,11 @@ public class Sprite {
             spriteSheet = loadSprite("sprite.png");
         }
 
-        return spriteSheet.getSubimage(yGrid * TILE_SIZE, xGrid * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        return spriteSheet.getSubimage(yGrid * tileSize, xGrid * tileSize, tileSize, tileSize);
+    }
+
+    public void setTileSize(int size) {
+        tileSize = size;
     }
 
 }

@@ -1,7 +1,7 @@
 package CDC;
 
-/**
- * Created by zet on 2016/12/21.
- */
 public class GameMode {
+  public static final int personalMaxBomb = 4;
+  public static final int bombExpireTime = 5;
+  public static final double walkSpeed = 0.5;
 }

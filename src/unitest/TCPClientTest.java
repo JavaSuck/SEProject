@@ -38,7 +38,7 @@ public class TCPClientTest {
         String[] ip={
             _correctIP,
             "8.8.8.8",
-            "192.16       8.0.1",
+            "192.168.0.1",
             "localhost",
             "abcdefg",
             "'1=1--"

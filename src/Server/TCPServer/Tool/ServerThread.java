@@ -23,20 +23,19 @@ public class ServerThread implements Runnable{
     protected PrintWriter sender;
     protected Instruction instructionMap;
     protected TokenRing tokenRing;
-    
-    //outside class
-    protected fakeCDC cdc = new fakeCDC();
+    protected fakeCDC cdc;
     
 
-    public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing){
+    public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing, fakeCDC cdc){
 
         //Handle yourself connection
         this.connection = connection;
         this.connectionList = connectionList;
         
         this.clientToken = clientToken;
-        
-        
+
+        this.cdc = cdc;
+//        this.cdc.addVirtualCharacter(clientToken, connection.getInetAddress());
         
         try{
             this.reciever = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -138,10 +137,10 @@ public class ServerThread implements Runnable{
 		        int instNumber = instructionMap.index(content);
 	
 		        if(instNumber>0 && instNumber<4){
-		        	cdc.updateDirection();
+		        	cdc.updateDirection(clientToken, instNumber);
 		        }
 		        else if(instNumber == 4){
-		        	cdc.getItem();
+		        	cdc.addBomb(clientToken);
 		        }
 		        
 //		        print(content+", get token is "+instNumber);
@@ -186,12 +185,6 @@ public class ServerThread implements Runnable{
     }
 
     protected void connection_close(){
-
-    	while(TCPServer.closeFlag);
-    	TCPServer.closeFlag = true;
-    	
-    	while(TCPServer.tableFlag);
-    	TCPServer.tableFlag = true;
     	
         try{
 
@@ -211,8 +204,6 @@ public class ServerThread implements Runnable{
             error_handle(e);
         }
 
-        TCPServer.tableFlag = false;
-        TCPServer.closeFlag = false;
     }
 
     protected void removeConnectionList(){
@@ -227,6 +218,7 @@ public class ServerThread implements Runnable{
         }
 
         connectionList.remove(index);
+        cdc.removeVirtualCharacter(clientToken);
 
     }
 

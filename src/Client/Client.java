@@ -15,7 +15,6 @@ import java.awt.event.KeyListener;
 
 public class Client extends JFrame implements KeyListener {
 
-
     private int WINDOW_WIDTH = 910;
     private int WINDOW_HEIGHT = 720;
     private BackgroundCanvas backgroundCanvas;

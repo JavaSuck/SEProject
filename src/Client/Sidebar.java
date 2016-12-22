@@ -1,15 +1,10 @@
 package Client;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Client.Assets.Images.images;
-import apple.laf.JRSUIUtils;
+import Client.AvatarBox.AvatarBox;
 
 public class Sidebar extends JPanel {
 

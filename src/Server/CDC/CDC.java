@@ -4,12 +4,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CDC {
-    private GameMode gameMode;
-    private GameState gameState;
-    private GameController gameController;
-    private PlayController playController;
-    private BombController bombController;
+    public GameController gameController;
+    public PlayerController playerController;
+    public BombController bombController;
     private GameMap gameMap;
+
+    public CDC() {
+        gameMap = new GameMap();
+        playerController = new PlayerController(gameMap);
+        bombController = new BombController(gameMap);
+    }
+
+
 
     public void addVirtualCharacter(int clientNo) {
 

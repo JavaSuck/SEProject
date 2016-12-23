@@ -1,10 +1,9 @@
-package unitest;
-
-import Client.TCPClient.TCPClient;
+package Client.TCPClient;
 
 import java.net.InetAddress;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by lucienlo on 2016/12/9.

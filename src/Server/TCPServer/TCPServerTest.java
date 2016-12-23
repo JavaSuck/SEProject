@@ -1,7 +1,6 @@
-package unitest;
+package Server.TCPServer;
 
 import Client.TCPClient.TCPClient;
-import Server.TCPServer.TCPServer;
 import Server.TCPServer.Tool.fakeCDC;
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +9,7 @@ import org.junit.Test;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by lucienlo on 2016/12/9.

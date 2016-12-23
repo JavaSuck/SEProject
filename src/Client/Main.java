@@ -1,7 +1,7 @@
 package Client;
 
 import javax.swing.*;
-import Client.Client;
+
 public class Main {
 
     public static void main(String[] args) {

@@ -13,9 +13,11 @@ public class UDPServer extends Thread {
     // TODO: Get this from gameMode
     private int playerCount = 4;
     private TCPServer TCPServer;
+    private CDC cdc;
 
-    public UDPServer(TCPServer TCPServer) throws IOException {
+    public UDPServer(TCPServer TCPServer, CDC cdc) throws IOException {
         this.TCPServer = TCPServer;
+        this.cdc = cdc;
     }
 
     public void run() {
@@ -44,7 +46,7 @@ public class UDPServer extends Thread {
     }
 
     private ArrayList<JSONObject> getEncodeInfo(String command) {
-        ArrayList<JSONObject> updateInfo = CDC.getUpdatingInfo();
+        ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();
         boolean infoCorrect = true;
         do {
             if (!infoCorrect)

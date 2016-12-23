@@ -29,11 +29,11 @@ public class CDC {
 
     }
 
-    public static void getUpdatingThread() {
+    public void getUpdatingThread() {
 
     }
 
-    public static ArrayList<JSONObject> getUpdatingInfo() {
+    public ArrayList<JSONObject> getUpdatingInfo() {
         return new ArrayList<JSONObject>() {{
             JSONObject info = new JSONObject();
             info.append("Character", "Jason Wu");

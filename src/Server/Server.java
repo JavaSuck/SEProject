@@ -23,7 +23,7 @@ public class Server {
         TCPServer tcp = new TCPServer(40689, 4, fakeCdc);
         tcp.initTCPServer();
 
-        UDPServer udp = new UDPServer(tcp);
+        UDPServer udp = new UDPServer(tcp, cdc);
         udp.start();
 
     }

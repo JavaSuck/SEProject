@@ -1,15 +1,22 @@
 package Server;
 
 import Server.CDC.CDC;
+import Server.CDC.Player;
 import Server.UDPServer.UDPServer;
 
 public class Server {
 
     public Server() {
-        //TCPServer TCP = new TCPServer();
-        UDPServer UDP = new UDPServer();
-        CDC CDC = new CDC();
+        //TCPServer tcp = new TCPServer();
 
-        UDP.start();
+        UDPServer udp = new UDPServer();
+        udp.start();
+
+        CDC cdc = new CDC();
+        Player p = (Player) cdc.playerController.players.get(1);
+        System.out.println(p.coordinate);
+        cdc.playerController.walk(1, 2);
+        System.out.println(p.coordinate);
+
     }
 }

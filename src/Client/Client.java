@@ -34,8 +34,8 @@ public class Client extends JFrame implements KeyListener {
         add(login, BorderLayout.CENTER);
 //        remove(login);
 //        add(game, BorderLayout.CENTER);
-        UDPClient UDP = new UDPClient();
-        UDP.start();
+        UDPClient udp = new UDPClient();
+        udp.start();
 
         // key handler
         addKeyListener(this);

@@ -1,18 +1,10 @@
 package Client.AvatarBox;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
-import Client.Assets.Images.images;
-import Client.Client;
 import Client.ImagePanel.ImagePanel;
-
-import static com.sun.deploy.ui.AppInfo.ICON_SIZE;
 
 public class AvatarBox extends JPanel {
     private String name = "";
@@ -24,7 +16,7 @@ public class AvatarBox extends JPanel {
 
         initUI();
         setLayout(new BorderLayout());
-        ImagePanel avatar = new Client.ImagePanel(avatarName);
+        ImagePanel avatar = new ImagePanel(avatarName);
         avatar.setResizedSize(150, 150);
         avatar.setSplitSize(144);
 

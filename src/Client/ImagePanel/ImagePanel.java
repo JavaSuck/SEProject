@@ -2,13 +2,9 @@ package Client.ImagePanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import Client.Assets.Images.images;
-import Client.Client;
 import Client.Sprite.*;
 
 public class ImagePanel extends JPanel {

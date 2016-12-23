@@ -1,9 +1,10 @@
-package Client;
+package Client.UIComponents;
 
 import java.awt.*;
 
 import javax.swing.*;
 
+import Client.Client;
 import Client.DOM.VirtualCharacter;
 
 public class FixedCanvas extends JPanel {

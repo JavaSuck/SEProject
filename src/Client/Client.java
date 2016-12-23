@@ -3,6 +3,8 @@ package Client;
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.*;
+import Client.UIComponents.FixedCanvas;
+import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
 

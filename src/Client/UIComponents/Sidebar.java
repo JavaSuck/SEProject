@@ -1,10 +1,11 @@
-package Client;
+package Client.UIComponents;
 
 import java.awt.*;
 
 import javax.swing.*;
 
 import Client.AvatarBox.AvatarBox;
+import Client.Client;
 
 public class Sidebar extends JPanel {
 

@@ -1,7 +1,7 @@
 package Server.CDC;
 
-/**
- * Created by zet on 2016/12/21.
- */
 public class GameState {
+  public static int gameTime = 0;
+  public static int livedPlayer = 4;
+//  public static enum stage = ;
 }

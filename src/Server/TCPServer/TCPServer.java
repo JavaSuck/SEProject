@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class TCPServer {
 
-    public volatile static boolean tableFlag = false;
-    public volatile static boolean closeFlag = false;
+    //outside class
+    protected fakeCDC cdc;
 
     protected ServerSocket server;
     protected int connection_limit;
@@ -25,12 +25,14 @@ public class TCPServer {
     protected ArrayList<InetAddress> connectionList;
 
 
-    public TCPServer(int port, int connection_limit) throws IOException {
+    public TCPServer(int port, int connection_limit, fakeCDC cdc) throws IOException {
 
         this.server = new ServerSocket(port);
         this.connection_limit = connection_limit;
         this.tokenRing = new TokenRing(connection_limit);
         this.connectionList = new ArrayList<InetAddress>();
+
+        this.cdc = cdc;
 
         System.out.println("Server is running");
     }
@@ -57,7 +59,6 @@ public class TCPServer {
         }).start();
 
     }
-
 
     public ArrayList<InetAddress> getClientIPTable() {
 
@@ -107,8 +108,9 @@ public class TCPServer {
             return;
         }
 
+        cdc.addVirtualCharacter(client_token, connection.getInetAddress());
 
-        new Thread(new ServerThread(connection, connectionList, client_token, tokenRing)).start();
+        new Thread(new ServerThread(connection, connectionList, client_token, tokenRing, cdc)).start();
 
         connectionList.add(connection.getInetAddress());
 

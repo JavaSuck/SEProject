@@ -2,6 +2,7 @@ package unitest;
 
 import Client.TCPClient.TCPClient;
 import Server.TCPServer.TCPServer;
+import Server.TCPServer.Tool.fakeCDC;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +22,15 @@ public class TCPServerTest {
     private int _port;
     private int _limitedConnections = 4;
 
+    private fakeCDC _cdc;
+
     @Before
     public void setUp() throws Exception {
 		_port = 40689;
-		_server = new TCPServer(_port, _limitedConnections);
+        _cdc = new fakeCDC();
+		_server = new TCPServer(_port, _limitedConnections, _cdc);
 		_server.initTCPServer();
+
     }
 
     @After

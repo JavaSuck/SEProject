@@ -4,13 +4,21 @@ import Server.CDC.CDC;
 import Server.TCPServer.TCPServer;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class UDPServer extends Thread {
 
-    int playerCount = 4;
-    TCPServer TCPServer;
+    // TODO: Get this from gameMode
+    private int playerCount = 4;
+    private TCPServer TCPServer;
+    private CDC cdc;
+
+    public UDPServer(TCPServer TCPServer, CDC cdc) throws IOException {
+        this.TCPServer = TCPServer;
+        this.cdc = cdc;
+    }
 
     public void run() {
         try {
@@ -21,10 +29,9 @@ public class UDPServer extends Thread {
     }
 
     private void startUDPBroadCast() throws Exception {
-        ArrayList<InetAddress> clientAddresses = new ArrayList<>();
+        ArrayList<InetAddress> clientAddresses;
         do {
-            if (clientAddresses.size() > 0)
-                sleep(100);
+            sleep(200);
             clientAddresses = TCPServer.getClientIPTable();
         } while (clientAddresses.size() < playerCount);
         ArrayList<JSONObject> firstEncodeInfo = getEncodeInfo("ADD");
@@ -39,7 +46,7 @@ public class UDPServer extends Thread {
     }
 
     private ArrayList<JSONObject> getEncodeInfo(String command) {
-        ArrayList<JSONObject> updateInfo = CDC.getUpdatingInfo();
+        ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();
         boolean infoCorrect = true;
         do {
             if (!infoCorrect)

@@ -64,7 +64,7 @@ public class Game extends JPanel implements KeyListener {
             public void actionPerformed(ActionEvent evt) {
                 character.updateAnimation();
                 revalidate();
-                repaint();
+//                repaint();
             }
         };
         Timer timer = new Timer(delay, taskPerformer);

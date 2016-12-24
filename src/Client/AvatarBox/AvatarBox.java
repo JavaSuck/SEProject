@@ -8,17 +8,16 @@ import Client.ImagePanel.ImagePanel;
 
 public class AvatarBox extends JPanel {
     private String name = "";
-    private int ICON_SIZE = 200;
     private int SIDEITEM_WIDTH = 160;
-    private int SIDEITEM_HEIGHT = 160;
+    private int SIDEITEM_HEIGHT = 167;
+    private int AVATAR_SIZE = 155;
+    private int AVATAR_CROP_SIZE = 144;
 
     public AvatarBox(String name, String avatarName) {
 
         initUI();
         setLayout(new BorderLayout());
-        ImagePanel avatar = new ImagePanel(avatarName);
-        avatar.setResizedSize(150, 150);
-        avatar.setSplitSize(144);
+        ImagePanel avatar = new ImagePanel(avatarName, AVATAR_SIZE, AVATAR_SIZE, AVATAR_CROP_SIZE);
 
         JLabel label = new JLabel(name, SwingConstants.CENTER);
         label.setFont(new Font("Serif", Font.PLAIN, 24));
@@ -28,7 +27,7 @@ public class AvatarBox extends JPanel {
     }
 
     private void initUI() {
-        setSize(SIDEITEM_WIDTH, SIDEITEM_HEIGHT);
+        setPreferredSize(new Dimension(SIDEITEM_WIDTH, SIDEITEM_HEIGHT));
         setBackground(Color.WHITE);
     }
 }

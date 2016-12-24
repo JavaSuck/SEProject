@@ -50,7 +50,7 @@ public class PlayerController {
     }
   }
 
-  void walk(int playerId, int direction) {
+  public void walk(int playerId, int direction) {
     Player p = (Player)players.get(playerId);
     p.direction = direction;
 

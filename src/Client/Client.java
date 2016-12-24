@@ -1,11 +1,10 @@
 package Client;
 
-import Client.BackgroundCanvas.BackgroundCanvas;
-import Client.DOM.VirtualCharacter;
-import Client.Scene.*;
+import Client.Scene.Game;
+import Client.Scene.Login;
+import Client.UDPClient.UDPClient;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +36,8 @@ public class Client extends JFrame implements KeyListener {
         add(login, BorderLayout.CENTER);
 //        remove(login);
 //        add(game, BorderLayout.CENTER);
+        UDPClient udp = new UDPClient();
+        udp.start();
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -52,7 +53,6 @@ public class Client extends JFrame implements KeyListener {
         // key handler
         addKeyListener(this);
         setFocusable(true);
-
     }
 
     public void replaceRoute(String routeName) {

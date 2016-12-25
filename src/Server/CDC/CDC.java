@@ -24,7 +24,7 @@ public class CDC {
 
     }
 
-    public void updateDirection(int clientNo, int moveCode) {
+    public void updateDirection(int clientNo, Direction direction) {
 
     }
 

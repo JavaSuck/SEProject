@@ -1,6 +1,7 @@
 package Server.TCPServer.Tool;
 
 import Server.CDC.CDC;
+import Server.CDC.Direction;
 import Server.TCPServer.TCPServer;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,7 +139,7 @@ public class ServerThread implements Runnable{
 		        int instNumber = instructionMap.index(content);
 	
 		        if(instNumber>0 && instNumber<4){
-		        	cdc.updateDirection(clientToken, instNumber);
+		        	cdc.updateDirection(clientToken, Direction.UP);
 		        }
 		        else if(instNumber == 4){
 		        	cdc.addBomb(clientToken);

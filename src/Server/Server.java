@@ -1,6 +1,7 @@
 package Server;
 
 import Server.CDC.CDC;
+import Server.CDC.Direction;
 import Server.CDC.Player;
 import Server.TCPServer.TCPServer;
 import Server.TCPServer.Tool.fakeCDC;
@@ -14,13 +15,12 @@ public class Server {
         CDC cdc = new CDC();
         Player p = (Player) cdc.playerController.players.get(1);
         System.out.println(p.coordinate);
-        cdc.playerController.walk(1, 2);
+        cdc.playerController.walk(1, Direction.DOWN);
         System.out.println(p.coordinate);
 
-        // TODO: Change it to CDC
-//        fakeCDC fakeCdc = new fakeCDC();
         // TODO: Get connection_limit from gameMode
-        TCPServer tcp = new TCPServer(40689, 4, cdc);
+        TCPServer tcp = new TCPServer(40689, cdc);
+
         tcp.initTCPServer();
 
         UDPServer udp = new UDPServer(tcp, cdc);

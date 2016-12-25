@@ -2,6 +2,7 @@ package Server.TCPServer;
 
 import Client.TCPClient.TCPClient;
 import Server.CDC.CDC;
+import Server.CDC.GameMode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class TCPServerTest {
     public void setUp() throws Exception {
         _port = 40689;
         _cdc = new CDC();
-        _server = new TCPServer(_port, _limitedConnections, _cdc);
+        _server = new TCPServer(_port, _cdc);
         _server.initTCPServer();
 
     }
@@ -74,7 +75,7 @@ public class TCPServerTest {
 
         //if has valid number connection
 
-        int ConnectionNumber = 4;
+        int ConnectionNumber = GameMode.playerCount;
 
         for(int i=0; i<ConnectionNumber; i++){
             TCPClient client = new TCPClient(40689);

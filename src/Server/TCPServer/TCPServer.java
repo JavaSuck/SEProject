@@ -1,6 +1,7 @@
 package Server.TCPServer;
 
 import Server.CDC.CDC;
+import Server.CDC.GameMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,26 +14,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-
+@SuppressWarnings("InfiniteLoopStatement")
 public class TCPServer {
 
     //outside class
-    protected CDC cdc;
 
     protected ServerSocket server;
-    protected int connection_limit;
     protected TokenRing tokenRing;
-
     protected ArrayList<InetAddress> connectionList;
+    protected CDC cdc;
 
-
-    public TCPServer(int port, int connection_limit, CDC cdc) throws IOException {
-
+    public TCPServer(int port,  CDC cdc) throws IOException {
         this.server = new ServerSocket(port);
-        this.connection_limit = connection_limit;
-        this.tokenRing = new TokenRing(connection_limit);
+        this.tokenRing = new TokenRing(GameMode.playerCount);
         this.connectionList = new ArrayList<InetAddress>();
-
         this.cdc = cdc;
 
         System.out.println("Server is running");
@@ -45,7 +40,6 @@ public class TCPServer {
             public void run() {
 
                 while (true) {
-
                     try {
                         Socket connection = server.accept();
                         create_thread(connection);

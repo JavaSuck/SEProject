@@ -6,7 +6,6 @@ import Client.UDPClient.UDPClient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -30,8 +29,6 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-
-
         initUI();
         add(login, BorderLayout.CENTER);
 //        remove(login);
@@ -39,12 +36,13 @@ public class Client extends JFrame implements KeyListener {
         UDPClient udp = new UDPClient();
         udp.start();
 
-        ActionListener taskPerformer = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-//                character.updateAnimation();
-                revalidate();
-                repaint();
-            }
+        //TCPClient tcp = new TCPClient();
+        //tcp.connectServer();
+
+        ActionListener taskPerformer = evt -> {
+//          character.updateAnimation();
+            revalidate();
+            repaint();
         };
         Timer timer = new Timer(15, taskPerformer);
         timer.setRepeats(true);

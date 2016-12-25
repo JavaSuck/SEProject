@@ -18,21 +18,18 @@ public class CDC {
     }
 
 
-
     public void addVirtualCharacter(int playerID, InetAddress addr) {
 
     }
 
-    public void removeVirtualCharacter(int playerID){
+    public void removeVirtualCharacter(int playerID) {
 
     }
-
     public void addBomb(int playerID) {
 
     }
 
-    public void updateDirection(int playerID, int moveCode) {
-
+    public void updateDirection(int clientNo, Direction direction) {
     }
 
     public void getUpdatingThread() {

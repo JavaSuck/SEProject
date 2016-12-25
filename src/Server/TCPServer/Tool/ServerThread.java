@@ -17,15 +17,15 @@ import java.util.ArrayList;
 
 public class ServerThread implements Runnable{
 
-    protected Socket connection;
-    protected ArrayList<InetAddress> connectionList;
+    private Socket connection;
+    private ArrayList<InetAddress> connectionList;
     
-    protected int clientToken;
-    protected BufferedReader reciever;
-    protected PrintWriter sender;
-    protected Instruction instructionMap;
-    protected TokenRing tokenRing;
-    protected CDC cdc;
+    private int clientToken;
+    private BufferedReader reciever;
+    private PrintWriter sender;
+    private Instruction instructionMap;
+    private TokenRing tokenRing;
+    private CDC cdc;
     
 
     public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing, CDC cdc){
@@ -64,7 +64,7 @@ public class ServerThread implements Runnable{
         listen();
     }
 
-    protected void listen(){
+    private void listen(){
 
         JSONObject request = recieve_data();
         
@@ -80,7 +80,7 @@ public class ServerThread implements Runnable{
 
     }
 
-    protected JSONObject recieve_data(){
+    private JSONObject recieve_data(){
         try{
             String data = this.reciever.readLine();
             if(data == null)
@@ -99,7 +99,7 @@ public class ServerThread implements Runnable{
         }
     }
 
-//    protected void response(String input){
+//    private void response(String input){
 //
 //        JSONObject jsonObject = new JSONObject();
 //
@@ -119,13 +119,13 @@ public class ServerThread implements Runnable{
 //        this.sender.flush();
 //    }
 
-    protected void response(JSONObject jsonObject){
+    private void response(JSONObject jsonObject){
 
         this.sender.println(jsonObject);
         this.sender.flush();
     }
 
-    protected boolean deal(JSONObject request){
+    private boolean deal(JSONObject request){
 
         String type = null;
         String content = null;
@@ -195,13 +195,13 @@ public class ServerThread implements Runnable{
     }
 
 
-    protected void print(String instruction){
+    private void print(String instruction){
         String get_data = String.format("[%s:%d]: [REQUEST] \t %s", connection.getInetAddress(), connection.getPort(), instruction );
         System.out.println(get_data);
 
     }
 
-    protected void connection_close(){
+    private void connection_close(){
     	
         try{
 
@@ -223,7 +223,7 @@ public class ServerThread implements Runnable{
 
     }
 
-    protected void removeConnectionList(){
+    private void removeConnectionList(){
 
         int index=0;
 
@@ -239,7 +239,7 @@ public class ServerThread implements Runnable{
 
     }
 
-    protected void error_handle(Exception e) {
+    private void error_handle(Exception e) {
         String error_string = String.format("[%s:%s] \t happend error, => %s", connection.getInetAddress(), connection.getPort(), e.toString());
         System.out.println(error_string);
     }

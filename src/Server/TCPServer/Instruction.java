@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Instruction {
 
-    protected Map map;
+    private Map map;
 
-    protected String[] instructionArr = {
+    private String[] instructionArr = {
             "DOWN",
             "LEFT",
             "RIGHT",

@@ -52,9 +52,6 @@ public class ServerThread implements Runnable{
 
     public void run(){
 
-        //response to client, show the client unique token.
-//        String info_msg = String.format("[Server]: [INFO] \t Connect Successfully! \t Your token is %d" , this.clientToken);
-
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("type", "CONNECT");
         jsonObject.put("content", Integer.toString(this.clientToken));
@@ -99,26 +96,6 @@ public class ServerThread implements Runnable{
         }
     }
 
-//    private void response(String input){
-//
-//        JSONObject jsonObject = new JSONObject();
-//
-//        try {
-//
-//            jsonObject.put("type", "RESPONSE");
-//            jsonObject.put("content", input);
-//
-////            System.out.println(jsonObject);
-//
-//        }
-//        catch (JSONException e){
-//            error_handle(e);
-//        }
-//
-//        this.sender.println(jsonObject);
-//        this.sender.flush();
-//    }
-
     private void response(JSONObject jsonObject){
 
         this.sender.println(jsonObject);
@@ -159,9 +136,6 @@ public class ServerThread implements Runnable{
                         System.out.println("Find unknown instruction");
                     }
                 }
-		        
-//		        print(content+", get token is "+instNumber);
-
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("type", "RESPONSE");

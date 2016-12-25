@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
+import Client.DOM.DOM;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
 import Client.UIComponents.FixedCanvas;
@@ -23,6 +24,8 @@ public class Game extends JPanel implements KeyListener {
     private BackgroundCanvas backgroundCanvas;
     private VirtualCharacter character;
     private int delay = 20; // milliseconds
+    private DOM dom;
+
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -30,6 +33,7 @@ public class Game extends JPanel implements KeyListener {
     }
 
     public Game() {
+        dom = new DOM();
         backgroundCanvas = new BackgroundCanvas();
         SDM sdm = new SDM(backgroundCanvas);
         sdm.loadMap();
@@ -39,6 +43,10 @@ public class Game extends JPanel implements KeyListener {
         FixedCanvas fixedCanvas = new FixedCanvas();
 
         character = new VirtualCharacter("player1.png");
+
+        dom.setBackgroundCanvas(backgroundCanvas);
+        dom.setCharacter(character);
+
         fixedCanvas.setMyCharacter(character);
         fixedCanvas.setSize(360, 360);
         character.stop();
@@ -90,29 +98,7 @@ public class Game extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                character.walk(Direction.LEFT);
-                backgroundCanvas.moveCanvas(48, 0);
-                break;
-            case KeyEvent.VK_RIGHT:
-                character.walk(Direction.RIGHT);
-                backgroundCanvas.moveCanvas(-48, 0);
-                break;
-            case KeyEvent.VK_UP:
-                character.walk(Direction.UP);
-                backgroundCanvas.moveCanvas(0, 48);
-                break;
-            case KeyEvent.VK_DOWN:
-                backgroundCanvas.moveCanvas(0, -48);
-                character.walk(Direction.DOWN);
-                break;
-            case KeyEvent.VK_SPACE:
-                character.stop();
-                break;
-            default:
-                break;
-        }
+        dom.keyPressed(e);
     }
 
 

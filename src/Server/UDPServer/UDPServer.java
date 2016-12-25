@@ -1,6 +1,7 @@
 package Server.UDPServer;
 
 import Server.CDC.CDC;
+import Server.CDC.GameMode;
 import Server.TCPServer.TCPServer;
 import org.json.JSONObject;
 
@@ -11,8 +12,6 @@ import java.util.ArrayList;
 @SuppressWarnings("InfiniteLoopStatement")
 public class UDPServer extends Thread {
 
-    // TODO: Get this from gameMode
-    private int playerCount = 4;
     private TCPServer TCPServer;
     private CDC cdc;
 
@@ -34,7 +33,7 @@ public class UDPServer extends Thread {
         do {
             sleep(200);
             clientAddresses = TCPServer.getClientIPTable();
-        } while (clientAddresses.size() < playerCount);
+        } while (clientAddresses.size() < GameMode.playerCount);
         ArrayList<JSONObject> firstEncodeInfo = getEncodeInfo("ADD");
         Broadcast firstBroadcast = new Broadcast(clientAddresses, firstEncodeInfo);
         firstBroadcast.start();

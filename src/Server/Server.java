@@ -20,8 +20,7 @@ public class Server {
 
         // TODO: Change it to CDC
         fakeCDC fakeCdc = new fakeCDC();
-        // TODO: Get connection_limit from gameMode
-        TCPServer tcp = new TCPServer(40689, 4, fakeCdc);
+        TCPServer tcp = new TCPServer(40689, fakeCdc);
         tcp.initTCPServer();
 
         UDPServer udp = new UDPServer(tcp, cdc);

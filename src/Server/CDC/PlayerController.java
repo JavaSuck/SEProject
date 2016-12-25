@@ -1,5 +1,7 @@
 package Server.CDC;
 
+import org.json.JSONObject;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +32,7 @@ public class PlayerController {
 
     Player player4= new Player();
     player4.playerId = 1;
-    player4.name = "YPC";
+    player4.name = "YPD";
     player4.coordinate = new Point(0, 1);
 
     players = new HashMap();
@@ -41,11 +43,12 @@ public class PlayerController {
     players.put(4, player4);
   }
 
-  void recieveAction(HashMap action) {
-    String func = (String)action.get("function");
-    if (func == "walk") {
-      walk(1, (int)action.get("direction"));
-    } else if (func == "dead") {
+  void recieveAction(JSONObject action) {
+    String method = (String)action.get("method");
+    JSONObject params = (JSONObject)action.get("params");
+    if (method == "walk") {
+      walk(1, (int)params.get("direction"));
+    } else if (method == "dead") {
       dead(1);
     }
   }
@@ -53,7 +56,6 @@ public class PlayerController {
   public void walk(int playerId, int direction) {
     Player p = (Player)players.get(playerId);
     p.direction = direction;
-
 
     int x = p.coordinate.x;
     int y = p.coordinate.y;

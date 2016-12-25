@@ -21,7 +21,7 @@ public class CDC {
 
     }
 
-    public void addBomb(int clientNo, int x, int y) {
+    public void addBomb(int clientNo) {
 
     }
 

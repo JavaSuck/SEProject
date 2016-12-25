@@ -13,6 +13,7 @@ import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
 import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
+import Server.CDC.Direction;
 
 
 public class Game extends JPanel implements KeyListener {
@@ -91,20 +92,20 @@ public class Game extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                character.walk(1);
+                character.walk(Direction.LEFT);
                 backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
-                character.walk(2);
+                character.walk(Direction.RIGHT);
                 backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
-                character.walk(3);
+                character.walk(Direction.UP);
                 backgroundCanvas.moveCanvas(0, 48);
                 break;
             case KeyEvent.VK_DOWN:
                 backgroundCanvas.moveCanvas(0, -48);
-                character.walk(0);
+                character.walk(Direction.DOWN);
                 break;
             case KeyEvent.VK_SPACE:
                 character.stop();

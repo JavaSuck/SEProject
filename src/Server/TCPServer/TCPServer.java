@@ -17,8 +17,6 @@ import java.util.ArrayList;
 @SuppressWarnings("InfiniteLoopStatement")
 public class TCPServer {
 
-    //outside class
-
     private ServerSocket server;
     private TokenRing tokenRing;
     private ArrayList<InetAddress> connectionList;
@@ -61,24 +59,13 @@ public class TCPServer {
 
     }
 
-//    public Socket[] getClientIPTable(){
-//    	
-//    	int connectionNumber = connectionList.size();
-//    	
-//    	Socket[] connectionArr = new Socket[connectionNumber];
-//    	connectionList.toArray(connectionArr);
-//    	
-//    	return connectionArr;
-//    	
-//    }
-
 
     private void create_thread(Socket connection) {
 
-        int noValue = -1;
-        int client_token = tokenRing.token_selector();
+        int noToken = -1;
+        int clientToken = tokenRing.getToken();
 
-        if (client_token == noValue) {
+        if (clientToken == noToken) {
 
             try {
 
@@ -103,11 +90,10 @@ public class TCPServer {
             return;
         }
 
-        cdc.addVirtualCharacter(client_token, connection.getInetAddress());
-
-        new Thread(new ServerThread(connection, connectionList, client_token, tokenRing, cdc)).start();
-
+        cdc.addVirtualCharacter(clientToken, connection.getInetAddress());
         connectionList.add(connection.getInetAddress());
+
+        new Thread(new ServerThread(connection, connectionList, clientToken, tokenRing, cdc)).start();
 
         print_connection_info(connection);
     }

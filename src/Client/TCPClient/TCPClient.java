@@ -31,9 +31,8 @@ public class TCPClient {
     public boolean connectServer(InetAddress ipAddr){
 
         try {
-            String server_ip = ipAddr.getHostAddress().toString();
 
-//            this.connection = new Socket(server_ip, this.port);
+            String server_ip = ipAddr.getHostAddress().toString();
             SocketAddress sockAddr = new InetSocketAddress(server_ip, this.port);
             this.connection = new Socket();
             connection.connect(sockAddr, 2000);
@@ -44,10 +43,10 @@ public class TCPClient {
             this.instructionMap = new Instruction();
 
 
-            //At first, Server will return a line of connection information.
+            //At first, Server will return JSONObject ofconnection information.
             JSONObject recieve = recieve_data();
-
             print(recieve.toString());
+
         }
         catch (IOException e){
             return false;
@@ -80,6 +79,7 @@ public class TCPClient {
 
 
     private JSONObject recieve_data(){
+
         try{
             String data = this.reciever.readLine();
 
@@ -108,11 +108,10 @@ public class TCPClient {
             jsonObject.put("type", "REQUEST");
             jsonObject.put("content", input);
 
-            System.out.println(jsonObject);
-
             this.sender.println(jsonObject);
             this.sender.flush();
 
+            //wait the data form server.
             JSONObject recieve = this.recieve_data();
             String response = (String)recieve.get("content");
 

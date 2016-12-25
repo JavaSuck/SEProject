@@ -11,7 +11,7 @@ public class TokenRing {
         token_ring = new boolean[size];
     }
 
-    public int token_selector(){
+    public int getToken(){
 
         int index=0;
         while(index < token_ring.length * 5){

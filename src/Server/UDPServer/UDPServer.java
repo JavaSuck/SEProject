@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
+@SuppressWarnings("InfiniteLoopStatement")
 public class UDPServer extends Thread {
 
     // TODO: Get this from gameMode

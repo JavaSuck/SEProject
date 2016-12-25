@@ -4,6 +4,7 @@ import Client.Scene.Game;
 import Client.Scene.Login;
 import Client.TCPClient.TCPClient;
 import Client.UDPClient.UDPClient;
+import Server.CDC.GameMode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,8 +38,8 @@ public class Client extends JFrame implements KeyListener {
         UDPClient udp = new UDPClient();
         udp.start();
 
-//        TCPClient tcp = new TCPClient();
-//        tcp.connectServer();
+        TCPClient tcp = new TCPClient(40689);
+        tcp.connectServer(GameMode.serverAddress);
 
         ActionListener taskPerformer = evt -> {
 //          character.updateAnimation();

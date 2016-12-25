@@ -2,18 +2,21 @@ package Server;
 
 import Server.CDC.CDC;
 import Server.CDC.Direction;
+import Server.CDC.GameMode;
 import Server.CDC.Player;
 import Server.TCPServer.TCPServer;
-import Server.TCPServer.Tool.fakeCDC;
 import Server.UDPServer.UDPServer;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 public class Server {
 
     public Server() throws IOException {
+        GameMode.serverAddress = InetAddress.getLocalHost();
+
         CDC cdc = new CDC();
-        Player p = (Player) cdc.playerController.players.get(1);
+        Player p = cdc.playerController.players.get(1);
         System.out.println(p.coordinate);
         cdc.playerController.walk(1, Direction.DOWN);
         System.out.println(p.coordinate);

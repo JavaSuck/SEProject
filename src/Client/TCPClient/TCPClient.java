@@ -1,31 +1,31 @@
 package Client.TCPClient;
 
 
+import Server.TCPServer.Instruction;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
-
-import Server.TCPServer.Instruction;
 
 public class TCPClient {
 
     private int port;
     private Socket connection;
 
-    private BufferedReader reciever;
+    private BufferedReader receiver;
     private PrintWriter sender;
     private Instruction instructionMap;
 
 
     public TCPClient(int port){
-
         this.port = port;
-
     }
 
     public boolean connectServer(InetAddress ipAddr){
@@ -38,7 +38,7 @@ public class TCPClient {
             connection.connect(sockAddr, 2000);
 
 
-            this.reciever = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            this.receiver = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             this.sender = new PrintWriter(connection.getOutputStream());
             this.instructionMap = new Instruction();
 
@@ -81,7 +81,7 @@ public class TCPClient {
     private JSONObject recieve_data(){
 
         try{
-            String data = this.reciever.readLine();
+            String data = this.receiver.readLine();
 
             if(data==null)
                 return null;

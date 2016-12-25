@@ -5,7 +5,7 @@ package Server.TCPServer.Tool;
  */
 public class TokenRing {
 
-    protected boolean[] token_ring;
+    private boolean[] token_ring;
 
     public TokenRing(int size){
         token_ring = new boolean[size];
@@ -19,7 +19,8 @@ public class TokenRing {
             if(!this.token_ring[index % token_ring.length]){
 
                 token_ring[index%5] = true;
-                int token_number = index + 1;
+//                int token_number = index + 1;
+                int token_number = index;
 
                 return token_number;
             }

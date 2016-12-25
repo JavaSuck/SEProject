@@ -19,10 +19,10 @@ public class TCPServer {
 
     //outside class
 
-    protected ServerSocket server;
-    protected TokenRing tokenRing;
-    protected ArrayList<InetAddress> connectionList;
-    protected CDC cdc;
+    private ServerSocket server;
+    private TokenRing tokenRing;
+    private ArrayList<InetAddress> connectionList;
+    private CDC cdc;
 
     public TCPServer(int port,  CDC cdc) throws IOException {
         this.server = new ServerSocket(port);
@@ -73,7 +73,7 @@ public class TCPServer {
 //    }
 
 
-    protected void create_thread(Socket connection) {
+    private void create_thread(Socket connection) {
 
         int noValue = -1;
         int client_token = tokenRing.token_selector();
@@ -112,7 +112,7 @@ public class TCPServer {
         print_connection_info(connection);
     }
 
-    protected void print_connection_info(Socket connection) {
+    private void print_connection_info(Socket connection) {
 
         String login_info = String.format("[%s:%s]: [INFO] Connection Create!", connection.getInetAddress(), connection.getPort());
         System.out.println(login_info);

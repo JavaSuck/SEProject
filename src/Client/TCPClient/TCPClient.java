@@ -14,12 +14,12 @@ import Server.TCPServer.Instruction;
 
 public class TCPClient {
 
-    protected int port;
-    protected Socket connection;
+    private int port;
+    private Socket connection;
 
-    protected BufferedReader reciever;
-    protected PrintWriter sender;
-    protected Instruction instructionMap;
+    private BufferedReader reciever;
+    private PrintWriter sender;
+    private Instruction instructionMap;
 
 
     public TCPClient(int port){
@@ -64,13 +64,13 @@ public class TCPClient {
     }
 
 
-    public void inputMoves(int moveCode){
+    public void callAction(int instructionNo){
 
-        String moveInstruction = instructionMap.get(moveCode);
+        String moveInstruction = instructionMap.get(instructionNo);
 
         //if instruction not found.
         if(moveInstruction==null) {
-            print("(WARNING) -> method: inputMoves > wrong parameter cause instruction not found.");
+            print("(WARNING) -> method: callAction > wrong parameter cause instruction not found.");
             return;
         }
 
@@ -79,7 +79,7 @@ public class TCPClient {
     }
 
 
-    protected JSONObject recieve_data(){
+    private JSONObject recieve_data(){
         try{
             String data = this.reciever.readLine();
 
@@ -99,7 +99,7 @@ public class TCPClient {
         }
     }
 
-    protected void request(String input){
+    private void request(String input){
 
         JSONObject jsonObject = new JSONObject();
 
@@ -126,13 +126,13 @@ public class TCPClient {
 
     }
 
-    protected void error_handle(Exception e) {
+    private void error_handle(Exception e) {
         String error_string = String.format("(ERROR) Connection:[%s:%s] happend error, -> %s", connection.getInetAddress(), connection.getPort(), e.toString());
         print(error_string);
     }
 
 
-    protected void print(String input){
+    private void print(String input){
         String msg = String.format("[TCPClient]: %s", input);
         System.out.println(msg);
     }

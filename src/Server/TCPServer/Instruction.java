@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class Instruction {
 
-    protected Map map;
+    private Map map;
 
-    protected String[] instructionArr = {
-            "TURNEAST",
-            "TURNSOUTH",
-            "TURNNORTH",
-            "TURNWEST",
-            "GET"
+    private String[] instructionArr = {
+            "DOWN",
+            "LEFT",
+            "RIGHT",
+            "UP",
+            "BOMB"
     };
 
     public Instruction(){

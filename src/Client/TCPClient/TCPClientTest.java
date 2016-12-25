@@ -74,31 +74,31 @@ public class TCPClientTest {
     }
 
     @org.junit.Test
-    public void inputMoves() throws Exception {
+    public void callAction() throws Exception {
 
         InetAddress ipAddr = InetAddress.getByName(_correctIP);
         _client.connectServer(ipAddr);
 
 
         //TURNEAST
-        _client.inputMoves(0);
+        _client.callAction(0);
 
         //TURNSOUTH
-        _client.inputMoves(1);
+        _client.callAction(1);
 
         //TURNNORTH
-        _client.inputMoves(2);
+        _client.callAction(2);
 
         //TURNWEST
-        _client.inputMoves(3);
+        _client.callAction(3);
 
         //GET
-        _client.inputMoves(4);
+        _client.callAction(4);
 
         //following is error test, due to the inputMove is not mapping to exist instruction.
-        _client.inputMoves(5);
-        _client.inputMoves(6);
-        _client.inputMoves(7);
+        _client.callAction(5);
+        _client.callAction(6);
+        _client.callAction(7);
 
         _client = null;
         _client = new TCPClient(_port);

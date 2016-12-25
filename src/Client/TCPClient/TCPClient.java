@@ -64,13 +64,13 @@ public class TCPClient {
     }
 
 
-    public void inputMoves(int moveCode){
+    public void callAction(int instructionNo){
 
-        String moveInstruction = instructionMap.get(moveCode);
+        String moveInstruction = instructionMap.get(instructionNo);
 
         //if instruction not found.
         if(moveInstruction==null) {
-            print("(WARNING) -> method: inputMoves > wrong parameter cause instruction not found.");
+            print("(WARNING) -> method: callAction > wrong parameter cause instruction not found.");
             return;
         }
 

@@ -8,11 +8,11 @@ public class Instruction {
     protected Map map;
 
     protected String[] instructionArr = {
-            "TURNEAST",
-            "TURNSOUTH",
-            "TURNNORTH",
-            "TURNWEST",
-            "GET"
+            "DOWN",
+            "LEFT",
+            "RIGHT",
+            "UP",
+            "BOMB"
     };
 
     public Instruction(){

@@ -137,13 +137,28 @@ public class ServerThread implements Runnable{
 	        	
 	            content = (String)request.get("content");
 		        int instNumber = instructionMap.index(content);
-	
-		        if(instNumber>0 && instNumber<4){
-		        	cdc.updateDirection(clientToken, Direction.UP);
-		        }
-		        else if(instNumber == 4){
-		        	cdc.addBomb(clientToken);
-		        }
+
+
+                switch (instNumber){
+                    case 1:
+                        cdc.updateDirection(clientToken, Direction.DOWN);
+                        break;
+                    case 2:
+                        cdc.updateDirection(clientToken, Direction.LEFT);
+                        break;
+                    case 3:
+                        cdc.updateDirection(clientToken, Direction.RIGHT);
+                        break;
+                    case 4:
+                        cdc.updateDirection(clientToken, Direction.UP);
+                        break;
+                    case 5:
+                        cdc.addBomb(clientToken);
+                        break;
+                    default:{
+                        System.out.println("Find unknown instruction");
+                    }
+                }
 		        
 //		        print(content+", get token is "+instNumber);
 

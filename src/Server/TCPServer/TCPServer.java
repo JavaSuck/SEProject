@@ -1,5 +1,6 @@
 package Server.TCPServer;
 
+import Server.CDC.CDC;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class TCPServer {
 
     //outside class
-    protected fakeCDC cdc;
+    protected CDC cdc;
 
     protected ServerSocket server;
     protected int connection_limit;
@@ -25,7 +26,7 @@ public class TCPServer {
     protected ArrayList<InetAddress> connectionList;
 
 
-    public TCPServer(int port, int connection_limit, fakeCDC cdc) throws IOException {
+    public TCPServer(int port, int connection_limit, CDC cdc) throws IOException {
 
         this.server = new ServerSocket(port);
         this.connection_limit = connection_limit;

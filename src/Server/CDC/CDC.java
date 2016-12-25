@@ -1,6 +1,8 @@
 package Server.CDC;
 
 import org.json.JSONObject;
+
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class CDC {
@@ -17,21 +19,27 @@ public class CDC {
 
 
 
-    public void addVirtualCharacter(int clientNo) {
+    public void addVirtualCharacter(int playerID, InetAddress addr) {
 
     }
 
-    public void addBomb(int clientNo, int x, int y) {
+    public void removeVirtualCharacter(int playerID){
 
     }
 
-    public void updateDirection(int clientNo, int moveCode) {
+    public void addBomb(int playerID) {
+
+    }
+
+    public void updateDirection(int playerID, int moveCode) {
 
     }
 
     public void getUpdatingThread() {
 
     }
+
+
 
     public ArrayList<JSONObject> getUpdatingInfo() {
         return new ArrayList<JSONObject>() {{

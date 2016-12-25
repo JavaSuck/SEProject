@@ -18,9 +18,9 @@ public class Server {
         System.out.println(p.coordinate);
 
         // TODO: Change it to CDC
-        fakeCDC fakeCdc = new fakeCDC();
+//        fakeCDC fakeCdc = new fakeCDC();
         // TODO: Get connection_limit from gameMode
-        TCPServer tcp = new TCPServer(40689, 4, fakeCdc);
+        TCPServer tcp = new TCPServer(40689, 4, cdc);
         tcp.initTCPServer();
 
         UDPServer udp = new UDPServer(tcp, cdc);

@@ -1,6 +1,7 @@
 package Server.CDC;
 
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class CDC {
@@ -14,8 +15,6 @@ public class CDC {
         playerController = new PlayerController(gameMap);
         bombController = new BombController(gameMap);
     }
-
-
 
     public void addVirtualCharacter(int clientNo) {
 

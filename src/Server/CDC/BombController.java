@@ -24,4 +24,8 @@ class BombController {
     private void explode(Bomb bomb) {
 
     }
+
+    public ArrayList<Bomb> getBombList() {
+        return bombs;
+    }
 }

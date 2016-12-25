@@ -1,5 +1,6 @@
 package Server.TCPServer;
 
+import Server.CDC.CDC;
 import Server.CDC.GameMode;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,13 +18,13 @@ import java.util.ArrayList;
 public class TCPServer {
 
     //outside class
-    protected fakeCDC cdc;
 
     protected ServerSocket server;
     protected TokenRing tokenRing;
     protected ArrayList<InetAddress> connectionList;
+    protected CDC cdc;
 
-    public TCPServer(int port, fakeCDC cdc) throws IOException {
+    public TCPServer(int port,  CDC cdc) throws IOException {
         this.server = new ServerSocket(port);
         this.tokenRing = new TokenRing(GameMode.playerCount);
         this.connectionList = new ArrayList<InetAddress>();

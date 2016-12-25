@@ -1,5 +1,7 @@
 package Server.TCPServer.Tool;
 
+import Server.CDC.CDC;
+import Server.CDC.Direction;
 import Server.TCPServer.TCPServer;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,10 +25,10 @@ public class ServerThread implements Runnable{
     protected PrintWriter sender;
     protected Instruction instructionMap;
     protected TokenRing tokenRing;
-    protected fakeCDC cdc;
+    protected CDC cdc;
     
 
-    public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing, fakeCDC cdc){
+    public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing, CDC cdc){
 
         //Handle yourself connection
         this.connection = connection;
@@ -137,7 +139,7 @@ public class ServerThread implements Runnable{
 		        int instNumber = instructionMap.index(content);
 	
 		        if(instNumber>0 && instNumber<4){
-		        	cdc.updateDirection(clientToken, instNumber);
+		        	cdc.updateDirection(clientToken, Direction.UP);
 		        }
 		        else if(instNumber == 4){
 		        	cdc.addBomb(clientToken);

@@ -18,9 +18,9 @@ public class Server {
         cdc.playerController.walk(1, Direction.DOWN);
         System.out.println(p.coordinate);
 
-        // TODO: Change it to CDC
-        fakeCDC fakeCdc = new fakeCDC();
-        TCPServer tcp = new TCPServer(40689, fakeCdc);
+        // TODO: Get connection_limit from gameMode
+        TCPServer tcp = new TCPServer(40689, cdc);
+
         tcp.initTCPServer();
 
         UDPServer udp = new UDPServer(tcp, cdc);

@@ -6,6 +6,7 @@ import Client.UDPClient.UDPClient;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 
 public class Client extends JFrame implements KeyListener {
 
-    private int WINDOW_WIDTH = 910;
+    private int WINDOW_WIDTH = 900;
     private int WINDOW_HEIGHT = 720;
 
     private HashMap<String, JPanel> scenes = new HashMap<String, JPanel>();
@@ -28,14 +29,24 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-
-
         initUI();
         add(login, BorderLayout.CENTER);
 //        remove(login);
 //        add(game, BorderLayout.CENTER);
         UDPClient udp = new UDPClient();
         udp.start();
+
+        //TCPClient tcp = new TCPClient();
+        //tcp.connectServer();
+
+        ActionListener taskPerformer = evt -> {
+//          character.updateAnimation();
+            revalidate();
+            repaint();
+        };
+        Timer timer = new Timer(15, taskPerformer);
+        timer.setRepeats(true);
+        timer.start();
 
         // key handler
         addKeyListener(this);

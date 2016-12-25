@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+@SuppressWarnings("InfiniteLoopStatement")
 public class UDPClient extends Thread {
 
     int port = 5566;

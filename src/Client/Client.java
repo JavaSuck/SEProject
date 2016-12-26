@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 
@@ -39,7 +41,11 @@ public class Client extends JFrame implements KeyListener {
         udp.start();
 
         TCPClient tcp = new TCPClient(40689);
-        tcp.connectServer(GameMode.serverAddress);
+        try {
+            tcp.connectServer(InetAddress.getByName(GameMode.serverAddress));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
 
         ActionListener taskPerformer = evt -> {
 //          character.updateAnimation();

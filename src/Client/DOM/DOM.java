@@ -77,9 +77,6 @@ public class DOM {
                 break;
             case KeyEvent.VK_SPACE:
                 character.stop();
-                break;
-            default:
-                break;
         }
     }
 }

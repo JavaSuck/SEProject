@@ -7,18 +7,18 @@ public class TokenRing {
 
     private boolean[] token_ring;
 
-    public TokenRing(int size){
+    public TokenRing(int size) {
         token_ring = new boolean[size];
     }
 
-    public int getToken(){
+    public int getToken() {
 
-        int index=0;
-        while(index < token_ring.length * 5){
+        int index = 0;
+        while (index < token_ring.length * 5) {
 
-            if(!this.token_ring[index % token_ring.length]){
+            if (!this.token_ring[index % token_ring.length]) {
 
-                token_ring[index%5] = true;
+                token_ring[index % 5] = true;
 //                int token_number = index + 1;
                 int token_number = index;
 
@@ -33,10 +33,7 @@ public class TokenRing {
 
     }
 
-    public void token_discard(int client_token){
-
-        int index = client_token -1;
-        this.token_ring[index] = false;
-
+    public void token_discard(int client_token) {
+        this.token_ring[client_token] = false;
     }
 }

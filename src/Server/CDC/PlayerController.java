@@ -46,6 +46,35 @@ public class PlayerController {
         player.coordinate = new Point(x, y);
     }
 
+    public void slip(int playerId, Direction direction){
+
+        Player player = players.get(playerId);
+
+        //Request will invalid while player is walking.
+        if(player.isWalk)
+            return;
+
+        final int OBSTACLE = 1;
+
+        new Thread(() -> {
+
+            player.direction = direction;
+
+            int x = player.coordinate.x;
+            int y = player.coordinate.y;
+
+            player.isWalk = true;
+
+            //if player is DEAD, it would NOT continue slide.
+            while(gameMap.getOriginalMap()[x][y] != OBSTACLE || player.deadTime!=0) {
+                walk(playerId, direction);
+            }
+
+            player.isWalk = false;
+
+        }).start();
+    }
+
     void dead(int playerId) {
         Player p = players.get(playerId);
         p.deadTime = GameState.gameTime;

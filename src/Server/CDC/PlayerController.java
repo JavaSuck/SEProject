@@ -27,11 +27,20 @@ public class PlayerController {
     }
 
     public void walk(int playerId, Direction direction) {
+
+        final int OBSTACLE = 1;
+
         Player player = players.get(playerId);
         player.direction = direction;
 
         int x = player.coordinate.x;
         int y = player.coordinate.y;
+
+        int nextDistination = getNextBlock(x ,y, direction);
+
+        if(nextDistination == OBSTACLE)
+            return;
+
         switch (direction) {
             case DOWN:
                 y++;
@@ -44,6 +53,7 @@ public class PlayerController {
                 break;
             case UP:
                 y--;
+                break;
         }
         player.coordinate = new Point(x, y);
     }
@@ -56,19 +66,26 @@ public class PlayerController {
         if (player.isWalk)
             return false;
 
-        final int OBSTACLE = 1;
-
         new Thread(() -> {
             int x = player.coordinate.x;
             int y = player.coordinate.y;
+
             player.isWalk = true;
             try {
                 //if player is DEAD, it would NOT continue slide.
-                while (gameMap.getOriginalMap()[x][y] != OBSTACLE || player.deadTime != 0) {
+                final int OBSTACLE = 1;
+
+                int nextDistination = getNextBlock(x, y, direction);
+                System.out.println(nextDistination+", "+player.deadTime);
+                while (nextDistination != OBSTACLE && player.deadTime == 0) {
+                    walk(playerId, direction);
+
+                    sleep(GameMode.movePeriod);
+
                     x = player.coordinate.x;
                     y = player.coordinate.y;
-                    walk(playerId, direction);
-                    sleep(GameMode.movePeriod);
+                    nextDistination = getNextBlock(x, y, direction);
+
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -86,5 +103,27 @@ public class PlayerController {
 
     public ArrayList<Player> getPlayerList() {
         return players;
+    }
+
+
+    private int getNextBlock(int x, int y, Direction direction){
+
+        int nextDistination = -1;
+
+        switch (direction) {
+            case DOWN:
+                nextDistination = gameMap.getOriginalMap()[x][y+1];
+                break;
+            case LEFT:
+                nextDistination = gameMap.getOriginalMap()[x-1][y];
+                break;
+            case RIGHT:
+                nextDistination = gameMap.getOriginalMap()[x+1][y];
+                break;
+            case UP:
+                nextDistination = gameMap.getOriginalMap()[x][y-1];
+        }
+
+        return nextDistination;
     }
 }

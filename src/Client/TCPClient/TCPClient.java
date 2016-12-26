@@ -80,7 +80,7 @@ public class TCPClient {
             //wait the data form server.
             JSONObject receive = this.receive_data();
             assert receive != null;
-            if ((Boolean)receive.get("content"))
+//            if (Boolean.parseBoolean((String) receive.get("content")))
                 print("Request successfully");
         } catch (JSONException e) {
             error_handle(e);

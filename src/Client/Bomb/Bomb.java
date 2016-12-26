@@ -5,7 +5,7 @@ import Client.Sprite.Sprite;
 public class Bomb extends Sprite {
 
     public Bomb() {
-        
+
 
     }
 

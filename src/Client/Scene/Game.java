@@ -70,6 +70,7 @@ public class Game extends JPanel implements KeyListener {
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
+//            DOM.updateAll();
             localPlayer.updateAnimation();
             bomb.updateAnimation();
             revalidate();

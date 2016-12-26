@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class BackgroundCanvas extends JPanel {
     public Image mapImage;
-    public int xOffset ;
-    public int yOffset ;
+    public int xOffset;
+    public int yOffset;
 
     private final int width = 816;
     private final int height = 816;
@@ -27,8 +27,8 @@ public class BackgroundCanvas extends JPanel {
     }
 
 
-    public void moveCanvas(int xOffsetDelta,int yOffsetDelta){
-        setLocation(getLocation().x+xOffsetDelta, getLocation().y+yOffsetDelta);
+    public void moveCanvas(int xOffsetDelta, int yOffsetDelta) {
+        setLocation(getLocation().x + xOffsetDelta, getLocation().y + yOffsetDelta);
 //        xOffset += xOffsetDelta;
 //        yOffset += yOffsetDelta;
     }

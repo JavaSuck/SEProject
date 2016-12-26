@@ -19,14 +19,14 @@ public class Client extends JFrame implements KeyListener {
     private int WINDOW_WIDTH = 900;
     private int WINDOW_HEIGHT = 720;
 
-    private HashMap<String, JPanel> scenes = new HashMap<String, JPanel>();
+    private HashMap<String, JPanel> scenes = new HashMap<>();
 
     private Login login = new Login();
     private Game game = new Game();
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setTitle("SEProject");
+        setTitle("Ice Fire Master YPC");
         setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
     }
 
@@ -66,7 +66,6 @@ public class Client extends JFrame implements KeyListener {
         add(game, BorderLayout.CENTER);
         repaint();
     }
-
 
     @Override
     public void keyReleased(KeyEvent e) {

@@ -67,6 +67,8 @@ public class PlayerController {
 
             //if player is DEAD, it would NOT continue slide.
             while(gameMap.getOriginalMap()[x][y] != OBSTACLE || player.deadTime!=0) {
+                x = player.coordinate.x;
+                y = player.coordinate.y;
                 walk(playerId, direction);
             }
 

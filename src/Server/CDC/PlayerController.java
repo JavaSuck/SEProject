@@ -58,8 +58,6 @@ public class PlayerController {
 
         new Thread(() -> {
 
-            player.direction = direction;
-
             int x = player.coordinate.x;
             int y = player.coordinate.y;
 

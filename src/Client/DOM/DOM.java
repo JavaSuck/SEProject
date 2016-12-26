@@ -25,9 +25,12 @@ public class DOM {
 
         for (int i = 0; i < 4; i++) {
             VirtualCharacter character = new VirtualCharacter("player" + i + ".png");
+
             characters.put(i, character);
             if (i == localPlayerId)
                 localPlayer = character;
+            else
+                backgroundCanvas.add(character);
         }
     }
 

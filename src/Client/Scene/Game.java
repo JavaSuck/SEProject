@@ -77,6 +77,7 @@ public class Game extends JPanel implements KeyListener {
 //            backgroundCanvas.repaint();
             repaint();
         };
+
         Timer timer = new Timer(delay, taskPerformer);
         timer.setRepeats(true);
         timer.start();

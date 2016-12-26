@@ -56,6 +56,7 @@ public class VirtualCharacter extends Sprite {
     }
 
     public void updateCharacter(Direction dir, int x, int y) {
+        setLocation(x, y);
         currentDirection = dir;
         positionX = x;
         positionY = y;

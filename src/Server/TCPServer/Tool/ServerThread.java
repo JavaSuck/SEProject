@@ -2,10 +2,9 @@ package Server.TCPServer.Tool;
 
 import Server.CDC.CDC;
 import Server.CDC.Direction;
-import Server.TCPServer.TCPServer;
 import org.json.JSONException;
 import org.json.JSONObject;
-import Server.TCPServer.Instruction;
+import Server.TCPServer.Action;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class ServerThread implements Runnable{
     private int clientToken;
     private BufferedReader reciever;
     private PrintWriter sender;
-    private Instruction instructionMap;
+    private Action actionMap;
     private TokenRing tokenRing;
     private CDC cdc;
     
@@ -42,7 +41,7 @@ public class ServerThread implements Runnable{
         try{
             this.reciever = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             this.sender = new PrintWriter(connection.getOutputStream());
-            this.instructionMap = new Instruction();
+            this.actionMap = new Action();
             this.tokenRing = tokenRing;
         }
         catch (IOException e) {
@@ -113,7 +112,7 @@ public class ServerThread implements Runnable{
 	        if( type.compareTo("REQUEST") == 0 ) {
 	        	
 	            content = (String)request.get("content");
-		        int instNumber = instructionMap.index(content);
+		        int instNumber = actionMap.index(content);
 
 
                 switch (instNumber){
@@ -133,7 +132,7 @@ public class ServerThread implements Runnable{
                         cdc.addBomb(clientToken);
                         break;
                     default:{
-                        System.out.println("Find unknown instruction");
+                        System.out.println("Find unknown action");
                     }
                 }
 
@@ -147,7 +146,7 @@ public class ServerThread implements Runnable{
 
         }catch (NullPointerException e) {
 
-            String answer = String.format("[Server]: [WARING] \t Instruction: \"%s\" is NOT FOUND", content);
+            String answer = String.format("[Server]: [WARING] \t Action: \"%s\" is NOT FOUND", content);
             print(answer);
 
             JSONObject jsonObject = new JSONObject();
@@ -169,8 +168,8 @@ public class ServerThread implements Runnable{
     }
 
 
-    private void print(String instruction){
-        String get_data = String.format("[%s:%d]: [REQUEST] \t %s", connection.getInetAddress(), connection.getPort(), instruction );
+    private void print(String action){
+        String get_data = String.format("[%s:%d]: [REQUEST] \t %s", connection.getInetAddress(), connection.getPort(), action );
         System.out.println(get_data);
 
     }

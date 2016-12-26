@@ -3,11 +3,11 @@ package Server.TCPServer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Instruction {
+public class Action {
 
     private Map map;
 
-    private String[] instructionArr = {
+    private String[] actionArray = {
             "DOWN",
             "LEFT",
             "RIGHT",
@@ -15,25 +15,21 @@ public class Instruction {
             "BOMB"
     };
 
-    public Instruction(){
-
+    public Action() {
         map = new HashMap<String, Integer>();
-
         int index = 0;
-
-        for(String inst: instructionArr)
-            map.put(inst, index++);
+        for (String action : actionArray)
+            map.put(action, index++);
     }
 
-    public int index(String instruction){
-        return (int)map.get(instruction);
+    public int index(String action) {
+        return (int) map.get(action);
     }
 
     public String get(int index) {
         try {
-            return instructionArr[index];
-        }
-        catch(IndexOutOfBoundsException e){
+            return actionArray[index];
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

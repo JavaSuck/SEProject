@@ -1,7 +1,7 @@
 package Client.TCPClient;
 
 import Server.CDC.GameMode;
-import Server.TCPServer.Instruction;
+import Server.TCPServer.Action;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,10 +19,9 @@ public class TCPClient {
     private Socket connection;
     private BufferedReader receiver;
     private PrintWriter sender;
-    private Instruction instructionMap;
+    private Action actionMap;
 
     public boolean connectServer(InetAddress ipAddress) {
-
         try {
             String server_ip = ipAddress.getHostAddress();
             SocketAddress sockAddress = new InetSocketAddress(server_ip, GameMode.TCPPort);
@@ -30,7 +29,7 @@ public class TCPClient {
             this.connection.connect(sockAddress, 2000);
             this.receiver = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             this.sender = new PrintWriter(connection.getOutputStream());
-            this.instructionMap = new Instruction();
+            this.actionMap = new Action();
 
             //At first, Server will return JSONObject of connection information.
             JSONObject receive = receive_data();
@@ -43,16 +42,14 @@ public class TCPClient {
         return true;
     }
 
-
-    public void callAction(int instructionNo) {
-
-        String moveInstruction = instructionMap.get(instructionNo);
-        //if instruction not found.
-        if (moveInstruction == null) {
-            print("(WARNING) -> method: callAction > wrong parameter cause instruction not found.");
+    public void callAction(int actionNo) {
+        String moveAction = actionMap.get(actionNo);
+        //if action not found.
+        if (moveAction == null) {
+            print("(WARNING) -> method: callAction > wrong parameter cause action not found.");
             return;
         }
-        request(moveInstruction);
+        request(moveAction);
     }
 
 

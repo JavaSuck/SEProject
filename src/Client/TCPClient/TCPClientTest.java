@@ -94,7 +94,7 @@ public class TCPClientTest {
         //GET
         _client.callAction(4);
 
-        //following is error test, due to the inputMove is not mapping to exist instruction.
+        //following is error test, due to the inputMove is not mapping to exist action.
         _client.callAction(5);
         _client.callAction(6);
         _client.callAction(7);

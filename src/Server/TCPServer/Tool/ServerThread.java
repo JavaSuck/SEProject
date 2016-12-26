@@ -83,6 +83,8 @@ public class ServerThread implements Runnable {
     private boolean deal(JSONObject request) {
         String type;
         String content = null;
+        boolean requestResult = true;
+
         try {
             type = (String) request.get("type");
             if (type.compareTo("REQUEST") == 0) {
@@ -113,7 +115,7 @@ public class ServerThread implements Runnable {
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("type", "RESPONSE");
-                jsonObject.put("content", Boolean.toString(true));
+                jsonObject.put("content", requestResult);
                 response(jsonObject);
             }
 

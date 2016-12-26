@@ -46,13 +46,13 @@ public class PlayerController {
         player.coordinate = new Point(x, y);
     }
 
-    public void slip(int playerId, Direction direction){
+    public boolean slip(int playerId, Direction direction){
 
         Player player = players.get(playerId);
 
         //Request will invalid while player is walking.
         if(player.isWalk)
-            return;
+            return false;
 
         final int OBSTACLE = 1;
 
@@ -73,6 +73,8 @@ public class PlayerController {
             player.isWalk = false;
 
         }).start();
+
+        return true;
     }
 
     void dead(int playerId) {

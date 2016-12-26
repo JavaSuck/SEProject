@@ -18,24 +18,26 @@ public class CDC {
         bombController = new BombController(gameMap);
     }
 
-    public void addVirtualCharacter(int playerId, InetAddress address) {
+    public boolean addVirtualCharacter(int playerId, InetAddress address) {
         playerController.getPlayerList().add(new Player(playerId, "YPC", new Point(0, 0)));
+        return true;
     }
 
-    public void removeVirtualCharacter(int playerId) {
+    public boolean removeVirtualCharacter(int playerId) {
         playerController.getPlayerList().remove(playerId);
+        return true;
     }
 
-    public void addBomb(int playerId) {
+    public boolean addBomb(int playerId) {
         Point playerCoordinate = playerController.getPlayerList().get(playerId).coordinate;
         bombController.generate(playerId, playerCoordinate);
+        return true;
     }
 
-    public void updateDirection(int playerId, Direction direction) {
+    public boolean updateDirection(int playerId, Direction direction) {
         // TODO: check if can walk to this side and if is Player.isWalk
 //        playerController.getPlayerList().get(playerId).direction = direction;
-        
-        playerController.slip(playerId, direction);
+        return playerController.slip(playerId, direction);
     }
 
     public void getUpdatingThread() {

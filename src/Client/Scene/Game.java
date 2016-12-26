@@ -4,6 +4,8 @@ import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.DOM.DOM;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
+import Client.TCPClient.TCPClient;
+import Client.UDPClient.UDPClient;
 import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
@@ -22,18 +24,22 @@ public class Game extends JPanel implements KeyListener {
     private int delay = 20; // milliseconds
     private DOM dom;
     private SDM sdm;
+    private TCPClient tcp;
+    private UDPClient udp;
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 //        setForeground(Color.RED);
     }
 
-    public Game() {
-        backgroundCanvas = new BackgroundCanvas();
-        character = new VirtualCharacter("player1.png");
-        dom = new DOM(backgroundCanvas, character);
-        sdm = new SDM(backgroundCanvas);
-        sdm.loadMap();
+    public Game(TCPClient tcp, UDPClient udp) {
+        this.tcp = tcp;
+        this.udp = udp;
+        this.backgroundCanvas = new BackgroundCanvas();
+        this.character = new VirtualCharacter("player1.png");
+        this.dom = new DOM(tcp, backgroundCanvas, character);
+        this.sdm = new SDM(backgroundCanvas);
+        this.sdm.loadMap();
 
         initUI();
 

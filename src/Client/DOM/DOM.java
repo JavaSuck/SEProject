@@ -2,6 +2,7 @@ package Client.DOM;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.Objects.Item;
+import Client.TCPClient.TCPClient;
 import Server.CDC.Direction;
 
 import java.awt.*;
@@ -10,14 +11,15 @@ import java.util.HashMap;
 
 
 public class DOM {
-
+    private TCPClient tcp;
     private HashMap<Integer, Item> dynamicObjects = new HashMap<>();
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private VirtualCharacter character;
     private int playerId;
 
-    public DOM(BackgroundCanvas backgroundCanvas, VirtualCharacter character) {
+    public DOM(TCPClient tcp, BackgroundCanvas backgroundCanvas, VirtualCharacter character) {
+        this.tcp = tcp;
         this.backgroundCanvas = backgroundCanvas;
         this.character = character;
     }
@@ -59,23 +61,28 @@ public class DOM {
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+            case KeyEvent.VK_DOWN:
+                tcp.callAction(0);
+                backgroundCanvas.moveCanvas(0, -48);
+                character.walk(Direction.DOWN);
+                break;
             case KeyEvent.VK_LEFT:
+                tcp.callAction(1);
                 character.walk(Direction.LEFT);
                 backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
+                tcp.callAction(2);
                 character.walk(Direction.RIGHT);
                 backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
+                tcp.callAction(3);
                 character.walk(Direction.UP);
                 backgroundCanvas.moveCanvas(0, 48);
                 break;
-            case KeyEvent.VK_DOWN:
-                backgroundCanvas.moveCanvas(0, -48);
-                character.walk(Direction.DOWN);
-                break;
             case KeyEvent.VK_SPACE:
+                tcp.callAction(4);
                 character.stop();
         }
     }

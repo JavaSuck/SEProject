@@ -20,11 +20,9 @@ public class Client extends JFrame implements KeyListener {
 
     private int WINDOW_WIDTH = 900;
     private int WINDOW_HEIGHT = 720;
-
     private HashMap<String, JPanel> scenes = new HashMap<>();
-
-    private Login login = new Login();
-    private Game game = new Game();
+    private Login login;
+    private Game game;
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -33,10 +31,6 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-        initUI();
-        add(login, BorderLayout.CENTER);
-//        remove(login);
-//        add(game, BorderLayout.CENTER);
         UDPClient udp = new UDPClient();
         udp.start();
 
@@ -46,6 +40,14 @@ public class Client extends JFrame implements KeyListener {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+
+        login = new Login(tcp);
+        game = new Game(tcp, udp);
+
+        initUI();
+        add(login, BorderLayout.CENTER);
+//        remove(login);
+//        add(game, BorderLayout.CENTER);
 
         ActionListener taskPerformer = evt -> {
 //          character.updateAnimation();

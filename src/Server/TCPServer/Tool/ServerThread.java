@@ -85,25 +85,25 @@ public class ServerThread implements Runnable {
         String content = null;
         try {
             type = (String) request.get("type");
-            System.out.println("type:" + type);
             if (type.compareTo("REQUEST") == 0) {
                 content = (String) request.get("content");
-                int instNumber = actionMap.index(content);
+                System.out.println("type:" + type + ", content:" + content);
+                int actionNumber = actionMap.index(content);
 
-                switch (instNumber) {
-                    case 1:
+                switch (actionNumber) {
+                    case 0:
                         cdc.updateDirection(clientToken, Direction.DOWN);
                         break;
-                    case 2:
+                    case 1:
                         cdc.updateDirection(clientToken, Direction.LEFT);
                         break;
-                    case 3:
+                    case 2:
                         cdc.updateDirection(clientToken, Direction.RIGHT);
                         break;
-                    case 4:
+                    case 3:
                         cdc.updateDirection(clientToken, Direction.UP);
                         break;
-                    case 5:
+                    case 4:
                         cdc.addBomb(clientToken);
                         break;
                     default: {

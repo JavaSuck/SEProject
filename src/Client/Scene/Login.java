@@ -1,11 +1,10 @@
 package Client.Scene;
 
-import java.awt.*;
-
-import javax.lang.model.element.Name;
-import javax.swing.*;
-
 import Client.ImagePanel.ImagePanel;
+import Client.TCPClient.TCPClient;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by DMOON on 2016/12/23.
@@ -14,9 +13,10 @@ public class Login extends JPanel {
 
     private int height = 920;
     private int width = 720;
+    private TCPClient tcp;
 
-
-    public Login() {
+    public Login(TCPClient tcp) {
+        this.tcp = tcp;
         setSize(1000, 1000);
         setLayout(null);
 

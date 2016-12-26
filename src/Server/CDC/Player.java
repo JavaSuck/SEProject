@@ -10,4 +10,10 @@ public class Player {
     public int usedBomb = 0;
     public boolean isWalking = false;
     Direction direction = Direction.DOWN;
+
+    public Player(int id, String name, Point coordinate) {
+        this.id = id;
+        this.name = name;
+        this.coordinate = coordinate;
+    }
 }

@@ -14,11 +14,10 @@ class BombController {
         bombTimer.start();
     }
 
-    private Boolean generate(int playerId, Point coordinate) {
-        // TODO: check map to put bomb & return result
+    public void generate(int playerId, Point coordinate) {
+        // TODO: check map to put bomb
         gameMap.getOriginalMap();
-        bombs.add(new Bomb(playerId, coordinate, 100, 3));
-        return true;
+        bombs.add(new Bomb(playerId, coordinate, 100));
     }
 
     public ArrayList<Bomb> getBombList() {

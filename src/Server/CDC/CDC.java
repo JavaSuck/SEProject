@@ -32,6 +32,7 @@ public class CDC {
     }
 
     public void updateDirection(int playerId, Direction direction) {
+        // TODO: check if can walk to this side
         playerController.getPlayerList().get(playerId).direction = direction;
     }
 

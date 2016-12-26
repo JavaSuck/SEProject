@@ -1,6 +1,7 @@
 package Server.UDPServer;
 
 import Server.CDC.CDC;
+import Server.CDC.GameMode;
 import Server.TCPServer.TCPServer;
 import org.json.JSONObject;
 
@@ -33,7 +34,7 @@ public class UDPServer extends Thread {
         do {
             sleep(200);
             clientAddresses = TCPServer.getClientIPTable();
-        } while (clientAddresses.size() < 1/*GameMode.playerCount*/);
+        } while (clientAddresses.size() < GameMode.playerCount);
         print("Get client table successfully");
         while (true) {
             ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();

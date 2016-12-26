@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 public class PlayerController {
     private GameMap gameMap;
     private ArrayList<Player> players;
@@ -46,32 +48,32 @@ public class PlayerController {
         player.coordinate = new Point(x, y);
     }
 
-    public boolean slip(int playerId, Direction direction){
+    public boolean slip(int playerId, Direction direction) {
 
         Player player = players.get(playerId);
 
         //Request will invalid while player is walking.
-        if(player.isWalk)
+        if (player.isWalk)
             return false;
 
         final int OBSTACLE = 1;
 
         new Thread(() -> {
-
             int x = player.coordinate.x;
             int y = player.coordinate.y;
-
             player.isWalk = true;
-
-            //if player is DEAD, it would NOT continue slide.
-            while(gameMap.getOriginalMap()[x][y] != OBSTACLE || player.deadTime!=0) {
-                x = player.coordinate.x;
-                y = player.coordinate.y;
-                walk(playerId, direction);
+            try {
+                //if player is DEAD, it would NOT continue slide.
+                while (gameMap.getOriginalMap()[x][y] != OBSTACLE || player.deadTime != 0) {
+                    x = player.coordinate.x;
+                    y = player.coordinate.y;
+                    walk(playerId, direction);
+                    sleep(GameMode.movePeriod);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
             player.isWalk = false;
-
         }).start();
 
         return true;

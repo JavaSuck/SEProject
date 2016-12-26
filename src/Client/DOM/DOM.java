@@ -65,21 +65,17 @@ public class DOM {
             case KeyEvent.VK_DOWN:
                 tcp.callAction(0);
 //                backgroundCanvas.moveCanvas(0, -48);
-//                localPlayer.walk(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
                 tcp.callAction(1);
-//                localPlayer.walk(Direction.LEFT);
 //                backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
                 tcp.callAction(2);
-//                localPlayer.walk(Direction.RIGHT);
 //                backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
                 tcp.callAction(3);
-//                localPlayer.walk(Direction.UP);
 //                backgroundCanvas.moveCanvas(0, 48);
                 break;
             case KeyEvent.VK_SPACE:

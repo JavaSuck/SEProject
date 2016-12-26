@@ -36,7 +36,7 @@ public class CDC {
 
     public boolean updateDirection(int playerId, Direction direction) {
         // TODO: check if can walk to this side and if is Player.isWalk
-//        playerController.getPlayerList().get(playerId).direction = direction;
+        playerController.getPlayerList().get(playerId).direction = direction;
         return playerController.slip(playerId, direction);
     }
 

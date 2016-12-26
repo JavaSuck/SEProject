@@ -1,10 +1,9 @@
 package Client.UIComponents;
 
-import java.awt.*;
+import Client.AvatarBox.AvatarBox;
 
 import javax.swing.*;
-
-import Client.AvatarBox.AvatarBox;
+import java.awt.*;
 
 public class Sidebar extends JPanel {
 
@@ -14,15 +13,15 @@ public class Sidebar extends JPanel {
     public Sidebar() {
         setBackground(new Color(35, 105, 186));
 //        setBackground(Color.WHITE);
-        AvatarBox avatarbox1 = new AvatarBox("YPC", "p1_face.png");
-        AvatarBox avatarbox2 = new AvatarBox("YPC", "p1_face.png");
-        AvatarBox avatarbox3 = new AvatarBox("YPC", "p1_face.png");
-        AvatarBox avatarbox4 = new AvatarBox("YPC", "p1_face.png");
+        AvatarBox avatarBox1 = new AvatarBox("YPC", "avatar0.png");
+        AvatarBox avatarBox2 = new AvatarBox("YPC", "avatar0.png");
+        AvatarBox avatarBox3 = new AvatarBox("YPC", "avatar0.png");
+        AvatarBox avatarBox4 = new AvatarBox("YPC", "avatar0.png");
 
-        add(avatarbox1);
-        add(avatarbox2);
-        add(avatarbox3);
-        add(avatarbox4);
+        add(avatarBox1);
+        add(avatarBox2);
+        add(avatarBox3);
+        add(avatarBox4);
     }
 
     @Override

@@ -19,8 +19,7 @@ public class TCPClientTest {
     public void setUp() throws Exception {
 
         _correctIP = "localhost";
-        _port = 40689;
-        _client = new TCPClient(_port);
+        _client = new TCPClient();
 
     }
 
@@ -56,7 +55,7 @@ public class TCPClientTest {
             if(currentIP.compareTo(_correctIP) == 0) {
                 assertTrue(_client.connectServer(ipAddr));
                 _client = null;
-                _client = new TCPClient(_port);
+                _client = new TCPClient();
             }
             else{
                 System.out.println(currentIP);
@@ -67,7 +66,7 @@ public class TCPClientTest {
 //        assertTrue(_client.connectServer(ipAddr));
 
         _client = null;
-        _client = new TCPClient(_port);
+        _client = new TCPClient();
 
 
 
@@ -101,7 +100,7 @@ public class TCPClientTest {
         _client.callAction(7);
 
         _client = null;
-        _client = new TCPClient(_port);
+        _client = new TCPClient();
 
     }
 //

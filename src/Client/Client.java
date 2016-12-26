@@ -40,7 +40,7 @@ public class Client extends JFrame implements KeyListener {
         UDPClient udp = new UDPClient();
         udp.start();
 
-        TCPClient tcp = new TCPClient(40689);
+        TCPClient tcp = new TCPClient();
         try {
             tcp.connectServer(InetAddress.getByName(GameMode.serverAddress));
         } catch (UnknownHostException e) {

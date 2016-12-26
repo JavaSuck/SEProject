@@ -1,6 +1,6 @@
 package Client.TCPClient;
 
-
+import Server.CDC.GameMode;
 import Server.TCPServer.Instruction;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,95 +16,63 @@ import java.net.SocketAddress;
 
 public class TCPClient {
 
-    private int port;
     private Socket connection;
-
     private BufferedReader receiver;
     private PrintWriter sender;
     private Instruction instructionMap;
 
-
-    public TCPClient(int port){
-        this.port = port;
-    }
-
-    public boolean connectServer(InetAddress ipAddr){
+    public boolean connectServer(InetAddress ipAddress) {
 
         try {
-
-            String server_ip = ipAddr.getHostAddress().toString();
-            SocketAddress sockAddr = new InetSocketAddress(server_ip, this.port);
+            String server_ip = ipAddress.getHostAddress();
+            SocketAddress sockAddress = new InetSocketAddress(server_ip, GameMode.TCPPort);
             this.connection = new Socket();
-            connection.connect(sockAddr, 2000);
-
-
+            this.connection.connect(sockAddress, 2000);
             this.receiver = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             this.sender = new PrintWriter(connection.getOutputStream());
             this.instructionMap = new Instruction();
 
+            //At first, Server will return JSONObject of connection information.
+            JSONObject receive = receive_data();
+            assert receive != null;
+            print(receive.toString());
 
-            //At first, Server will return JSONObject ofconnection information.
-            JSONObject recieve = recieve_data();
-            print(recieve.toString());
-
-        }
-        catch (IOException e){
+        } catch (IOException | NullPointerException | JSONException e) {
             return false;
         }
-        catch (NullPointerException e){
-            //connection not found, cause no recieve data.
-            return false;
-        }
-        catch (JSONException e){
-            return false;
-        }
-
         return true;
     }
 
 
-    public void callAction(int instructionNo){
+    public void callAction(int instructionNo) {
 
         String moveInstruction = instructionMap.get(instructionNo);
-
         //if instruction not found.
-        if(moveInstruction==null) {
+        if (moveInstruction == null) {
             print("(WARNING) -> method: callAction > wrong parameter cause instruction not found.");
             return;
         }
-
         request(moveInstruction);
-
     }
 
 
-    private JSONObject recieve_data(){
-
-        try{
+    private JSONObject receive_data() {
+        try {
             String data = this.receiver.readLine();
 
-            if(data==null)
+            if (data == null)
                 return null;
 
             return new JSONObject(data);
-        }
-        catch(JSONException e){
+        } catch (JSONException | IOException e) {
             error_handle(e);
             return null;
-        }
-        catch(IOException e){
-            error_handle(e);
-            return null;
-
         }
     }
 
-    private void request(String input){
-
+    private void request(String input) {
         JSONObject jsonObject = new JSONObject();
-
         try {
-
             jsonObject.put("type", "REQUEST");
             jsonObject.put("content", input);
 
@@ -112,17 +80,14 @@ public class TCPClient {
             this.sender.flush();
 
             //wait the data form server.
-            JSONObject recieve = this.recieve_data();
-            String response = (String)recieve.get("content");
+            JSONObject receive = this.receive_data();
+            assert receive != null;
+            String response = (String) receive.get("content");
 
             System.out.println(response);
-
-        }
-        catch (JSONException e){
+        } catch (JSONException e) {
             error_handle(e);
         }
-
-
     }
 
     private void error_handle(Exception e) {
@@ -130,10 +95,8 @@ public class TCPClient {
         print(error_string);
     }
 
-
-    private void print(String input){
+    private void print(String input) {
         String msg = String.format("[TCPClient]: %s", input);
         System.out.println(msg);
     }
-
 }

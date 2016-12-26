@@ -28,7 +28,7 @@ public class TCPServerTest {
     public void setUp() throws Exception {
         _port = 40689;
         _cdc = new CDC();
-        _server = new TCPServer(_port, _cdc);
+        _server = new TCPServer(_cdc);
         _server.initTCPServer();
 
     }
@@ -78,7 +78,7 @@ public class TCPServerTest {
         int ConnectionNumber = GameMode.playerCount;
 
         for(int i=0; i<ConnectionNumber; i++){
-            TCPClient client = new TCPClient(40689);
+            TCPClient client = new TCPClient();
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }
@@ -102,7 +102,7 @@ public class TCPServerTest {
 
 
         for(int i=0; i<AddConnectionNumber; i++){
-            TCPClient client = new TCPClient(40689);
+            TCPClient client = new TCPClient();
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }

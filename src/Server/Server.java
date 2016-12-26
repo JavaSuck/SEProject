@@ -11,7 +11,7 @@ public class Server {
     public Server() throws IOException {
         CDC cdc = new CDC();
 
-        TCPServer tcp = new TCPServer(40689, cdc);
+        TCPServer tcp = new TCPServer(cdc);
         tcp.initTCPServer();
 
         UDPServer udp = new UDPServer(tcp, cdc);

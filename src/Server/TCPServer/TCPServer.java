@@ -22,93 +22,66 @@ public class TCPServer {
     private ArrayList<InetAddress> connectionList;
     private CDC cdc;
 
-    public TCPServer(int port,  CDC cdc) throws IOException {
-        this.server = new ServerSocket(port);
+    public TCPServer(CDC cdc) throws IOException {
+        this.server = new ServerSocket(GameMode.TCPPort);
         this.tokenRing = new TokenRing(GameMode.playerCount);
-        this.connectionList = new ArrayList<InetAddress>();
+        this.connectionList = new ArrayList<>();
         this.cdc = cdc;
-
         System.out.println("Server is running");
     }
 
     public void initTCPServer() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (true) {
-                    try {
-                        Socket connection = server.accept();
-                        create_thread(connection);
-                    } catch (IOException e) {
-                        // TODO: handle exception
-                        e.printStackTrace();
-                    }
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Socket connection = server.accept();
+                    create_thread(connection);
+                } catch (IOException e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
                 }
-
             }
-
         }).start();
-
     }
 
     public ArrayList<InetAddress> getClientIPTable() {
-
         return connectionList;
-
     }
 
-
     private void create_thread(Socket connection) {
-
         int noToken = -1;
         int clientToken = tokenRing.getToken();
-
         if (clientToken == noToken) {
-
             try {
-
                 PrintWriter sender = new PrintWriter(connection.getOutputStream());
 
                 JSONObject jsonObject = new JSONObject();
-
-
                 jsonObject.put("type", "CONNECT");
                 jsonObject.put("content", Boolean.toString(false));
-
 
                 sender.println(jsonObject);
                 sender.flush();
 
                 connection.close();
 
-            } catch (IOException e) {
-            } catch (JSONException e) {
+            } catch (IOException | JSONException ignored) {
             }
-
             return;
         }
 
         cdc.addVirtualCharacter(clientToken, connection.getInetAddress());
         connectionList.add(connection.getInetAddress());
-
         new Thread(new ServerThread(connection, connectionList, clientToken, tokenRing, cdc)).start();
 
         print_connection_info(connection);
     }
 
     private void print_connection_info(Socket connection) {
-
         String login_info = String.format("[%s:%s]: [INFO] Connection Create!", connection.getInetAddress(), connection.getPort());
         System.out.println(login_info);
-
     }
 }
-
 
 /**
  * Deal request for single Connection
  */
-
-

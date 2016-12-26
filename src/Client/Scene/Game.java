@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
 public class Game extends JPanel implements KeyListener {
 
     private int WINDOW_WIDTH = 910;
@@ -23,7 +22,6 @@ public class Game extends JPanel implements KeyListener {
     private int delay = 20; // milliseconds
     private DOM dom;
     private SDM sdm;
-
 
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -72,7 +70,6 @@ public class Game extends JPanel implements KeyListener {
         setFocusable(true);
     }
 
-
     @Override
     public void keyReleased(KeyEvent e) {
         //        System.out.println("keyReleased");
@@ -87,6 +84,5 @@ public class Game extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         dom.keyPressed(e);
     }
-
 
 }

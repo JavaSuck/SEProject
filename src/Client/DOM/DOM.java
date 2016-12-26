@@ -15,21 +15,21 @@ public class DOM {
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private VirtualCharacter character;
-    private int myClientno = 0;
+    private int playerId;
 
     public DOM(BackgroundCanvas backgroundCanvas, VirtualCharacter character) {
         this.backgroundCanvas = backgroundCanvas;
         this.character = character;
     }
 
-    public void addVirtualCharacter(int clientno) {
-        // Create VirtualCharacter and Client.Sprite
+    public void addVirtualCharacter(int playerId) {
+        this.playerId = playerId;
         VirtualCharacter character = new VirtualCharacter("sprite.png");
-        characters.put(clientno, character);
+        characters.put(playerId, character);
     }
 
     public Point getVirtualCharacterXY() {
-        return characters.get(myClientno).getPosition();
+        return characters.get(playerId).getPosition();
     }
 
     public void updateVirtualCharacter(int clientno, Direction dir, int speed, int x, int y) {

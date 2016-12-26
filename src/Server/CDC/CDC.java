@@ -19,7 +19,7 @@ public class CDC {
     }
 
     public boolean addVirtualCharacter(int playerId, InetAddress address) {
-        playerController.getPlayerList().add(new Player(playerId, "YPC", new Point(5, 5)));
+        playerController.getPlayerList().add(new Player(playerId, "YPC", new Point(4, 4)));
         return true;
     }
 

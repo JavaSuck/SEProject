@@ -3,7 +3,6 @@ package Client;
 import Client.Scene.Game;
 import Client.Scene.Login;
 import Client.TCPClient.TCPClient;
-import Client.UDPClient.UDPClient;
 import Server.CDC.GameMode;
 
 import javax.swing.*;
@@ -31,9 +30,6 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-        UDPClient udp = new UDPClient();
-        udp.start();
-
         TCPClient tcp = new TCPClient();
         try {
             tcp.connectServer(InetAddress.getByName(GameMode.serverAddress));
@@ -42,7 +38,7 @@ public class Client extends JFrame implements KeyListener {
         }
 
         login = new Login(tcp);
-        game = new Game(tcp, udp);
+        game = new Game(tcp);
 
         initUI();
         add(login, BorderLayout.CENTER);

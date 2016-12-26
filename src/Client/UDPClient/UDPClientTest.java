@@ -1,5 +1,6 @@
 package Client.UDPClient;
 
+import Client.DOM.DOM;
 import Server.CDC.GameMode;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,10 +16,11 @@ import static org.junit.Assert.*;
 
 class UDPClientTest {
     private UDPClient UDPClient;
+    private DOM dom;
 
     @Before
     void setUp() {
-        UDPClient = new UDPClient();
+        UDPClient = new UDPClient(dom);
     }
 
     @After

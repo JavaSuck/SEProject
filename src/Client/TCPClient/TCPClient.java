@@ -20,6 +20,7 @@ public class TCPClient {
     private BufferedReader receiver;
     private PrintWriter sender;
     private Action actionMap;
+    public int playerId;
 
     public boolean connectServer(InetAddress ipAddress) {
         try {
@@ -35,7 +36,7 @@ public class TCPClient {
             JSONObject receive = receive_data();
             assert receive != null;
             print(receive.toString());
-
+            playerId = Integer.parseInt(receive.get("content").toString());
         } catch (IOException | NullPointerException | JSONException e) {
             return false;
         }
@@ -79,9 +80,8 @@ public class TCPClient {
             //wait the data form server.
             JSONObject receive = this.receive_data();
             assert receive != null;
-            String response = (String) receive.get("content");
-
-            System.out.println(response);
+            if (Boolean.parseBoolean((String) receive.get("content")))
+                print("Request successfully");
         } catch (JSONException e) {
             error_handle(e);
         }

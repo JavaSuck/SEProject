@@ -1,5 +1,6 @@
 package Client.UDPClient;
 
+import Client.DOM.DOM;
 import Server.CDC.Direction;
 import Server.CDC.GameMode;
 import org.json.JSONArray;
@@ -11,6 +12,12 @@ import java.net.DatagramSocket;
 
 @SuppressWarnings("InfiniteLoopStatement")
 public class UDPClient extends Thread {
+
+    private DOM dom;
+
+    public UDPClient(DOM dom) {
+        this.dom = dom;
+    }
 
     public void run() {
         try {
@@ -42,6 +49,8 @@ public class UDPClient extends Thread {
                 int directionValue = (int) ((JSONArray) message.get("direction")).get(0);
                 Direction direction = Direction.getDirection(directionValue);
                 print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction);
+                dom.updateVirtualCharacter(playerId, direction, coordinateX, coordinateY);
+                // TODO: update character of dom
             }
             socket.close();
             sleep(200);

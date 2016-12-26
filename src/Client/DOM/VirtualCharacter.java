@@ -1,10 +1,11 @@
 package Client.DOM;
 
+import Client.Sprite.Animation;
+import Client.Sprite.Sprite;
+import Server.CDC.Direction;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import Client.Sprite.*;
-import Server.CDC.Direction;
 
 
 public class VirtualCharacter extends Sprite {
@@ -13,7 +14,6 @@ public class VirtualCharacter extends Sprite {
 
     private String name;
     private int positionX, positionY;
-    private int speed;
     private final int walkingFrameAmount = 6;
 
     private int delay = 12;
@@ -55,9 +55,9 @@ public class VirtualCharacter extends Sprite {
         animation.update();
     }
 
-    public void updateCharacter(Direction dir, int speed, int x, int y) {
+    public void updateCharacter(Direction dir, int x, int y) {
+
         currentDirection = dir;
-        this.speed = speed;
         positionX = x;
         positionY = y;
         walk(dir);
@@ -65,10 +65,6 @@ public class VirtualCharacter extends Sprite {
 
     public Direction getCurrentDirection() {
         return currentDirection;
-    }
-
-    public int getSpeed() {
-        return speed;
     }
 
     public BufferedImage getAnimationFrame() {

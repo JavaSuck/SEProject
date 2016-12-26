@@ -20,7 +20,7 @@ public class Game extends JPanel implements KeyListener {
     private int WINDOW_WIDTH = 910;
     private int WINDOW_HEIGHT = 720;
     private BackgroundCanvas backgroundCanvas;
-    private VirtualCharacter character;
+    private VirtualCharacter localPlayer;
     private int delay = 20; // milliseconds
     private DOM dom;
     private SDM sdm;
@@ -32,21 +32,22 @@ public class Game extends JPanel implements KeyListener {
 //        setForeground(Color.RED);
     }
 
-    public Game(TCPClient tcp, UDPClient udp) {
+    public Game(TCPClient tcp) {
         this.tcp = tcp;
-        this.udp = udp;
         this.backgroundCanvas = new BackgroundCanvas();
-        this.character = new VirtualCharacter("player1.png");
-        this.dom = new DOM(tcp, backgroundCanvas, character);
+        this.dom = new DOM(tcp, backgroundCanvas);
         this.sdm = new SDM(backgroundCanvas);
         this.sdm.loadMap();
+        this.udp = new UDPClient(dom);
+        this.udp.start();
+        this.localPlayer = dom.localPlayer;
 
         initUI();
 
         FixedCanvas fixedCanvas = new FixedCanvas();
-        fixedCanvas.setMyCharacter(character);
+        fixedCanvas.setMyCharacter(localPlayer);
         fixedCanvas.setSize(360, 360);
-        character.stop();
+        localPlayer.stop();
 
         Sidebar sidebar = new Sidebar();
         JLayeredPane content = new JLayeredPane();
@@ -63,7 +64,7 @@ public class Game extends JPanel implements KeyListener {
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
-            character.updateAnimation();
+            localPlayer.updateAnimation();
             revalidate();
             repaint();
         };

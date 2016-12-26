@@ -15,27 +15,28 @@ public class DOM {
     private HashMap<Integer, Item> dynamicObjects = new HashMap<>();
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
-    private VirtualCharacter character;
-    private int playerId;
+    private int localPlayerId;
+    public VirtualCharacter localPlayer;
 
-    public DOM(TCPClient tcp, BackgroundCanvas backgroundCanvas, VirtualCharacter character) {
+    public DOM(TCPClient tcp, BackgroundCanvas backgroundCanvas) {
         this.tcp = tcp;
         this.backgroundCanvas = backgroundCanvas;
-        this.character = character;
-    }
+        this.localPlayerId = tcp.playerId;
 
-    public void addVirtualCharacter(int playerId) {
-        this.playerId = playerId;
-        VirtualCharacter character = new VirtualCharacter("sprite.png");
-        characters.put(playerId, character);
+        for (int i = 0; i < 4; i++) {
+            VirtualCharacter character = new VirtualCharacter("player" + i + ".png");
+            characters.put(i, character);
+            if (i == localPlayerId)
+                localPlayer = character;
+        }
     }
 
     public Point getVirtualCharacterXY() {
-        return characters.get(playerId).getPosition();
+        return characters.get(localPlayerId).getPosition();
     }
 
-    public void updateVirtualCharacter(int clientno, Direction dir, int speed, int x, int y) {
-        characters.get(clientno).updateCharacter(dir, speed, x, y);
+    public void updateVirtualCharacter(int playerId, Direction dir, int x, int y) {
+        characters.get(playerId).updateCharacter(dir, x, y);
     }
 
     public void addItem(String name, int index, boolean shared) {
@@ -63,27 +64,27 @@ public class DOM {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN:
                 tcp.callAction(0);
-                backgroundCanvas.moveCanvas(0, -48);
-                character.walk(Direction.DOWN);
+//                backgroundCanvas.moveCanvas(0, -48);
+//                localPlayer.walk(Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
                 tcp.callAction(1);
-                character.walk(Direction.LEFT);
-                backgroundCanvas.moveCanvas(48, 0);
+//                localPlayer.walk(Direction.LEFT);
+//                backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
                 tcp.callAction(2);
-                character.walk(Direction.RIGHT);
-                backgroundCanvas.moveCanvas(-48, 0);
+//                localPlayer.walk(Direction.RIGHT);
+//                backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
                 tcp.callAction(3);
-                character.walk(Direction.UP);
-                backgroundCanvas.moveCanvas(0, 48);
+//                localPlayer.walk(Direction.UP);
+//                backgroundCanvas.moveCanvas(0, 48);
                 break;
             case KeyEvent.VK_SPACE:
-                tcp.callAction(4);
-                character.stop();
+//                tcp.callAction(4);
+                localPlayer.stop();
         }
     }
 }

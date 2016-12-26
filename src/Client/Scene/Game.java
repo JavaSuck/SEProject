@@ -1,6 +1,7 @@
 package Client.Scene;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
+import Client.Bomb.Bomb;
 import Client.DOM.DOM;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
@@ -10,6 +11,7 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -60,12 +62,18 @@ public class Game extends JPanel implements KeyListener {
         fixedCanvas.setBounds(0, 0, 720, 720);
         content.moveToFront(fixedCanvas);
 
+        Bomb bomb = new Bomb();
+        bomb.setBounds(80, 80, 48, 48);
+        backgroundCanvas.add(bomb);
+
         add(content, BorderLayout.CENTER);
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
             localPlayer.updateAnimation();
+            bomb.updateAnimation();
             revalidate();
+//            backgroundCanvas.repaint();
             repaint();
         };
         Timer timer = new Timer(delay, taskPerformer);

@@ -1,16 +1,20 @@
 package Client.Sprite;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 import Client.Assets.Images.images;
 
-public class Sprite {
+public class Sprite extends JPanel {
 
     private BufferedImage spriteSheet;
     private int tileSize = 48;
+    protected BufferedImage currentFrame;
+    protected Animation animation;
 
     public BufferedImage loadSprite(String file) {
 
@@ -39,4 +43,19 @@ public class Sprite {
         tileSize = size;
     }
 
+//    protected abstract void customRender(Graphics g);
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponents(g);
+//        customRender(g);
+        if (animation != null) {
+            g.drawImage(animation.getSprite(), 0, 0, null);
+        }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(tileSize, tileSize);
+    }
 }

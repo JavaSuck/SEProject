@@ -32,7 +32,7 @@ public class CDC {
     }
 
     public void updateDirection(int playerId, Direction direction) {
-        // TODO: check if can walk to this side
+        // TODO: check if can walk to this side and if is Player.isWalk
         playerController.getPlayerList().get(playerId).direction = direction;
     }
 
@@ -42,10 +42,17 @@ public class CDC {
 
     public ArrayList<JSONObject> getUpdatingInfo() {
         return new ArrayList<JSONObject>() {{
-            JSONObject info = new JSONObject();
-            info.append("Character", "Jason Wu");
-            info.append("Item", "Bomb");
-            add(info);
+            for (Player player : playerController.getPlayerList()) {
+                JSONObject info = new JSONObject();
+                info.append("playerId", player.id);
+                info.append("coordinateX", player.coordinate.getX());
+                info.append("coordinateY", player.coordinate.getY());
+                info.append("deadTime", player.deadTime);
+                info.append("usedBomb", player.usedBomb);
+                info.append("isWalk", player.isWalk);
+                info.append("direction", player.direction.getValue());
+                add(info);
+            }
         }};
     }
 }

@@ -8,7 +8,7 @@ public class Player {
     public Point coordinate;
     public int deadTime = 0;
     public int usedBomb = 0;
-    public boolean isWalking = false;
+    public boolean isWalk = false;
     Direction direction = Direction.DOWN;
 
     public Player(int id, String name, Point coordinate) {

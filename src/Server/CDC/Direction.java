@@ -7,6 +7,7 @@ public enum Direction {
     UP(3);
 
     private int value;
+    private static Direction[] allValues = values();
 
     Direction(int value) {
         this.value = value;
@@ -14,5 +15,9 @@ public enum Direction {
 
     public int getValue() {
         return this.value;
+    }
+
+    public static Direction getDirection(int n) {
+        return allValues[n];
     }
 }

@@ -1,5 +1,6 @@
 package Client.UDPClient;
 
+import Server.CDC.GameMode;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
@@ -41,7 +42,7 @@ class UDPClientTest {
         byte buffer[] = new byte[SIZE];
         boolean infoCorrect = true;
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        DatagramSocket socket = new DatagramSocket(UDPClient.port);
+        DatagramSocket socket = new DatagramSocket(GameMode.UDPPort);
         for (int i = 0; i < 10; i++) {
             socket.receive(packet);
             String receiveMessage = new String(buffer, 0, packet.getLength());

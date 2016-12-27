@@ -19,7 +19,8 @@ public class CDC {
     }
 
     public boolean addVirtualCharacter(int playerId, InetAddress address) {
-        playerController.getPlayerList().add(new Player(playerId, "YPC", new Point(4, 4)));
+        Point[] startLocation = getStartLocation();
+        playerController.getPlayerList().add(new Player(playerId, "YPC", startLocation[playerId]));
         return true;
     }
 
@@ -58,5 +59,30 @@ public class CDC {
                 add(info);
             }
         }};
+    }
+
+    private Point[] getStartLocation(){
+
+        final int startLocationBlock = 2;
+
+        Point[] startLocation = new Point[GameMode.playerCount];
+        int[][] map = gameMap.getOriginalMap();
+        int startLocationIndex = 0;
+
+        for(int y =0; y<map.length; y++){
+            for(int x=0; x<map[y].length; x++) {
+                if (map[y][x] == startLocationBlock) {
+                    startLocation[startLocationIndex] = new Point(x, y);
+                    startLocationIndex++;
+                }
+            }
+        }
+
+        //Assure the GameMode and GameMap is synchronize.
+        assert startLocationIndex == GameMode.playerCount;
+
+        return startLocation;
+
+
     }
 }

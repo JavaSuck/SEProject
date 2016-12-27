@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import Client.Scene.Game;
 
-public class BackgroundCanvas extends JPanel {
+public class BackgroundCanvas extends JLayeredPane {
   public Image mapImage;
 
   public final static int CANVAS_WIDTH = 816;

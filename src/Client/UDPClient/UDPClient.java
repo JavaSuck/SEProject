@@ -61,7 +61,7 @@ public class UDPClient extends Thread {
                     backgroundCanvas.update(coordinate);
                 }
                 socket.close();
-                sleep(300);
+                sleep(50); // dont't modify this
             } catch (InterruptedIOException e) {
                 print("Timeout");
             } catch (InterruptedException | IOException e) {

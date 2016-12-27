@@ -16,7 +16,7 @@ public class PlayerController {
     players = new ArrayList<>();
   }
 
-  void recieveAction(JSONObject action) {
+  public void recieveAction(JSONObject action) {
 
     int playerID = 1;
 
@@ -89,12 +89,7 @@ public class PlayerController {
           y = player.coordinate.y;
 
           nextDestination = getNextBlock(x, y, direction);
-          lastDelay = true;
         }
-
-        if(lastDelay)
-          sleep(GameMode.movePeriod);
-
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -104,7 +99,7 @@ public class PlayerController {
     return true;
   }
 
-  void dead(int playerId) {
+  public void dead(int playerId) {
     Player p = players.get(playerId);
     p.deadTime = GameState.gameTime;
   }
@@ -115,7 +110,6 @@ public class PlayerController {
 
 
   private int getNextBlock(int x, int y, Direction direction){
-
     int nextDestination = -1;
     int [][] mapData = gameMap.getOriginalMap();
     switch (direction) {

@@ -70,7 +70,7 @@ public class Game extends JPanel implements KeyListener {
     content.moveToFront(fixedCanvas);
 
     Bomb bomb = new Bomb();
-    bomb.setBounds(80, 80, BLOCK_PIXEL, BLOCK_PIXEL);
+    bomb.setBounds(48, 48, BLOCK_PIXEL, BLOCK_PIXEL);
     backgroundCanvas.add(bomb);
 
     add(content, BorderLayout.CENTER);

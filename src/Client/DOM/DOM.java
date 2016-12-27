@@ -27,10 +27,12 @@ public class DOM {
             VirtualCharacter character = new VirtualCharacter("player" + i + ".png");
 
             characters.put(i, character);
-            if (i == localPlayerId)
+            if (i == localPlayerId) {
                 localPlayer = character;
-            else
-                backgroundCanvas.add(character);
+                backgroundCanvas.add(localPlayer);
+            } else {
+//                backgroundCanvas.add(character);
+            }
         }
     }
 

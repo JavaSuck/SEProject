@@ -6,6 +6,7 @@ import Client.TCPClient.TCPClient;
 import Server.CDC.GameMode;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -42,6 +43,7 @@ public class Client extends JFrame implements KeyListener {
 
         initUI();
         add(login, BorderLayout.CENTER);
+        replaceRoute("login");
 //        remove(login);
 //        add(game, BorderLayout.CENTER);
 
@@ -66,6 +68,7 @@ public class Client extends JFrame implements KeyListener {
         remove(login);
 //        removeKeyListener(this);
 //        setFocusable(false);
+        game.initGame();
         game.requestFocus();
         add(game, BorderLayout.CENTER);
         repaint();
@@ -83,12 +86,7 @@ public class Client extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                replaceRoute("yo");
-                break;
-            default:
-                break;
-        }
+        // switch gameMode
+        game.keyPressed(e);
     }
 }

@@ -1,8 +1,10 @@
 package Client.BackgroundCanvas;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
+
 import Client.Scene.Game;
 
 public class BackgroundCanvas extends JLayeredPane {
@@ -22,6 +24,7 @@ public class BackgroundCanvas extends JLayeredPane {
 
     public boolean isWalkingAnimation = false;
     private boolean shouldCharacterSync = true;
+
 //  @Override
 //  public Dimension getPreferredSize() {
 //    return new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);

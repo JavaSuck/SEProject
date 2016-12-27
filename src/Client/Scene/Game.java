@@ -15,9 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class Game extends JPanel implements KeyListener {
+public class Game extends JPanel {
 
     private int WINDOW_WIDTH = 910;
     private int WINDOW_HEIGHT = 720;
@@ -38,7 +37,11 @@ public class Game extends JPanel implements KeyListener {
     }
 
     public Game(TCPClient tcp) {
+        initUI();
         this.tcp = tcp;
+    }
+
+    public void initGame() {
         this.backgroundCanvas = new BackgroundCanvas();
         this.dom = new DOM(tcp, backgroundCanvas);
         this.sdm = new SDM(backgroundCanvas);
@@ -46,8 +49,6 @@ public class Game extends JPanel implements KeyListener {
         this.udp = new UDPClient(dom, backgroundCanvas);
         this.udp.start();
         this.localPlayer = dom.localPlayer;
-
-        initUI();
 
         FixedCanvas fixedCanvas = new FixedCanvas();
         fixedCanvas.setMyCharacter(localPlayer);
@@ -69,7 +70,9 @@ public class Game extends JPanel implements KeyListener {
 
         content.moveToFront(fixedCanvas);
 
-        Bomb bomb = new Bomb();
+
+        Bomb bomb = new Bomb(1);
+
         bomb.setBounds(48, 48, BLOCK_PIXEL, BLOCK_PIXEL);
         backgroundCanvas.add(bomb);
 
@@ -88,22 +91,16 @@ public class Game extends JPanel implements KeyListener {
         timer.setRepeats(true);
         timer.start();
 
-        // key handler
-        addKeyListener(this);
-        setFocusable(true);
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
         //        System.out.println("keyReleased");
     }
 
-    @Override
     public void keyTyped(KeyEvent e) {
         //        System.out.println("keyTyped");
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         dom.keyPressed(e);
     }

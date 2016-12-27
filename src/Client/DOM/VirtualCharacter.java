@@ -1,5 +1,6 @@
 package Client.DOM;
 
+import Client.Scene.Game;
 import Client.Sprite.Animation;
 import Client.Sprite.Sprite;
 import Server.CDC.Direction;
@@ -16,14 +17,14 @@ public class VirtualCharacter extends Sprite {
     private Point coordinateNext;
     private final int walkingFrameAmount = 6;
 
-    private int delay = 12;
+    private int delay = 8;
+
 
     Animation[] walk = new Animation[4];
 
-    // current animation
-    private Animation animation;
 
     public VirtualCharacter(String imageName) {
+
         loadSprite(imageName);
         for (int i = 0; i < 4; i++) {
             BufferedImage[] walking = {getSprite(i, 1), getSprite(i, 0), getSprite(i, 2)};
@@ -34,6 +35,7 @@ public class VirtualCharacter extends Sprite {
 
     public Point getPosition() {
         return this.coordinateNext;
+
     }
 
     public void walk(Direction direction) {
@@ -75,5 +77,6 @@ public class VirtualCharacter extends Sprite {
     public BufferedImage getAnimationFrame() {
         return animation.getSprite();
     }
+
 
 }

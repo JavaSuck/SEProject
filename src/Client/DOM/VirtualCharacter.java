@@ -50,7 +50,7 @@ public class VirtualCharacter extends Sprite {
 
 
     public void updateCharacter(Direction dir, int x, int y, boolean isCharacterSync) {
-        setLocation(x, y);
+        setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
         currentDirection = dir;
         positionX = x;
         positionY = y;

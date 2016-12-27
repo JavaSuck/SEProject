@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
-import static jdk.nashorn.internal.objects.Global.print;
 
 public class PlayerController {
   private GameMap gameMap;
@@ -32,7 +31,7 @@ public class PlayerController {
     final int OBSTACLE = 1;
 
     Player player = players.get(playerId);
-    player.direction = direction;
+    //player.direction = direction;
 
     int x = player.coordinate.x;
     int y = player.coordinate.y;
@@ -62,6 +61,7 @@ public class PlayerController {
   public boolean slip(int playerId, Direction direction) {
 
     Player player = players.get(playerId);
+    player.direction = direction;
 
     //Request will invalid while player is walking.
     if (player.isWalk)

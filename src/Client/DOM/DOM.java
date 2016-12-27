@@ -67,19 +67,15 @@ public class DOM {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN:
                 tcp.callAction(0);
-//                backgroundCanvas.moveCanvas(0, -48);
                 break;
             case KeyEvent.VK_LEFT:
                 tcp.callAction(1);
-//                backgroundCanvas.moveCanvas(48, 0);
                 break;
             case KeyEvent.VK_RIGHT:
                 tcp.callAction(2);
-//                backgroundCanvas.moveCanvas(-48, 0);
                 break;
             case KeyEvent.VK_UP:
                 tcp.callAction(3);
-//                backgroundCanvas.moveCanvas(0, 48);
                 break;
             case KeyEvent.VK_SPACE:
 //                tcp.callAction(4);

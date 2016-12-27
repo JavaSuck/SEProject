@@ -38,7 +38,7 @@ public class UDPServer extends Thread {
         print("Get client table successfully");
         while (true) {
             ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();
-            checkInfo(updateInfo);
+            //checkInfo(updateInfo);
             Broadcast broadcast = new Broadcast(clientAddresses, updateInfo);
             broadcast.start();
             sleep(50);
@@ -51,9 +51,9 @@ public class UDPServer extends Thread {
             if (!infoCorrect)
                 infoCorrect = true;
             for (JSONObject info : updateInfo) {
-                infoCorrect &= info.has("playerId");
-                infoCorrect &= info.has("coordinateX");
-                infoCorrect &= info.has("coordinateY");
+                infoCorrect &= info.has("players");
+                infoCorrect &= info.has("bombs");
+                infoCorrect &= info.has("gameState");
             }
         } while (!infoCorrect);
     }

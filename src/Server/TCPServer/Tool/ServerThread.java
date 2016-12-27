@@ -94,16 +94,16 @@ public class ServerThread implements Runnable {
 
                 switch (actionNumber) {
                     case 0:
-                        cdc.updateDirection(clientToken, Direction.DOWN);
+                        cdc.playerSlip(clientToken, Direction.DOWN);
                         break;
                     case 1:
-                        cdc.updateDirection(clientToken, Direction.LEFT);
+                        cdc.playerSlip(clientToken, Direction.LEFT);
                         break;
                     case 2:
-                        cdc.updateDirection(clientToken, Direction.RIGHT);
+                        cdc.playerSlip(clientToken, Direction.RIGHT);
                         break;
                     case 3:
-                        cdc.updateDirection(clientToken, Direction.UP);
+                        cdc.playerSlip(clientToken, Direction.UP);
                         break;
                     case 4:
                         cdc.addBomb(clientToken);

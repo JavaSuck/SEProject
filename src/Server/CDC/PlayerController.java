@@ -8,129 +8,118 @@ import java.util.ArrayList;
 import static java.lang.Thread.sleep;
 
 public class PlayerController {
-  private GameMap gameMap;
-  private ArrayList<Player> players;
+    private GameMap gameMap;
+    private ArrayList<Player> players;
 
-  PlayerController(GameMap gameMap) {
-    this.gameMap = gameMap;
-    players = new ArrayList<>();
-  }
-
-  public void recieveAction(JSONObject action) {
-
-    int playerID = 1;
-
-    String method = action.get("method").toString();
-    JSONObject params = (JSONObject) action.get("params");
-    if (method.equals("walk")) {
-      walk(playerID, (Direction) params.get("direction"));
-    } else if (method.equals("dead")) {
-      dead(playerID);
+    PlayerController(GameMap gameMap) {
+        this.gameMap = gameMap;
+        players = new ArrayList<>();
     }
-  }
 
-  public void walk(int playerId, Direction direction) {
+//    public void recieveAction(JSONObject action) {
+//
+//        int playerID = 1;
+//
+//        String method = action.get("method").toString();
+//        JSONObject params = (JSONObject) action.get("params");
+//        if (method.equals("walk")) {
+//            walk(playerID, (Direction) params.get("direction"));
+//        } else if (method.equals("dead")) {
+//            dead(playerID);
+//        }
+//    }
 
-    final int OBSTACLE = 1;
-
-    Player player = players.get(playerId);
-    //player.direction = direction;
-
-    int x = player.coordinate.x;
-    int y = player.coordinate.y;
-
-    int nextDestination = getNextBlock(x ,y, direction);
-
-    if(nextDestination == OBSTACLE)
-      return;
-
-    switch (direction) {
-      case DOWN:
-        y++;
-        break;
-      case LEFT:
-        x--;
-        break;
-      case RIGHT:
-        x++;
-        break;
-      case UP:
-        y--;
-        break;
-    }
-    player.coordinate = new Point(x, y);
-  }
-
-  public boolean slip(int playerId, Direction direction) {
-
-    Player player = players.get(playerId);
-    player.direction = direction;
-
-    //Request will invalid while player is walking.
-//    if (!player.isCharacterSync)
-//      return false;
-
-    new Thread(() -> {
-      int x = player.coordinate.x;
-      int y = player.coordinate.y;
-
-      player.isCharacterSync = false;
-      try {
-        //if player is DEAD, it would NOT continue slide.
+    public Point getNextCoordinate(Point coordinate, Direction direction) {
         final int OBSTACLE = 1;
 
-        int nextDestination = getNextBlock(x, y, direction);
+        int nextBlock = getNextBlock(coordinate, direction);
 
-        // first time delay
-        if (nextDestination != OBSTACLE && player.deadTime == 0) {
-          sleep(GameMode.movePeriod / 2);
+        if (nextBlock == OBSTACLE)
+            return coordinate;
+
+        int x = (int)coordinate.getX();
+        int y = (int)coordinate.getY();
+        switch (direction) {
+            case DOWN:
+                y++;
+                break;
+            case LEFT:
+                x--;
+                break;
+            case RIGHT:
+                x++;
+                break;
+            case UP:
+                y--;
+                break;
         }
-
-        while (nextDestination != OBSTACLE && player.deadTime == 0) {
-          walk(playerId, direction);
-          sleep(GameMode.movePeriod);
-
-          x = player.coordinate.x;
-          y = player.coordinate.y;
-
-          nextDestination = getNextBlock(x, y, direction);
-        }
-        player.isCharacterSync = true;
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }).start();
-
-    return true;
-  }
-
-  public void dead(int playerId) {
-    Player p = players.get(playerId);
-    p.deadTime = GameState.gameTime;
-  }
-
-  public ArrayList<Player> getPlayerList() {
-    return players;
-  }
-
-
-  private int getNextBlock(int x, int y, Direction direction){
-    int nextDestination = -1;
-    int [][] mapData = gameMap.getOriginalMap();
-    switch (direction) {
-      case DOWN:
-        nextDestination = mapData[y+1][x];
-        break;
-      case LEFT:
-        nextDestination = mapData[y][x-1];
-        break;
-      case RIGHT:
-        nextDestination = mapData[y][x+1];
-        break;
-      case UP:
-        nextDestination = mapData[y-1][x];
+        return new Point(x, y);
     }
 
-    return nextDestination;
-  }
+    public boolean slip(int playerId, Direction direction) {
+
+        Player player = players.get(playerId);
+
+        //Request will invalid while player is walking.
+        if (!player.shouldCharacterSync) {
+            return false;
+        }
+
+        player.direction = direction;
+        new Thread(() -> {
+            player.shouldCharacterSync = false;
+            try {
+                //if player is DEAD, it would NOT continue slide.
+                final int OBSTACLE = 1;
+
+                int nextBlock = getNextBlock(player.coordinate, direction);
+
+                while (nextBlock != OBSTACLE && player.deadTime == 0) {
+                    player.coordinateNext = getNextCoordinate(player.coordinate, direction);
+                    sleep((long)(GameMode.movePeriod * 0.7));
+
+                    player.coordinate = player.coordinateNext;
+                    sleep((long)(GameMode.movePeriod * 0.3));
+
+                    nextBlock = getNextBlock(player.coordinate, direction);
+                }
+                player.shouldCharacterSync = true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        return true;
+    }
+
+    public void dead(int playerId) {
+        Player player = players.get(playerId);
+        player.deadTime = GameState.gameTime;
+    }
+
+    public ArrayList<Player> getPlayerList() {
+        return players;
+    }
+
+    private int getNextBlock(Point coordinate, Direction direction){
+        int nextBlock = -1;
+        int [][] mapData = gameMap.getOriginalMap();
+        int x = (int)coordinate.getX();
+        int y = (int)coordinate.getY();
+        switch (direction) {
+            case DOWN:
+                nextBlock = mapData[y + 1][x];
+                break;
+            case LEFT:
+                nextBlock = mapData[y][x - 1];
+                break;
+            case RIGHT:
+                nextBlock = mapData[y][x + 1];
+                break;
+            case UP:
+                nextBlock = mapData[y - 1][x];
+        }
+
+        return nextBlock;
+    }
 }

@@ -32,7 +32,7 @@ public class UDPServer extends Thread {
         ArrayList<InetAddress> clientAddresses;
         print("Try to get client table ...");
         do {
-            sleep(200);
+            sleep(100);
             clientAddresses = TCPServer.getClientIPTable();
         } while (clientAddresses.size() < GameMode.playerCount - 3);
         print("Get client table successfully");

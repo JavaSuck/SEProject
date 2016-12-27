@@ -56,7 +56,7 @@ public class UDPClient extends Thread {
         backgroundCanvas.update(coordinate);
       }
       socket.close();
-      sleep(16);
+      sleep(50);
     }
   }
 

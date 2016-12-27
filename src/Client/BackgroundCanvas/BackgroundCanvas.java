@@ -49,7 +49,7 @@ public class BackgroundCanvas extends JPanel {
       }
     };
 
-    timer = new Timer(4, move);
+    timer = new Timer(3, move);
     timer.setRepeats(true);
     timer.start();
   }

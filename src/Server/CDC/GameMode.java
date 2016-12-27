@@ -11,5 +11,3 @@ public class GameMode {
     public static final int movePeriod = 170;
     public static final double walkSpeed = 0.5;
 }
-
-

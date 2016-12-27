@@ -17,12 +17,15 @@ public class PlayerController {
   }
 
   void recieveAction(JSONObject action) {
+
+    int playerID = 1;
+
     String method = action.get("method").toString();
     JSONObject params = (JSONObject) action.get("params");
     if (method.equals("walk")) {
-      walk(1, (Direction) params.get("direction"));
+      walk(playerID, (Direction) params.get("direction"));
     } else if (method.equals("dead")) {
-      dead(1);
+      dead(playerID);
     }
   }
 

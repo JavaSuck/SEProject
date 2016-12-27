@@ -16,6 +16,10 @@ public class Sprite extends JPanel {
     protected BufferedImage currentFrame;
     protected Animation animation;
 
+    public Sprite() {
+        setSize(tileSize, tileSize);
+    }
+
     public BufferedImage loadSprite(String file) {
 
 //        BufferedImage sprite = null;
@@ -41,6 +45,8 @@ public class Sprite extends JPanel {
 
     public void setSplitSize(int size) {
         tileSize = size;
+        setSize(tileSize, tileSize);
+        setPreferredSize(new Dimension(tileSize, tileSize));
     }
 
 //    protected abstract void customRender(Graphics g);

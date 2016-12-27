@@ -55,13 +55,13 @@ public class VirtualCharacter extends Sprite {
     animation.update();
   }
 
-  public void updateCharacter(Direction dir, int x, int y, boolean isWalk) {
+  public void updateCharacter(Direction dir, int x, int y, boolean isCharacterSync) {
     setLocation(x, y);
     currentDirection = dir;
     positionX = x;
     positionY = y;
 
-    if(isWalk) {
+    if(isCharacterSync) {
       walk(dir);
     } else {
       stop();

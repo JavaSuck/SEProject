@@ -48,16 +48,16 @@ public class UDPClient extends Thread {
                 for (int i = 0; i < messages.length(); i++) {
                     JSONObject message = new JSONObject(messages.get(i).toString());
                     int playerId = (int) ((JSONArray) message.get("playerId")).get(0);
-                    int coordinateX = (int) ((JSONArray) message.get("coordinateX")).get(0);
-                    int coordinateY = (int) ((JSONArray) message.get("coordinateY")).get(0);
-                    Point coordinate = new Point(coordinateX, coordinateY);
+                    int nextCoordinateX = (int) ((JSONArray) message.get("nextCoordinateX")).get(0);
+                    int nextCoordinateY = (int) ((JSONArray) message.get("nextCoordinateY")).get(0);
+                    Point coordinate = new Point(nextCoordinateX, nextCoordinateY);
                     int deadTime = (int) ((JSONArray) message.get("deadTime")).get(0);
                     int usedBomb = (int) ((JSONArray) message.get("usedBomb")).get(0);
-                    boolean isWalk = (boolean) ((JSONArray) message.get("isWalk")).get(0);
+                    boolean isCharacterSync = (boolean) ((JSONArray) message.get("isCharacterSync")).get(0);
                     int directionValue = (int) ((JSONArray) message.get("direction")).get(0);
                     Direction direction = Direction.getDirection(directionValue);
-                    print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction + ", isWalk = " + isWalk);
-                    dom.updateVirtualCharacter(playerId, direction, coordinateX, coordinateY, isWalk);
+                    print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction + ", isCharacterSync = " + isCharacterSync);
+                    dom.updateVirtualCharacter(playerId, direction, nextCoordinateX, nextCoordinateY, isCharacterSync);
                     backgroundCanvas.update(coordinate);
                 }
                 socket.close();

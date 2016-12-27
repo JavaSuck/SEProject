@@ -67,8 +67,8 @@ public class PlayerController {
     player.direction = direction;
 
     //Request will invalid while player is walking.
-    if (!player.isCharacterSync)
-      return false;
+//    if (!player.isCharacterSync)
+//      return false;
 
     new Thread(() -> {
       int x = player.coordinate.x;

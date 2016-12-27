@@ -53,7 +53,7 @@ public class UDPClient extends Thread {
                     Point coordinate = new Point(nextCoordinateX, nextCoordinateY);
                     int deadTime = (int) ((JSONArray) message.get("deadTime")).get(0);
                     int usedBomb = (int) ((JSONArray) message.get("usedBomb")).get(0);
-                    boolean isCharacterSync = (boolean) ((JSONArray) message.get("isCharacterSync")).get(0);
+                     boolean isCharacterSync = (boolean) ((JSONArray) message.get("isCharacterSync")).get(0);
                     int directionValue = (int) ((JSONArray) message.get("direction")).get(0);
                     Direction direction = Direction.getDirection(directionValue);
                     print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction + ", isCharacterSync = " + isCharacterSync);

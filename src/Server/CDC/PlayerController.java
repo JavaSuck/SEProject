@@ -77,7 +77,7 @@ public class PlayerController {
         final int OBSTACLE = 1;
 
         int nextDestination = getNextBlock(x, y, direction);
-        System.out.println(nextDestination+", "+player.deadTime);
+
         while (nextDestination != OBSTACLE && player.deadTime == 0) {
           walk(playerId, direction);
           sleep(GameMode.movePeriod);

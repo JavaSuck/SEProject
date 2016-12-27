@@ -80,7 +80,7 @@ public class PlayerController {
         final int OBSTACLE = 1;
 
         int nextDestination = getNextBlock(x, y, direction);
-        boolean lastDelay = false;
+
         while (nextDestination != OBSTACLE && player.deadTime == 0) {
           walk(playerId, direction);
           sleep(GameMode.movePeriod);

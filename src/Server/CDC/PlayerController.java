@@ -77,7 +77,7 @@ public class PlayerController {
         final int OBSTACLE = 1;
 
         int nextDestination = getNextBlock(x, y, direction);
-
+        boolean lastDelay = false;
         while (nextDestination != OBSTACLE && player.deadTime == 0) {
           walk(playerId, direction);
           sleep(GameMode.movePeriod);
@@ -86,7 +86,12 @@ public class PlayerController {
           y = player.coordinate.y;
 
           nextDestination = getNextBlock(x, y, direction);
+          lastDelay = true;
         }
+
+        if(lastDelay)
+          sleep(GameMode.movePeriod);
+
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

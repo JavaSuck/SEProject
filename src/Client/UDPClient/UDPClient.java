@@ -51,12 +51,12 @@ public class UDPClient extends Thread {
         boolean isWalk = (boolean) ((JSONArray) message.get("isWalk")).get(0);
         int directionValue = (int) ((JSONArray) message.get("direction")).get(0);
         Direction direction = Direction.getDirection(directionValue);
-        print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction);
-        dom.updateVirtualCharacter(playerId, direction, coordinateX, coordinateY);
+        print("Get message, id = " + playerId + ", coordinate = " + coordinate + ", direction = " + direction + ", isWalk = " + isWalk);
+        dom.updateVirtualCharacter(playerId, direction, coordinateX, coordinateY, isWalk);
         backgroundCanvas.update(coordinate);
       }
       socket.close();
-      sleep(200);
+      sleep(16);
     }
   }
 

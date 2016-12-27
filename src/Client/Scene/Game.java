@@ -1,6 +1,7 @@
 package Client.Scene;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
+import Client.Bomb.Bomb;
 import Client.DOM.DOM;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
@@ -10,6 +11,7 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,6 +21,10 @@ public class Game extends JPanel implements KeyListener {
 
   private int WINDOW_WIDTH = 910;
   private int WINDOW_HEIGHT = 720;
+  public static int CAMERA_WIDTH = 720;
+  public static int CAMERA_HEIGHT = 720;
+  public static final int BLOCK_PIXEL = 48;
+
   private BackgroundCanvas backgroundCanvas;
   private VirtualCharacter localPlayer;
   private int delay = 20; // milliseconds
@@ -29,7 +35,6 @@ public class Game extends JPanel implements KeyListener {
 
   private void initUI() {
     setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-//        setForeground(Color.RED);
   }
 
   public Game(TCPClient tcp) {
@@ -52,23 +57,31 @@ public class Game extends JPanel implements KeyListener {
     Sidebar sidebar = new Sidebar();
     JLayeredPane content = new JLayeredPane();
     content.setLayout(null);
-    content.setPreferredSize(new Dimension(720, 720));
+    content.setPreferredSize(new Dimension(CAMERA_WIDTH, CAMERA_HEIGHT));
 
     backgroundCanvas.initCanvasPosition();
-    backgroundCanvas.setSize(816, 816);
+    backgroundCanvas.initTimer();
+    backgroundCanvas.setSize(BackgroundCanvas.CANVAS_WIDTH, BackgroundCanvas.CANVAS_HEIGHT);
     content.add(backgroundCanvas);
 
-    fixedCanvas.setBounds(0, 0, 720, 720);
+    fixedCanvas.setBounds(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
     content.add(fixedCanvas);
 
     content.moveToFront(fixedCanvas);
+
+    Bomb bomb = new Bomb();
+    bomb.setBounds(80, 80, BLOCK_PIXEL, BLOCK_PIXEL);
+    backgroundCanvas.add(bomb);
 
     add(content, BorderLayout.CENTER);
     add(sidebar, BorderLayout.EAST);
 
     ActionListener taskPerformer = evt -> {
+//            DOM.updateAll();
       localPlayer.updateAnimation();
+      bomb.updateAnimation();
       revalidate();
+//            backgroundCanvas.repaint();
       repaint();
     };
     Timer timer = new Timer(delay, taskPerformer);
@@ -94,5 +107,4 @@ public class Game extends JPanel implements KeyListener {
   public void keyPressed(KeyEvent e) {
     dom.keyPressed(e);
   }
-
 }

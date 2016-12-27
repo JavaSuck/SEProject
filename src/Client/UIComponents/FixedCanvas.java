@@ -12,11 +12,13 @@ public class FixedCanvas extends JPanel {
     private VirtualCharacter myCharacter;
 
     public FixedCanvas() {
-        setBackground(Color.BLUE);
+//        setBackground(Color.BLUE);
     }
 
     public void setMyCharacter(VirtualCharacter character) {
         myCharacter = character;
+//        myCharacter.setLocation(336, 336);
+//        add(myCharacter);
     }
 
     @Override

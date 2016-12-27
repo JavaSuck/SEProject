@@ -25,9 +25,12 @@ public class DOM {
 
         for (int i = 0; i < 4; i++) {
             VirtualCharacter character = new VirtualCharacter("player" + i + ".png");
+
             characters.put(i, character);
             if (i == localPlayerId)
                 localPlayer = character;
+            else
+                backgroundCanvas.add(character);
         }
     }
 
@@ -35,8 +38,8 @@ public class DOM {
         return characters.get(localPlayerId).getPosition();
     }
 
-    public void updateVirtualCharacter(int playerId, Direction dir, int x, int y) {
-        characters.get(playerId).updateCharacter(dir, x, y);
+    public void updateVirtualCharacter(int playerId, Direction dir, int x, int y, boolean isWalk) {
+        characters.get(playerId).updateCharacter(dir, x, y, isWalk);
     }
 
     public void addItem(String name, int index, boolean shared) {

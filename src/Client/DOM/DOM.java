@@ -31,7 +31,7 @@ public class DOM {
             characters.put(i, character);
             if (i == localPlayerId) {
                 localPlayer = character;
-                backgroundCanvas.add(character);
+//                backgroundCanvas.add(character);
             }
 //            else
 //                backgroundCanvas.add(character);

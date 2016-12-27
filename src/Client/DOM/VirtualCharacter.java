@@ -43,8 +43,23 @@ public class VirtualCharacter extends Sprite {
         start();
     }
 
+
     public void start() {
         animation.start();
+    }
+
+
+    public void updateCharacter(Direction dir, int x, int y, boolean isCharacterSync) {
+        setLocation(x, y);
+        currentDirection = dir;
+        positionX = x;
+        positionY = y;
+
+//    if(isCharacterSync) {
+        walk(dir);
+//    } else {
+//      stop();
+//    }
     }
 
     public void stop() {
@@ -56,19 +71,6 @@ public class VirtualCharacter extends Sprite {
         animation.update();
     }
 
-    public void updateCharacter(Direction dir, int x, int y, boolean isWalk) {
-        setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-        currentDirection = dir;
-        positionX = x;
-        positionY = y;
-
-        if (isWalk) {
-            walk(dir);
-        } else {
-            stop();
-        }
-
-    }
 
     public Direction getCurrentDirection() {
         return currentDirection;

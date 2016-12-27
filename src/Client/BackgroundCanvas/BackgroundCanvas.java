@@ -21,6 +21,8 @@ public class BackgroundCanvas extends JLayeredPane {
 
     private int newCanvasX;
     private int newCanvasY;
+
+    public boolean isWalkingAnimation = false;
 //  @Override
 //  public Dimension getPreferredSize() {
 //    return new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -49,6 +51,13 @@ public class BackgroundCanvas extends JLayeredPane {
             } else if (newCanvasY - oldCanvasY < 0) {
                 moveCanvas(0, -1);
             }
+
+            if (Math.abs(newCanvasX - oldCanvasX) < 36 && Math.abs(newCanvasY - oldCanvasY) < 36) {
+                isWalkingAnimation = false;
+            } else {
+                isWalkingAnimation = true;
+            }
+
         };
 
         timer = new Timer(3, move);

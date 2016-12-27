@@ -3,6 +3,7 @@ package Server.UDPServer;
 import Server.CDC.CDC;
 import Server.CDC.GameMode;
 import Server.TCPServer.TCPServer;
+
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -38,20 +39,24 @@ public class UDPServer extends Thread {
         print("Get client table successfully");
         while (true) {
             ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();
-            boolean infoCorrect = true;
-            do {
-                if (!infoCorrect)
-                    infoCorrect = true;
-                for (JSONObject info : updateInfo) {
-                    infoCorrect &= info.has("playerId");
-                    infoCorrect &= info.has("coordinateX");
-                    infoCorrect &= info.has("coordinateY");
-                }
-            } while (!infoCorrect);
+            //checkInfo(updateInfo);
             Broadcast broadcast = new Broadcast(clientAddresses, updateInfo);
             broadcast.start();
-            sleep(100);
+            sleep(50);
         }
+    }
+
+    private void checkInfo(ArrayList<JSONObject> updateInfo) {
+        boolean infoCorrect = true;
+        do {
+            if (!infoCorrect)
+                infoCorrect = true;
+            for (JSONObject info : updateInfo) {
+                infoCorrect &= info.has("players");
+                infoCorrect &= info.has("bombs");
+                infoCorrect &= info.has("gameState");
+            }
+        } while (!infoCorrect);
     }
 
     private void print(String input) {

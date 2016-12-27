@@ -67,19 +67,24 @@ public class PlayerController {
     player.direction = direction;
 
     //Request will invalid while player is walking.
-    if (player.isWalk)
-      return false;
+//    if (!player.isCharacterSync)
+//      return false;
 
     new Thread(() -> {
       int x = player.coordinate.x;
       int y = player.coordinate.y;
 
-      player.isWalk = true;
+      player.isCharacterSync = false;
       try {
         //if player is DEAD, it would NOT continue slide.
         final int OBSTACLE = 1;
 
         int nextDestination = getNextBlock(x, y, direction);
+
+        // first time delay
+        if (nextDestination != OBSTACLE && player.deadTime == 0) {
+          sleep(GameMode.movePeriod / 2);
+        }
 
         while (nextDestination != OBSTACLE && player.deadTime == 0) {
           walk(playerId, direction);
@@ -90,10 +95,10 @@ public class PlayerController {
 
           nextDestination = getNextBlock(x, y, direction);
         }
+        player.isCharacterSync = true;
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      player.isWalk = false;
     }).start();
 
     return true;

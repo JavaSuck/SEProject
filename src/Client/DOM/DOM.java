@@ -25,7 +25,6 @@ public class DOM {
 
         for (int i = 0; i < 4; i++) {
             VirtualCharacter character = new VirtualCharacter("player" + i + ".png");
-
             characters.put(i, character);
             if (i == localPlayerId) {
                 localPlayer = character;
@@ -34,14 +33,15 @@ public class DOM {
 //                backgroundCanvas.add(character);
             }
         }
+
     }
 
     public Point getVirtualCharacterXY() {
         return characters.get(localPlayerId).getPosition();
     }
 
-    public void updateVirtualCharacter(int playerId, Direction dir, int x, int y, boolean isWalk) {
-        characters.get(playerId).updateCharacter(dir, x, y, isWalk);
+    public void updateVirtualCharacter(int playerId, Direction dir, int x, int y, boolean isCharacterSync) {
+        characters.get(playerId).updateCharacter(dir, x, y, isCharacterSync);
     }
 
     public void addItem(String name, int index, boolean shared) {
@@ -66,22 +66,26 @@ public class DOM {
     }
 
     public void keyPressed(KeyEvent e) {
+        if (!backgroundCanvas.isWalkingAnimation) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_DOWN:
+                    tcp.callAction(0);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    tcp.callAction(1);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    tcp.callAction(2);
+                    break;
+                case KeyEvent.VK_UP:
+                    tcp.callAction(3);
+                    break;
+            }
+        }
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_DOWN:
-                tcp.callAction(0);
-                break;
-            case KeyEvent.VK_LEFT:
-                tcp.callAction(1);
-                break;
-            case KeyEvent.VK_RIGHT:
-                tcp.callAction(2);
-                break;
-            case KeyEvent.VK_UP:
-                tcp.callAction(3);
-                break;
             case KeyEvent.VK_SPACE:
 //                tcp.callAction(4);
-                localPlayer.stop();
+//                localPlayer.stop();
         }
     }
 }

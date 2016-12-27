@@ -11,11 +11,13 @@ import Client.Sprite.Animation;
 import Client.Sprite.Sprite;
 
 public class Bomb extends Sprite {
+    private int id;
     private int positionX, positionY;
     private int delay = 20;
     private Animation explosion, bomb;
 
-    public Bomb() {
+    public Bomb(int id) {
+        this.id = id;
         loadSprite("bomb.png");
         for (int i = 0; i < 4; i++) {
             setSplitSize(47);

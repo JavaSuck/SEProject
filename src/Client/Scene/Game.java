@@ -71,7 +71,7 @@ public class Game extends JPanel {
 
         content.moveToFront(fixedCanvas);
 
-        Bomb bomb = new Bomb();
+        Bomb bomb = new Bomb(1);
         bomb.setBounds(48, 48, BLOCK_PIXEL, BLOCK_PIXEL);
         backgroundCanvas.add(bomb);
 

@@ -3,6 +3,7 @@ package Client.DOM;
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.Objects.Item;
 import Client.TCPClient.TCPClient;
+import Client.Bomb.Bomb;
 import Server.CDC.Direction;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public class DOM {
     private TCPClient tcp;
     private HashMap<Integer, Item> dynamicObjects = new HashMap<>();
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
+    private HashMap<Integer, Bomb> bombs = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private int localPlayerId;
     public VirtualCharacter localPlayer;
@@ -33,7 +35,6 @@ public class DOM {
 //                backgroundCanvas.add(character);
             }
         }
-
     }
 
     public Point getVirtualCharacterXY() {
@@ -44,17 +45,37 @@ public class DOM {
         characters.get(playerId).updateCharacter(dir, x, y, isCharacterSync);
     }
 
-    public void addItem(String name, int index, boolean shared) {
-        Item newItem = new Item(name, index, shared, "item.png");
-        if (dynamicObjects.get(index) == null) {
-            dynamicObjects.put(index, newItem);
+//    public void addItem(String name, int index, boolean shared) {
+//        Item newItem = new Item(name, index, shared, "item.png");
+//        if (dynamicObjects.get(index) == null) {
+//            dynamicObjects.put(index, newItem);
+//        } else {
+//            System.out.println("Create Failed: item already exist");
+//        }
+//    }
+//
+//    public void updateItem(int index, boolean shared, int owner) {
+//        dynamicObjects.get(index).updateItem(shared, owner);
+//    }
+
+    public void createBomb(int index, int x, int y) {
+        if (bombs.get(index) == null) {
+            Bomb newBomb = new Bomb(index);
+            newBomb.setLocation(x, y);
+            bombs.put(index, newBomb);
+            backgroundCanvas.add(newBomb);
         } else {
-            System.out.println("Create Failed: item already exist");
+            System.out.println("Create Failed: bomb already exist");
         }
     }
 
-    public void updateItem(int index, boolean shared, int owner) {
-        dynamicObjects.get(index).updateItem(shared, owner);
+    public void bombExplode(int index) {
+        if (bombs.get(index) == null) {
+//            bombs.get(index);
+//            create Explosion(int x, int y);
+//            backgroundCanvas.add(explosion);
+//            explosion.start();
+        }
     }
 
     public HashMap<Integer, Item> getAllDynamicObjects() {

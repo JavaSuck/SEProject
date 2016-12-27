@@ -58,7 +58,7 @@ public class VirtualCharacter extends Sprite {
     }
 
     public void updateCharacter(Direction direction, Point coordinateNext, boolean shouldCharacterSync) {
-//        setLocation(direction.x, direction.y);
+        setLocation(coordinateNext.x * Game.BLOCK_PIXEL, coordinateNext.y * Game.BLOCK_PIXEL);
         currentDirection = direction;
         this.coordinateNext = coordinateNext;
 

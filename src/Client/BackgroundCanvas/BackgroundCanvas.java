@@ -45,11 +45,11 @@ public class BackgroundCanvas extends JLayeredPane {
             int oldCanvasX = getLocation().x;
             int oldCanvasY = getLocation().y;
 
-//            if (this.shouldCharacterSync) {
-//                setLocation(newCanvasX, newCanvasY);
-//                isWalkingAnimation = false;
-//                return;
-//            }
+            if (this.shouldCharacterSync) {
+                setLocation(newCanvasX, newCanvasY);
+                isWalkingAnimation = false;
+                return;
+            }
 
             if (newCanvasX - oldCanvasX > 0) {
                 moveCanvas(1 ,0);

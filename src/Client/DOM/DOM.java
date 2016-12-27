@@ -38,8 +38,8 @@ public class DOM {
     return characters.get(localPlayerId).getPosition();
   }
 
-  public void updateVirtualCharacter(int playerId, Direction dir, int x, int y, boolean isWalk) {
-    characters.get(playerId).updateCharacter(dir, x, y, isWalk);
+  public void updateVirtualCharacter(int playerId, Direction dir, int x, int y, boolean isCharacterSync) {
+      characters.get(playerId).updateCharacter(dir, x, y, isCharacterSync);
   }
 
   public void addItem(String name, int index, boolean shared) {

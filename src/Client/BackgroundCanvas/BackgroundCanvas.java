@@ -13,7 +13,7 @@ public class BackgroundCanvas extends JLayeredPane {
     public final static int CANVAS_WIDTH = 816;
     public final static int CANVAS_HEIGHT = 816;
 
-    public Point coordinateOld = new Point(4, 4);
+    public Point coordinateOld = new Point(0, 0);
 
     public final int canvasBasicOffsetX = (Game.CAMERA_WIDTH / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;
     public final int canvasBasicOffsetY = (Game.CAMERA_HEIGHT / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;

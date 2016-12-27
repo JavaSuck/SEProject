@@ -10,21 +10,26 @@ import java.util.ArrayList;
 
 public class Broadcast extends Thread {
     private ArrayList<InetAddress> clientAddresses;
-    private ArrayList<JSONObject> encodeInfo;
+    private ArrayList<JSONObject> info;
 
-    Broadcast(ArrayList<InetAddress> clientAddresses, ArrayList<JSONObject> encodeInfo) {
+    Broadcast(ArrayList<InetAddress> clientAddresses, ArrayList<JSONObject> info) {
         this.clientAddresses = clientAddresses;
-        this.encodeInfo = encodeInfo;
+        this.info = info;
     }
 
     public void run() {
         try {
-            DatagramSocket socket = new DatagramSocket();
-            String message = encodeInfo.toString();
-            byte buffer[] = message.getBytes();
-            for (InetAddress clientAddress : clientAddresses) {
-                DatagramPacket packet = new DatagramPacket(buffer, buffer.length, clientAddress, GameMode.UDPPort);
-                socket.send(packet);
+            if (clientAddresses.size() == GameMode.playerCount - 3) {
+                DatagramSocket socket = new DatagramSocket();
+                String message = info.toString();
+                byte buffer[] = message.getBytes();
+                for (InetAddress clientAddress : clientAddresses) {
+                    DatagramPacket packet = new DatagramPacket(buffer, buffer.length, clientAddress, GameMode.UDPPort);
+                    socket.send(packet);
+                }
+                socket.close();
+            } else {
+                System.out.println("[UDPServer]: Numbers of clients is not correct.");
             }
         } catch (Exception e) {
             e.printStackTrace();

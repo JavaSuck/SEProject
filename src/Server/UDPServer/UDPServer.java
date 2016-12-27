@@ -50,7 +50,7 @@ public class UDPServer extends Thread {
             } while (!infoCorrect);
             Broadcast broadcast = new Broadcast(clientAddresses, updateInfo);
             broadcast.start();
-            sleep(200);
+            sleep(50);
         }
     }
 

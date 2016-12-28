@@ -35,7 +35,7 @@ public class TCPServer {
             while (true) {
                 try {
                     Socket connection = server.accept();
-                    create_thread(connection);
+                    createThread(connection);
                 } catch (IOException e) {
                     // TODO: handle exception
                     e.printStackTrace();
@@ -48,7 +48,7 @@ public class TCPServer {
         return connectionList;
     }
 
-    private void create_thread(Socket connection) {
+    private void createThread(Socket connection) {
         int noToken = -1;
         int clientToken = tokenRing.getToken();
         if (clientToken == noToken) {
@@ -73,10 +73,10 @@ public class TCPServer {
         connectionList.add(connection.getInetAddress());
         new Thread(new ServerThread(connection, connectionList, clientToken, tokenRing, cdc)).start();
 
-        print_connection_info(connection);
+        printConnectionInfo(connection);
     }
 
-    private void print_connection_info(Socket connection) {
+    private void printConnectionInfo(Socket connection) {
         String login_info = String.format("[%s:%s]: [INFO] Connection Create!", connection.getInetAddress(), connection.getPort());
         System.out.println(login_info);
     }

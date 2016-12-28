@@ -32,9 +32,16 @@ public class CDC {
     }
 
     public boolean addBomb(int playerId) {
+        Player player = playerController.getPlayerList().get(playerId);
+
+        //if player is dead
+        if(player.deadTime!=0) {
+          return false;
+        }
+
         // Check if player can put bomb
         int placedBombs = 0;
-        Player player = playerController.getPlayerList().get(playerId);
+
         ArrayList<Bomb> bombs =  bombController.getBombList();
         for (Bomb bomb : bombs) {
             if (bomb.isExist && bomb.playerId == playerId)

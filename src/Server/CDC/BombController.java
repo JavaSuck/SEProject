@@ -20,8 +20,10 @@ class BombController {
             try {
                 while (true) {
                     for (Bomb bomb : bombs) {
-                        if (bomb.expireTime == GameState.gameTime) {
+                        if (GameState.gameTime >= bomb.expireTime) {
+                            System.out.println("Bomb" + bomb.id + " explode!");
                             explode(bomb);
+                            break;
                         }
                     }
                     sleep(50);
@@ -47,12 +49,12 @@ class BombController {
         int effectBlock = (GameMode.bombPower - 1) / 2;
         mapData[bombY][bombX] = 0;
         for (int effectX = bombX - effectBlock; effectX <= bombX + effectBlock; effectX++) {
-            if (effectX >= 0 && effectX <= 17 && mapData[bombY][effectX] != 1) {
+            if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                 checkPlayerDead(effectX, bombY);
             }
         }
         for (int effectY = bombY - effectBlock; effectY <= bombY + effectBlock; effectY++) {
-            if (effectY >= 0 && effectY <= 17 && mapData[effectY][bombX] != 1) {
+            if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
                 checkPlayerDead(bombX, effectY);
             }
         }
@@ -66,6 +68,7 @@ class BombController {
             int playerY = (int) player.coordinate.getY();
             if (playerX == x && playerY == y) {
                 player.deadTime = GameState.gameTime;
+                System.out.println("Player" + player.id + " die!");
             }
         }
     }

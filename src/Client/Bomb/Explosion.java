@@ -17,10 +17,13 @@ import Server.CDC.Direction;
 
 public class Explosion extends JPanel {
 
-    private int power = 2;
+    private int power = 4;
     private int size = 5;
     private HashMap<Integer, Sprite> explosion = new HashMap<>();
-    private HashMap<Integer, ExplosionSprite> mid = new HashMap<>(4);
+    private HashMap<Integer, ExplosionSprite> midUp = new HashMap<>();
+    private HashMap<Integer, ExplosionSprite> midDown = new HashMap<>();
+    private HashMap<Integer, ExplosionSprite> midLeft = new HashMap<>();
+    private HashMap<Integer, ExplosionSprite> midRight = new HashMap<>();
     private HashMap<Integer, ExplosionSprite> end = new HashMap<>(4);
     private ExplosionSprite center;
     private int centerX, centerY;
@@ -41,12 +44,16 @@ public class Explosion extends JPanel {
 
     public void setPower(int power) {
         this.power = power;
+        reSize();
+    }
+
+    public void reSize() {
         size = power * 2 + 1;
+        setSize(size * Game.BLOCK_PIXEL, size * Game.BLOCK_PIXEL);
     }
 
     public void setExplosionRange(int[] explosionRange) {
-
-        setSize(size * Game.BLOCK_PIXEL, size * Game.BLOCK_PIXEL);
+        reSize();
         for (int i = 0; i < 4; i++) {
             int powerLength = 0;
             Direction direction = Direction.getDirection(i);
@@ -84,7 +91,21 @@ public class Explosion extends JPanel {
                 // mid
                 ExplosionSprite newMidSprite = new ExplosionSprite(direction, false);
                 newMidSprite.setLocation((power + j * xDir) * Game.BLOCK_PIXEL, (power + j * yDir) * Game.BLOCK_PIXEL);
-                mid.put(dir, newMidSprite);
+                switch (Direction.getDirection(dir)) {
+                    case DOWN:
+                        midDown.put(midDown.size(), newMidSprite);
+                        break;
+                    case UP:
+                        midUp.put(midUp.size(), newMidSprite);
+                        break;
+                    case LEFT:
+                        midLeft.put(midLeft.size(), newMidSprite);
+                        break;
+                    case RIGHT:
+                        midRight.put(midRight.size(), newMidSprite);
+                        break;
+
+                }
                 add(newMidSprite);
             }
         }
@@ -93,7 +114,16 @@ public class Explosion extends JPanel {
 
     public void updateAnimation() {
         center.updateAnimation();
-        for (Map.Entry<Integer, ExplosionSprite> m : mid.entrySet()) {
+        for (Map.Entry<Integer, ExplosionSprite> m : midDown.entrySet()) {
+            m.getValue().updateAnimation();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midLeft.entrySet()) {
+            m.getValue().updateAnimation();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midRight.entrySet()) {
+            m.getValue().updateAnimation();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midUp.entrySet()) {
             m.getValue().updateAnimation();
         }
         for (Map.Entry<Integer, ExplosionSprite> e : end.entrySet()) {
@@ -104,7 +134,16 @@ public class Explosion extends JPanel {
 
     public void startAnimation() {
         center.start();
-        for (Map.Entry<Integer, ExplosionSprite> m : mid.entrySet()) {
+        for (Map.Entry<Integer, ExplosionSprite> m : midDown.entrySet()) {
+            m.getValue().start();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midUp.entrySet()) {
+            m.getValue().start();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midLeft.entrySet()) {
+            m.getValue().start();
+        }
+        for (Map.Entry<Integer, ExplosionSprite> m : midRight.entrySet()) {
             m.getValue().start();
         }
         for (Map.Entry<Integer, ExplosionSprite> e : end.entrySet()) {

@@ -69,8 +69,12 @@ public class DOM {
         return characters.get(localPlayerId).getPosition();
     }
 
-    public void updateVirtualCharacter(int playerId, Direction dir, Point coordinateNext, boolean shouldCharacterSync) {
-        characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
+    public void updateVirtualCharacter(int playerId, Direction dir, Point coordinateNext, boolean shouldCharacterSync, int deadTime) {
+        if (deadTime != 0) {
+            characters.get(playerId).dead();
+        } else {
+            characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
+        }
     }
 
     public void addItem(String name, int index, boolean shared) {
@@ -102,8 +106,10 @@ public class DOM {
             bombs.remove(bomb.getId());
 
             Explosion newExplosion = new Explosion(power, x, y);
+            newExplosion.setPower(power);
             newExplosion.setExplosionRange(explosionRange);
             explosions.put(index, newExplosion);
+
             backgroundCanvas.add(newExplosion);
             newExplosion.startAnimation();
 

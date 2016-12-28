@@ -129,5 +129,9 @@ public class VirtualCharacter extends Sprite {
         return animation.getSprite();
     }
 
-
+    public void dead() {
+        loadSprite("dead.png");
+        BufferedImage[] deadImage = {getSprite(0, 0)};
+        animation = new Animation(deadImage, 10);
+    }
 }

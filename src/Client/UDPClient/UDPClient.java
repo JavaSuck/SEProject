@@ -64,7 +64,7 @@ public class UDPClient extends Thread {
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
 //                    if (i == 0)
 //                        print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
-                    dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync);
+                    dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync, deadTime);
                     if (i == dom.getLocalPlayerId()) {
                         backgroundCanvas.update(coordinateNext, shouldCharacterSync);
                     }

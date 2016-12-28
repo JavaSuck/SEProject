@@ -38,7 +38,7 @@ public class ServerThread implements Runnable {
             this.actionMap = new Action();
             this.tokenRing = tokenRing;
         } catch (IOException e) {
-            error_handle(e);
+            printError(e);
         }
     }
 
@@ -56,7 +56,7 @@ public class ServerThread implements Runnable {
             deal(request);
             request = receiveData();
         }
-        connection_close();
+        closeConnection();
     }
 
     private JSONObject receiveData() {
@@ -66,10 +66,10 @@ public class ServerThread implements Runnable {
                 return null;
             return new JSONObject(data);
         } catch (JSONException e) {
-            error_handle(e);
+            printError(e);
             return null;
         } catch (IOException e) {
-            error_handle(e);
+            printError(e);
             return null;
         }
     }
@@ -129,7 +129,7 @@ public class ServerThread implements Runnable {
 
             response(jsonObject);
         } catch (JSONException e) {
-            error_handle(e);
+            printError(e);
         }
         return true;
     }
@@ -139,7 +139,7 @@ public class ServerThread implements Runnable {
         System.out.println(get_data);
     }
 
-    private void connection_close() {
+    private void closeConnection() {
         try {
             removeConnectionList();
 
@@ -148,12 +148,12 @@ public class ServerThread implements Runnable {
             jsonObject.put("content", Integer.toString(this.clientToken));
             connection.close();
 
-            tokenRing.token_discard(this.clientToken);
+            tokenRing.removeToken(this.clientToken);
 
             String info_string = String.format("[%s:%s] \t Connection Closed!", connection.getInetAddress(), connection.getPort());
             System.out.println(info_string);
         } catch (IOException e) {
-            error_handle(e);
+            printError(e);
         }
     }
 
@@ -169,7 +169,7 @@ public class ServerThread implements Runnable {
         cdc.removeVirtualCharacter(clientToken);
     }
 
-    private void error_handle(Exception e) {
+    private void printError(Exception e) {
         String error_string = String.format("[%s:%s] \t happend error, => %s", connection.getInetAddress(), connection.getPort(), e.toString());
         System.out.println(error_string);
     }

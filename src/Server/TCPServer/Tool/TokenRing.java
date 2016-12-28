@@ -33,7 +33,7 @@ public class TokenRing {
 
     }
 
-    public void token_discard(int client_token) {
+    public void removeToken(int client_token) {
         this.token_ring[client_token] = false;
     }
 }

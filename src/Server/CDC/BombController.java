@@ -20,8 +20,7 @@ class BombController {
             try {
                 while (true) {
                     for (Bomb bomb : bombs) {
-                        if (GameState.gameTime >= bomb.expireTime) {
-                            System.out.println("Bomb" + bomb.id + " explode!");
+                        if (bomb.isExist && GameState.gameTime >= bomb.expireTime) {
                             explode(bomb);
                             break;
                         }
@@ -46,8 +45,10 @@ class BombController {
         int [][] mapData = gameMap.getOriginalMap();
         int bombX = (int) bomb.coordinate.getX();
         int bombY = (int) bomb.coordinate.getY();
-        int effectBlock = (GameMode.bombPower - 1) / 2;
+        int effectBlock = (bomb.power - 1) / 2;
         mapData[bombY][bombX] = 0;
+        bomb.isExist = false;
+        System.out.println("Bomb" + bomb.id + " explode!");
         // TODO: Chain explode bomb
         // Check if out of map range and stop at obstacle
         for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
@@ -78,7 +79,6 @@ class BombController {
                 break;
             }
         }
-        bombs.remove(bomb);
     }
 
     private void checkPlayerDead(int x, int y) {
@@ -88,6 +88,7 @@ class BombController {
             int playerY = (int) player.coordinate.getY();
             if (playerX == x && playerY == y && player.deadTime == 0) {
                 player.deadTime = GameState.gameTime;
+                player.shouldCharacterSync = true;
                 System.out.println("Player" + player.id + " die!");
             }
         }

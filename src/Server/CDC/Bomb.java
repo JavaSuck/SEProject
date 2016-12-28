@@ -7,6 +7,7 @@ public class Bomb {
     public int playerId;
     public Point coordinate;
     public int expireTime;
+    public boolean isExist;
     public int power = GameMode.bombPower;
 
     Bomb(int id, int playerId, Point coordinate, int expireTime) {
@@ -14,5 +15,6 @@ public class Bomb {
         this.playerId = playerId;
         this.coordinate = coordinate;
         this.expireTime = expireTime;
+        this.isExist = true;
     }
 }

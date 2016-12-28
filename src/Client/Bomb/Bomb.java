@@ -1,16 +1,13 @@
 package Client.Bomb;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
+import Client.Sprite.Animation;
+import Client.Sprite.Sprite;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
-
-import Client.Sprite.Animation;
-import Client.Sprite.Sprite;
-
 public class Bomb extends Sprite {
+
     private int id;
     private int positionX, positionY;
     private int delay = 20;
@@ -43,5 +40,9 @@ public class Bomb extends Sprite {
 
     protected void customRender(Graphics g) {
 
+    }
+
+    public int getId() {
+        return id;
     }
 }

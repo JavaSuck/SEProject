@@ -27,7 +27,7 @@ public class Client extends JFrame implements KeyListener {
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setTitle("Ice Fire Master YPC");
-        setPreferredSize(new Dimension(WINDOW_WIDTH + 2, WINDOW_HEIGHT));
+        setPreferredSize(new Dimension(WINDOW_WIDTH + 2, WINDOW_HEIGHT ));
     }
 
     public Client() {

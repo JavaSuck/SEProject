@@ -38,6 +38,7 @@ public class VirtualCharacter extends Sprite {
             walk[i] = new Animation(walking, delay);
         }
         animation = walk[currentDirection.getValue()];
+        initTimer();
     }
 
     public void initTimer() {
@@ -50,13 +51,13 @@ public class VirtualCharacter extends Sprite {
                 return;
             }
 
-            int movePixel = 2;
+            int movePixel = 4;
             if (Math.abs(newSpiteX - oldSpriteX) > 60 || Math.abs(newSpiteY - oldSpriteY) > 60) {
-                timer.setDelay(2);
+                timer.setDelay(5);
             } else if (Math.abs(newSpiteX - oldSpriteX) > 48 || Math.abs(newSpiteY - oldSpriteY) > 48) {
-                timer.setDelay(6);
+                timer.setDelay(15);
             } else {
-                timer.setDelay(8);
+                timer.setDelay(16);
             }
 
             if (newSpiteX - oldSpriteX > 0) {
@@ -70,16 +71,11 @@ public class VirtualCharacter extends Sprite {
             }
         };
 
-        timer = new Timer(3, move);
+        timer = new Timer(16, move);
         timer.setRepeats(true);
         timer.start();
     }
 
-//    public void initCanvasPosition() {
-//        newCanvasX = canvasBasicOffsetX - coordinateOld.x * Game.BLOCK_PIXEL;
-//        newCanvasY = canvasBasicOffsetY - coordinateOld.y * Game.BLOCK_PIXEL;
-//        setLocation(newCanvasX, newCanvasY);
-//    }
 
     public void moveSprite(int xOffsetDelta, int yOffsetDelta) {
         setLocation(getLocation().x + xOffsetDelta, getLocation().y + yOffsetDelta);
@@ -118,7 +114,6 @@ public class VirtualCharacter extends Sprite {
             newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL;
             newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL;
         }
-        setLocation(newSpiteX, newSpiteY);
 
         if (!shouldCharacterSync) {
             walk(direction);

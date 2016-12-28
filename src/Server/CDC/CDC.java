@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.net.InetAddress;
+import java.util.ArrayList;
 
 public class CDC {
     public GameController gameController;
@@ -31,7 +32,19 @@ public class CDC {
     }
 
     public boolean addBomb(int playerId) {
-        Point playerCoordinate = playerController.getPlayerList().get(playerId).coordinate;
+        // Check if player can put bomb
+        int placedBombs = 0;
+        Player player = playerController.getPlayerList().get(playerId);
+        ArrayList<Bomb> bombs =  bombController.getBombList();
+        for (Bomb bomb : bombs) {
+            if (bomb.playerId == playerId)
+                ++placedBombs;
+        }
+        if (placedBombs >= GameMode.playerMaxBomb) {
+            System.out.println("The number of bombs has been MAX");
+            return false;
+        }
+        Point playerCoordinate = player.coordinate;
         bombController.generate(playerId, playerCoordinate);
         return true;
     }

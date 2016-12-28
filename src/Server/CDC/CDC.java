@@ -16,6 +16,7 @@ public class CDC {
         gameMap = new GameMap();
         playerController = new PlayerController(gameMap);
         bombController = new BombController(gameMap, playerController);
+        gameController = new GameController(playerController);
     }
 
     public boolean addVirtualCharacter(int playerId, InetAddress address) {

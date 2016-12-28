@@ -19,7 +19,7 @@ public class Broadcast extends Thread {
 
     public void run() {
         try {
-            if (clientAddresses.size() == GameMode.playerCount - 3) {
+            if (clientAddresses.size() == GameMode.playerCount - 2) {
                 DatagramSocket socket = new DatagramSocket();
                 String message = info.toString();
                 byte buffer[] = message.getBytes();

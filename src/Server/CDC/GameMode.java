@@ -1,7 +1,9 @@
 package Server.CDC;
 
 public class GameMode {
-    public static final String serverAddress = "127.0.0.1";
+//    public static final String serverAddress = "192.168.1.108";
+    public static final String serverAddress = "192.168.1.213";
+
     public static final int TCPPort = 5567;
     public static final int UDPPort = 5566;
     public static final int playerCount = 4;

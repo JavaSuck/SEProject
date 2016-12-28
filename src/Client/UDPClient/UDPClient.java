@@ -73,13 +73,13 @@ public class UDPClient extends Thread {
                     JSONObject bomb = bombs.getJSONObject(i);
                     int bombId = bomb.getInt("bombId");
                     int playerId = bomb.getInt("playerId");
-                    int coordinateNextX = bomb.getInt("coordinateX");
-                    int coordinateNextY = bomb.getInt("coordinateY");
+                    int coordinateX = bomb.getInt("coordinateX");
+                    int coordinateY = bomb.getInt("coordinateY");
                     int expireTime = bomb.getInt("expireTime");
                     int power = bomb.getInt("power");
-                    Point coordinate = new Point(coordinateNextX, coordinateNextY);
-                    print("Get Bomb - id = " + bombId + "playId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime);
-                    // TODO: Let dom get bomb message
+                    Point coordinate = new Point(coordinateX, coordinateY);
+                    print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime);
+                    dom.createBomb(bombId, coordinateX, coordinateY);
                 }
 
                 JSONObject gameState = messages.getJSONObject("gameState");

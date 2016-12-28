@@ -2,6 +2,7 @@ package Client.DOM;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.Objects.Item;
+import Client.Scene.Game;
 import Client.TCPClient.TCPClient;
 import Client.Bomb.Bomb;
 import Server.CDC.Direction;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 public class DOM {
     private TCPClient tcp;
     private HashMap<Integer, Item> dynamicObjects = new HashMap<>();
+
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private HashMap<Integer, Bomb> bombs = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
@@ -63,7 +65,7 @@ public class DOM {
     public void createBomb(int index, int x, int y) {
         if (bombs.get(index) == null) {
             Bomb newBomb = new Bomb(index);
-            newBomb.setLocation(x, y);
+            newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
             bombs.put(index, newBomb);
             backgroundCanvas.add(newBomb);
         } else {
@@ -88,6 +90,10 @@ public class DOM {
         return characters;
     }
 
+    public HashMap<Integer, Bomb> getBombs() {
+        return bombs;
+    }
+
     public void keyPressed(KeyEvent e) {
         if (!backgroundCanvas.isWalkingAnimation) {
             switch (e.getKeyCode()) {
@@ -105,10 +111,12 @@ public class DOM {
                     break;
             }
         }
+    }
+
+    public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_SPACE:
                 tcp.callAction(4);
-//                localPlayer.stop();
         }
     }
 

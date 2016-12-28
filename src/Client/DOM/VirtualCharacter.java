@@ -50,14 +50,14 @@ public class VirtualCharacter extends Sprite {
                 return;
             }
 
-            int movePixel = 2;
-            if (Math.abs(newSpiteX - oldSpriteX) > 60 || Math.abs(newSpiteY - oldSpriteY) > 60) {
-                timer.setDelay(2);
-            } else if (Math.abs(newSpiteX - oldSpriteX) > 48 || Math.abs(newSpiteY - oldSpriteY) > 48) {
-                timer.setDelay(6);
-            } else {
-                timer.setDelay(8);
-            }
+            int movePixel = 4;
+//            if (Math.abs(newSpiteX - oldSpriteX) > 60 || Math.abs(newSpiteY - oldSpriteY) > 60) {
+//                timer.setDelay(2);
+//            } else if (Math.abs(newSpiteX - oldSpriteX) > 48 || Math.abs(newSpiteY - oldSpriteY) > 48) {
+//                timer.setDelay(6);
+//            } else {
+//                timer.setDelay(8);
+//            }
 
             if (newSpiteX - oldSpriteX > 0) {
                 moveSprite(movePixel, 0);
@@ -70,7 +70,7 @@ public class VirtualCharacter extends Sprite {
             }
         };
 
-        timer = new Timer(3, move);
+        timer = new Timer(16, move);
         timer.setRepeats(true);
         timer.start();
     }

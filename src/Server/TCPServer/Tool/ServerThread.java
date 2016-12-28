@@ -83,44 +83,52 @@ public class ServerThread implements Runnable {
     private boolean deal(JSONObject request) {
         String type;
         String content = null;
-        boolean requestResult = true;
+        boolean requestResult = false;
 
         try {
             type = (String) request.get("type");
             if (type.compareTo("REQUEST") == 0) {
                 content = (String) request.get("content");
-                System.out.println("type:" + type + ", content:" + content);
+                print("type:" + type + ", content:" + content);
                 int actionNumber = actionMap.index(content);
 
                 switch (actionNumber) {
                     case 0:
-                        cdc.playerSlip(clientToken, Direction.DOWN);
+                        requestResult = cdc.playerSlip(clientToken, Direction.DOWN);
                         break;
                     case 1:
-                        cdc.playerSlip(clientToken, Direction.LEFT);
+                        requestResult = cdc.playerSlip(clientToken, Direction.LEFT);
                         break;
                     case 2:
-                        cdc.playerSlip(clientToken, Direction.RIGHT);
+                        requestResult = cdc.playerSlip(clientToken, Direction.RIGHT);
                         break;
                     case 3:
-                        cdc.playerSlip(clientToken, Direction.UP);
+                        requestResult = cdc.playerSlip(clientToken, Direction.UP);
                         break;
                     case 4:
-                        cdc.addBomb(clientToken);
+                        requestResult = cdc.addBomb(clientToken);
                         break;
                     default: {
                         System.out.println("Find unknown action");
                     }
                 }
 
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("type", "RESPONSE");
-                jsonObject.put("content", requestResult);
-                response(jsonObject);
+
+            }
+            else if(type.compareTo("SETNAME") == 0) {
+                    String playerName = (String) request.get("content");
+                    requestResult = cdc.setPlayerName(clientToken, playerName);
+
             }
 
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("type", "RESPONSE");
+            jsonObject.put("content", requestResult);
+            response(jsonObject);
+
+
         } catch (NullPointerException e) {
-            String answer = String.format("[Server]: [WARING] \t Action: \"%s\" is NOT FOUND", content);
+            String answer = String.format("[WARING] \t Action: \"%s\" is NOT FOUND", content);
             print(answer);
 
             JSONObject jsonObject = new JSONObject();
@@ -132,11 +140,6 @@ public class ServerThread implements Runnable {
             printError(e);
         }
         return true;
-    }
-
-    private void print(String action) {
-        String get_data = String.format("[%s:%d]: [REQUEST] \t %s", connection.getInetAddress(), connection.getPort(), action);
-        System.out.println(get_data);
     }
 
     private void closeConnection() {
@@ -169,8 +172,14 @@ public class ServerThread implements Runnable {
         cdc.removeVirtualCharacter(clientToken);
     }
 
+    private void print(String action) {
+        String getData = String.format("[%s:%d]: [REQUEST] \t %s", connection.getInetAddress(), connection.getPort(), action);
+        System.out.println(getData);
+    }
+
     private void printError(Exception e) {
         String error_string = String.format("[%s:%s] \t happend error, => %s", connection.getInetAddress(), connection.getPort(), e.toString());
-        System.out.println(error_string);
+        print(error_string);
     }
+
 }

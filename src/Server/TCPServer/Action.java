@@ -12,7 +12,7 @@ public class Action {
             "LEFT",
             "RIGHT",
             "UP",
-            "BOMB"
+            "BOMB",
     };
 
     public Action() {

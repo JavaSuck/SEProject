@@ -53,6 +53,24 @@ public class TCPClient {
         request(moveAction);
     }
 
+    public void setPlayerName(String playerName){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("type", "SETNAME");
+            jsonObject.put("content", playerName);
+
+            this.sender.println(jsonObject);
+            this.sender.flush();
+
+            //wait the data form server.
+            JSONObject receive = this.receiveData();
+            assert receive != null;
+//            if (Boolean.parseBoolean((String) receive.get("content")))
+            print("SetPlayerName successfully");
+        } catch (JSONException e) {
+            printError(e);
+        }
+    }
 
     private JSONObject receiveData() {
         try {

@@ -9,7 +9,6 @@ public class Bomb {
     public int expireTime;
     public boolean isExist;
     public int power = GameMode.bombPower;
-    public int[] explosionRange = new int[4];
 
     Bomb(int id, int playerId, Point coordinate, int expireTime) {
         this.id = id;
@@ -17,7 +16,5 @@ public class Bomb {
         this.coordinate = coordinate;
         this.expireTime = expireTime;
         this.isExist = true;
-        for (int i = 0; i < 4; i++)
-            this.explosionRange[i] = 0;
     }
 }

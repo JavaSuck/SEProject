@@ -10,7 +10,7 @@ import Client.Sprite.Sprite;
 public class Explosion extends Sprite {
 
     private int power = 2;
-//    private HashMap<int, Sprite> explosion = new HashMap<>;
+    private HashMap<Integer, Sprite> explosion = new HashMap<>();
 
     public Explosion() {
         loadSprite("bomb.png");

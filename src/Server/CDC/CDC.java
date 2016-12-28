@@ -92,7 +92,6 @@ public class CDC {
                 bombObject.put("expireTime", bomb.expireTime);
                 bombObject.put("isExist", bomb.isExist);
                 bombObject.put("power", bomb.power);
-                bombObject.put("explosionRange", bomb.explosionRange);
                 bombs.put(bombObject);
             }
             put("bombs", bombs);

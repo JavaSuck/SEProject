@@ -51,12 +51,9 @@ class BombController {
         System.out.println("Bomb" + bomb.id + " explode!");
         // TODO: Chain explode bomb
         // Check if out of map range and stop at obstacle
-        --bomb.explosionRange[0];
-        --bomb.explosionRange[2];
         for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                 checkPlayerDead(effectX, bombY);
-                ++bomb.explosionRange[2];
             } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
                 break;
             }
@@ -64,7 +61,6 @@ class BombController {
         for (int effectX = bombX - 1; effectX >= bombX - effectBlock; effectX--) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                 checkPlayerDead(effectX, bombY);
-                ++bomb.explosionRange[1];
             } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
                 break;
             }
@@ -72,7 +68,6 @@ class BombController {
         for (int effectY = bombY; effectY <= bombY + effectBlock; effectY++) {
             if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
                 checkPlayerDead(bombX, effectY);
-                ++bomb.explosionRange[0];
             } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
                 break;
             }
@@ -80,7 +75,6 @@ class BombController {
         for (int effectY = bombY - 1; effectY >= bombY - effectBlock; effectY--) {
             if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
                 checkPlayerDead(bombX, effectY);
-                ++bomb.explosionRange[3];
             } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
                 break;
             }

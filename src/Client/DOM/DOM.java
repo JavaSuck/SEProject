@@ -10,6 +10,7 @@ import Server.CDC.Direction;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class DOM {
@@ -36,9 +37,18 @@ public class DOM {
                 localPlayer = character;
 //                backgroundCanvas.add(character);
 //                character.initTimer();
+            } else {
+                backgroundCanvas.add(character);
             }
-//            else
-//                backgroundCanvas.add(character);
+        }
+    }
+
+    public void updateAllAnimationFrame() {
+        for (Map.Entry<Integer, VirtualCharacter> character : characters.entrySet()) {
+            character.getValue().updateAnimation();
+        }
+        for (Map.Entry<Integer, Bomb> bomb : bombs.entrySet()) {
+            bomb.getValue().updateAnimation();
         }
     }
 
@@ -62,7 +72,8 @@ public class DOM {
     public void updateItem(int index, boolean shared, int owner) {
         dynamicObjects.get(index).updateItem(shared, owner);
     }
-    public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange) {
+
+    public void updateBomb(int index, int x, int y, boolean isExist) {
         // Create exist bomb
         if (bombs.get(index) == null && isExist) {
             Bomb newBomb = new Bomb(index);

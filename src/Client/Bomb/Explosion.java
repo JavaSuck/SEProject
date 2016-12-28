@@ -32,7 +32,6 @@ public class Explosion extends JPanel {
         size = power * 2 + 1;
     }
 
-
     public void setExplosionRange(int[] explosionRange) {
         for (int i = 0; i < 4; i++) {
             int powerLength = 0;
@@ -55,7 +54,6 @@ public class Explosion extends JPanel {
                     createRange(powerLength, direction, -1, 0);
                     break;
             }
-
         }
     }
 
@@ -71,4 +69,6 @@ public class Explosion extends JPanel {
         endMidSprite.setLocation((centerX + powerLength * xDir) * Game.BLOCK_PIXEL, (centerY + powerLength * yDir) * Game.BLOCK_PIXEL);
         add(endMidSprite);
     }
+
+
 }

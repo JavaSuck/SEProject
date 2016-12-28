@@ -1,6 +1,7 @@
 package Client.DOM;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
+import Client.Bomb.Explosion;
 import Client.Objects.Item;
 import Client.Scene.Game;
 import Client.TCPClient.TCPClient;
@@ -73,7 +74,7 @@ public class DOM {
         dynamicObjects.get(index).updateItem(shared, owner);
     }
 
-    public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange) {
+    public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange, int power) {
         // Create exist bomb
         if (bombs.get(index) == null && isExist) {
             Bomb newBomb = new Bomb(index);
@@ -87,6 +88,10 @@ public class DOM {
             bomb.stop();
             backgroundCanvas.remove(bomb);
             bombs.remove(bomb.getId());
+
+            Explosion newExplosion = new Explosion(power);
+            newExplosion.setExplosionRange(explosionRange);
+            backgroundCanvas.add(newExplosion);
         }
     }
 

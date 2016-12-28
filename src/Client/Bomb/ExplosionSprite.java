@@ -1,18 +1,19 @@
 package Client.Bomb;
 
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import javax.swing.*;
 
 import Client.Sprite.Animation;
 import Client.Sprite.Sprite;
 import Server.CDC.Direction;
 
-public class ExplosionSprite extends Sprite implements Cloneable {
+public class ExplosionSprite extends Sprite {
 
     private final String imageName = "bomb.png";
     private final int delay = 30;
-    private ArrayList<Sprite> mid = new ArrayList<>(4);
-    private ArrayList<Sprite> end = new ArrayList<>(4);
     private Sprite explosionSprite = new Sprite();
 
     public ExplosionSprite(Direction direction, boolean isEnd) {
@@ -58,7 +59,17 @@ public class ExplosionSprite extends Sprite implements Cloneable {
         animation = new Animation(frames, delay);
     }
 
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public void start() {
+        animation.start();
     }
+
+    public void stop() {
+        animation.stop();
+        animation.reset();
+    }
+
+    public void updateAnimation() {
+        animation.update();
+    }
+
 }

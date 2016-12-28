@@ -1,7 +1,5 @@
 package Server.CDC;
 
-import org.json.JSONObject;
-
 import java.awt.*;
 import java.util.ArrayList;
 

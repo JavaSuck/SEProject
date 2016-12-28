@@ -77,6 +77,7 @@ public class Client extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         //        System.out.println("keyReleased");
+        game.keyReleased(e);
     }
 
     @Override

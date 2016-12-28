@@ -11,10 +11,10 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.Map;
 
 public class Game extends JPanel {
 
@@ -70,19 +70,15 @@ public class Game extends JPanel {
 
         content.moveToFront(fixedCanvas);
 
-
-        Bomb bomb = new Bomb(1);
-
-        bomb.setBounds(48, 48, BLOCK_PIXEL, BLOCK_PIXEL);
-        backgroundCanvas.add(bomb);
-
         add(content, BorderLayout.CENTER);
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
 //            DOM.updateAll();
             localPlayer.updateAnimation();
-            bomb.updateAnimation();
+            for (Map.Entry<Integer, Bomb> bomb : dom.getBombs().entrySet()) {
+                bomb.getValue().updateAnimation();
+            }
             revalidate();
 //            backgroundCanvas.repaint();
             repaint();
@@ -95,6 +91,7 @@ public class Game extends JPanel {
 
     public void keyReleased(KeyEvent e) {
         //        System.out.println("keyReleased");
+        dom.keyReleased(e);
     }
 
     public void keyTyped(KeyEvent e) {

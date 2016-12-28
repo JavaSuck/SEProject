@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.awt.*;
 import java.net.InetAddress;
+import java.util.ArrayList;
 
 public class CDC {
     public GameController gameController;
@@ -15,7 +16,8 @@ public class CDC {
     public CDC() {
         gameMap = new GameMap();
         playerController = new PlayerController(gameMap);
-        bombController = new BombController(gameMap);
+        bombController = new BombController(gameMap, playerController);
+        gameController = new GameController(playerController);
     }
 
     public boolean addVirtualCharacter(int playerId, InetAddress address) {
@@ -30,7 +32,29 @@ public class CDC {
     }
 
     public boolean addBomb(int playerId) {
-        Point playerCoordinate = playerController.getPlayerList().get(playerId).coordinate;
+        // Check if player can put bomb
+        int placedBombs = 0;
+        Player player = playerController.getPlayerList().get(playerId);
+        ArrayList<Bomb> bombs =  bombController.getBombList();
+        for (Bomb bomb : bombs) {
+            if (bomb.playerId == playerId)
+                ++placedBombs;
+        }
+        if (placedBombs >= GameMode.playerMaxBomb) {
+            System.out.println("The number of bombs has been MAX");
+            return false;
+        }
+
+        // Check if there are no bombs
+        Point playerCoordinate = player.coordinate;
+        int[][] mapData = gameMap.getOriginalMap();
+        int bombX = (int) playerCoordinate.getX();
+        int bombY = (int) playerCoordinate.getY();
+        if (mapData[bombY][bombX] == 1) {
+            System.out.println("A bomb already exists here");
+            return false;
+        }
+
         bombController.generate(playerId, playerCoordinate);
         return true;
     }

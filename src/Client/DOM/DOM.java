@@ -35,8 +35,6 @@ public class DOM {
             characters.put(i, character);
             if (i == localPlayerId) {
                 localPlayer = character;
-//                backgroundCanvas.add(character);
-//                character.initTimer();
             } else {
                 backgroundCanvas.add(character);
             }

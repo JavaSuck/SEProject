@@ -61,6 +61,7 @@ public class UDPClient extends Thread {
                     int directionValue = player.getInt("direction");
                     Direction direction = Direction.getDirection(directionValue);
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
+                    if(i == 0)
                     print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
                     dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync);
                     if (i == dom.getLocalPlayerId()) {
@@ -84,7 +85,7 @@ public class UDPClient extends Thread {
                     for (int j = 0; j < explosionRangeArray.length(); ++j) {
                         explosionRange[j] = explosionRangeArray.optInt(j);
                     }
-                    print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime + ", isExist = " + isExist);
+//                    print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime + ", isExist = " + isExist);
                     dom.updateBomb(bombId, coordinateX, coordinateY, isExist, explosionRange);
                 }
 
@@ -93,7 +94,7 @@ public class UDPClient extends Thread {
                 int livedPlayer = gameState.getInt("livedPlayer");
                 int stageValue = gameState.getInt("stage");
                 Stage stage = Stage.getStage(stageValue);
-                print("Get gameState - gameTime = " + gameTime + ", livedPlayer = " + livedPlayer + ", stage = " + stage);
+//                print("Get gameState - gameTime = " + gameTime + ", livedPlayer = " + livedPlayer + ", stage = " + stage);
                 // TODO: Let dom get gameState
 
                 socket.close();

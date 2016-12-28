@@ -76,6 +76,16 @@ public class CDC {
 
   }
 
+  public boolean setPlayerName(int playerId, String playerName){
+    try {
+      playerController.getPlayerList().get(playerId).name = playerName;
+      return true;
+    }catch (Exception e){
+      e.printStackTrace();
+      return false;
+    }
+  }
+
   public JSONObject getUpdatingInfo() {
     return new JSONObject() {{
       JSONArray players = new JSONArray();

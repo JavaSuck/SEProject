@@ -44,7 +44,17 @@ public class CDC {
             System.out.println("The number of bombs has been MAX");
             return false;
         }
+
+        // Check if there are no bombs
         Point playerCoordinate = player.coordinate;
+        int[][] mapData = gameMap.getOriginalMap();
+        int bombX = (int) playerCoordinate.getX();
+        int bombY = (int) playerCoordinate.getY();
+        if (mapData[bombY][bombX] == 1) {
+            System.out.println("A bomb already exists here");
+            return false;
+        }
+
         bombController.generate(playerId, playerCoordinate);
         return true;
     }

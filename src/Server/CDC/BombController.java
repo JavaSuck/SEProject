@@ -48,6 +48,7 @@ class BombController {
         int bombY = (int) bomb.coordinate.getY();
         int effectBlock = (GameMode.bombPower - 1) / 2;
         mapData[bombY][bombX] = 0;
+        // TODO: Chain explode bomb
         // Check if out of map range and stop at obstacle
         for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {

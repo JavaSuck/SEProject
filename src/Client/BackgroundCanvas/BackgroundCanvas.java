@@ -13,7 +13,7 @@ public class BackgroundCanvas extends JLayeredPane {
     public final static int CANVAS_WIDTH = 816;
     public final static int CANVAS_HEIGHT = 816;
 
-    public Point coordinateOld = new Point(4, 4);
+    public Point coordinateOld = new Point(0, 0);
 
     public final int canvasBasicOffsetX = (Game.CAMERA_WIDTH / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;
     public final int canvasBasicOffsetY = (Game.CAMERA_HEIGHT / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;
@@ -51,14 +51,14 @@ public class BackgroundCanvas extends JLayeredPane {
                 return;
             }
 
-            int movePixel = 1;
-            if (Math.abs(newCanvasX - oldCanvasX) > 60 || Math.abs(newCanvasY - oldCanvasY) > 60) {
-                timer.setDelay(1);
-            } else if (Math.abs(newCanvasX - oldCanvasX) > 48 || Math.abs(newCanvasY - oldCanvasY) > 48) {
-                timer.setDelay(3);
-            } else {
-                timer.setDelay(4);
-            }
+            int movePixel = 4;
+//            if (Math.abs(newCanvasX - oldCanvasX) > 60 || Math.abs(newCanvasY - oldCanvasY) > 60) {
+//                timer.setDelay(5);
+//            } else if (Math.abs(newCanvasX - oldCanvasX) > 48 || Math.abs(newCanvasY - oldCanvasY) > 48) {
+//                timer.setDelay(15);
+//            } else {
+//                timer.setDelay(16);
+//            }
 
             if (newCanvasX - oldCanvasX > 0) {
                 moveCanvas(movePixel ,0);
@@ -78,8 +78,9 @@ public class BackgroundCanvas extends JLayeredPane {
 
         };
 
-        timer = new Timer(3, move);
+        timer = new Timer(16, move);
         timer.setRepeats(true);
+        timer.setCoalesce(true);
         timer.start();
     }
 

@@ -27,7 +27,7 @@ public class TCPServer {
         this.tokenRing = new TokenRing(GameMode.playerCount);
         this.connectionList = new ArrayList<>();
         this.cdc = cdc;
-        System.out.println("Server is running");
+        System.out.println("[TCPServer]: Server is running");
     }
 
     public void initTCPServer() {

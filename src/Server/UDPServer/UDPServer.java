@@ -38,7 +38,7 @@ public class UDPServer extends Thread {
         } while (clientAddresses.size() < GameMode.playerCount - 3);
         print("Get client table successfully");
         while (true) {
-            ArrayList<JSONObject> updateInfo = cdc.getUpdatingInfo();
+            JSONObject updateInfo = cdc.getUpdatingInfo();
             //checkInfo(updateInfo);
             Broadcast broadcast = new Broadcast(clientAddresses, updateInfo);
             broadcast.start();

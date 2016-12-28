@@ -32,6 +32,7 @@ public class DOM {
             if (i == localPlayerId) {
                 localPlayer = character;
 //                backgroundCanvas.add(character);
+//                character.initTimer();
             }
 //            else
 //                backgroundCanvas.add(character);
@@ -105,7 +106,7 @@ public class DOM {
         }
         switch (e.getKeyCode()) {
             case KeyEvent.VK_SPACE:
-//                tcp.callAction(4);
+                tcp.callAction(4);
 //                localPlayer.stop();
         }
     }

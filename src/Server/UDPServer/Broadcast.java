@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class Broadcast extends Thread {
     private ArrayList<InetAddress> clientAddresses;
-    private ArrayList<JSONObject> info;
+    private JSONObject info;
 
-    Broadcast(ArrayList<InetAddress> clientAddresses, ArrayList<JSONObject> info) {
+    Broadcast(ArrayList<InetAddress> clientAddresses, JSONObject info) {
         this.clientAddresses = clientAddresses;
         this.info = info;
     }

@@ -62,7 +62,7 @@ public class DOM {
     public void updateItem(int index, boolean shared, int owner) {
         dynamicObjects.get(index).updateItem(shared, owner);
     }
-    public void updateBomb(int index, int x, int y, boolean isExist) {
+    public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange) {
         // Create exist bomb
         if (bombs.get(index) == null && isExist) {
             Bomb newBomb = new Bomb(index);

@@ -63,3 +63,5 @@ $RECYCLE.BIN/
 *.iml
 out/
 .idea/
+
+/src/Server/CDC/GameMode.java

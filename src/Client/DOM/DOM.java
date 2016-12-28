@@ -103,7 +103,9 @@ public class DOM {
 
             Explosion newExplosion = new Explosion(power, x, y);
             newExplosion.setExplosionRange(explosionRange);
+            newExplosion.setPower(power);
             explosions.put(index, newExplosion);
+
             backgroundCanvas.add(newExplosion);
             newExplosion.startAnimation();
 

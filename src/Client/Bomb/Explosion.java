@@ -17,7 +17,7 @@ import Server.CDC.Direction;
 
 public class Explosion extends JPanel {
 
-    private int power = 2;
+    private int power = 4;
     private int size = 5;
     private HashMap<Integer, Sprite> explosion = new HashMap<>();
     private HashMap<Integer, ExplosionSprite> mid = new HashMap<>(4);
@@ -41,12 +41,16 @@ public class Explosion extends JPanel {
 
     public void setPower(int power) {
         this.power = power;
+        reSize();
+    }
+
+    public void reSize() {
         size = power * 2 + 1;
+        setSize(size * Game.BLOCK_PIXEL, size * Game.BLOCK_PIXEL);
     }
 
     public void setExplosionRange(int[] explosionRange) {
-
-        setSize(size * Game.BLOCK_PIXEL, size * Game.BLOCK_PIXEL);
+        reSize();
         for (int i = 0; i < 4; i++) {
             int powerLength = 0;
             Direction direction = Direction.getDirection(i);

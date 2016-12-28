@@ -92,7 +92,7 @@ public class UDPClient extends Thread {
                 // TODO: Let dom get gameState
 
                 socket.close();
-                sleep(50);
+                sleep(20);
             } catch (InterruptedIOException e) {
                 print("Timeout");
             } catch (InterruptedException | IOException e) {

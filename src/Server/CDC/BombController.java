@@ -6,6 +6,7 @@ import java.util.ArrayList;
 class BombController {
     private GameMap gameMap;
     private ArrayList<Bomb> bombs;
+    private int bombCount = 0;
 
     BombController(GameMap gameMap) {
         this.gameMap = gameMap;
@@ -14,13 +15,13 @@ class BombController {
         bombTimer.start();
     }
 
-    public void generate(int playerId, Point coordinate) {
+    void generate(int playerId, Point coordinate) {
         // TODO: check map to put bomb
         gameMap.getOriginalMap();
-        bombs.add(new Bomb(playerId, coordinate, 100));
+        bombs.add(new Bomb(bombCount++, playerId, coordinate, 100));
     }
 
-    public ArrayList<Bomb> getBombList() {
+    ArrayList<Bomb> getBombList() {
         return bombs;
     }
 }

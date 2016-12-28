@@ -85,14 +85,14 @@ class BombController {
                 break;
             }
         }
-        /*new Thread(() -> {
-            try {
-                sleep(10000);
-                bombs.remove(bomb);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();*/
+//        new Thread(() -> {
+//            try {
+//                sleep(10000);
+//                bombs.remove(bomb);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 
     private void checkPlayerDead(int x, int y) {

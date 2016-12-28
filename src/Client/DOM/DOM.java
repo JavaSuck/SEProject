@@ -73,14 +73,20 @@ public class DOM {
         dynamicObjects.get(index).updateItem(shared, owner);
     }
 
-    public void createBomb(int index, int x, int y) {
-        if (bombs.get(index) == null) {
+    public void updateBomb(int index, int x, int y, boolean isExist) {
+        // Create exist bomb
+        if (bombs.get(index) == null && isExist) {
             Bomb newBomb = new Bomb(index);
             newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
             bombs.put(index, newBomb);
             backgroundCanvas.add(newBomb);
-        } else {
-            System.out.println("Create Failed: bomb already exist");
+        }
+        // Exist, do explode
+        else if (bombs.get(index) != null && !isExist) {
+            Bomb bomb = bombs.get(index);
+            bomb.stop();
+            backgroundCanvas.remove(bomb);
+            bombs.remove(bomb.getId());
         }
     }
 

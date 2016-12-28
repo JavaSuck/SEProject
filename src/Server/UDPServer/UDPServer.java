@@ -39,6 +39,7 @@ public class UDPServer extends Thread {
         print("Get client table successfully");
         while (true) {
             JSONObject updateInfo = cdc.getUpdatingInfo();
+            //TODO: check it
             //checkInfo(updateInfo);
             Broadcast broadcast = new Broadcast(clientAddresses, updateInfo);
             broadcast.start();

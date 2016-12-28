@@ -37,7 +37,7 @@ public class CDC {
         Player player = playerController.getPlayerList().get(playerId);
         ArrayList<Bomb> bombs =  bombController.getBombList();
         for (Bomb bomb : bombs) {
-            if (bomb.playerId == playerId)
+            if (bomb.isExist && bomb.playerId == playerId)
                 ++placedBombs;
         }
         if (placedBombs >= GameMode.playerMaxBomb) {
@@ -90,6 +90,7 @@ public class CDC {
                 bombObject.put("coordinateX", bomb.coordinate.getX());
                 bombObject.put("coordinateY", bomb.coordinate.getY());
                 bombObject.put("expireTime", bomb.expireTime);
+                bombObject.put("isExist", bomb.isExist);
                 bombObject.put("power", bomb.power);
                 bombs.put(bombObject);
             }

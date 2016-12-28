@@ -6,6 +6,7 @@ import Client.Sprite.Sprite;
 import Server.CDC.Direction;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -59,9 +60,9 @@ public class VirtualCharacter extends Sprite {
             }
 
             if (newSpiteX - oldSpriteX > 0) {
-                moveSprite(movePixel ,0);
+                moveSprite(movePixel, 0);
             } else if (newSpiteX - oldSpriteX < 0) {
-                moveSprite(movePixel * -1 ,0);
+                moveSprite(movePixel * -1, 0);
             } else if (newSpiteY - oldSpriteY > 0) {
                 moveSprite(0, movePixel);
             } else if (newSpiteY - oldSpriteY < 0) {
@@ -117,8 +118,9 @@ public class VirtualCharacter extends Sprite {
             newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL;
             newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL;
         }
+        setLocation(newSpiteX, newSpiteY);
 
-        if(!shouldCharacterSync) {
+        if (!shouldCharacterSync) {
             walk(direction);
         } else {
             stop();

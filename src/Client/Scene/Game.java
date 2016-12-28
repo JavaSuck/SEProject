@@ -11,6 +11,7 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -74,11 +75,7 @@ public class Game extends JPanel {
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
-//            DOM.updateAll();
-            localPlayer.updateAnimation();
-            for (Map.Entry<Integer, Bomb> bomb : dom.getBombs().entrySet()) {
-                bomb.getValue().updateAnimation();
-            }
+            dom.updateAllAnimationFrame();
             revalidate();
 //            backgroundCanvas.repaint();
             repaint();

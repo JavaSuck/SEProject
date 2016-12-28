@@ -17,6 +17,7 @@ public class DOM {
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private HashMap<Integer, Bomb> bombs = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
+
     private int localPlayerId;
     public VirtualCharacter localPlayer;
 
@@ -109,5 +110,9 @@ public class DOM {
                 tcp.callAction(4);
 //                localPlayer.stop();
         }
+    }
+
+    public int getLocalPlayerId() {
+        return localPlayerId;
     }
 }

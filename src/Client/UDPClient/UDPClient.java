@@ -63,8 +63,9 @@ public class UDPClient extends Thread {
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
                     print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
                     dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync);
-                    // TODO: Fix here, it may change by every character
-                    backgroundCanvas.update(coordinateNext, shouldCharacterSync);
+                    if (i == dom.getLocalPlayerId()) {
+                        backgroundCanvas.update(coordinateNext, shouldCharacterSync);
+                    }
                 }
 
                 JSONArray bombs = messages.getJSONArray("bombs");

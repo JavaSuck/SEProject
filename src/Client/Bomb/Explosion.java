@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import Client.Scene.Game;
 import Client.Sprite.Sprite;
 import Server.CDC.Direction;
 
@@ -19,12 +20,11 @@ public class Explosion extends JPanel {
     private ArrayList<Sprite> mid = new ArrayList<>(4);
     private ArrayList<Sprite> end = new ArrayList<>(4);
     private Sprite center = new Sprite();
-
+    private int centerX, centerY;
     private Sprite explosionSprite = new Sprite();
-    private final String imageName = "bomb.png";
 
     public Explosion(int power) {
-//        loadSprite("bomb.png");
+
     }
 
     public void setPower(int power) {
@@ -32,54 +32,43 @@ public class Explosion extends JPanel {
         size = power * 2 + 1;
     }
 
-    public BufferedImage[] getAnimationFrames(int column) {
-        BufferedImage[] frames = {explosionSprite.getSprite(1, 7), explosionSprite.getSprite(2, 7), explosionSprite.getSprite(3, 7), explosionSprite.getSprite(4, 7)};
-        return frames;
-    }
 
-    public void initExplosionSprite() {
-        explosionSprite.loadSprite(imageName);
-        setSize(size, size);
-
+    public void setExplosionRange(int[] explosionRange) {
         for (int i = 0; i < 4; i++) {
-            ExplosionSprite newExplosionSprite = new ExplosionSprite();
-            switch (Direction.getDirection(i)) {
+            int powerLength = 0;
+            Direction direction = Direction.getDirection(i);
+            switch (direction) {
                 case DOWN:
-                    newExplosionSprite.createAnimation(getAnimationFrames(7));
-                    mid.set(i, newExplosionSprite);
-                    newExplosionSprite.createAnimation(getAnimationFrames(8));
-                    end.set(i, newExplosionSprite);
-                    break;
-                case LEFT:
-                    newExplosionSprite.createAnimation(getAnimationFrames(3));
-                    mid.set(i, newExplosionSprite);
-                    newExplosionSprite.createAnimation(getAnimationFrames(2));
-                    end.set(i, newExplosionSprite);
+                    powerLength = explosionRange[i];
+                    createRange(powerLength, direction, 0, 1);
                     break;
                 case RIGHT:
-                    newExplosionSprite.createAnimation(getAnimationFrames(1));
-                    mid.set(i, newExplosionSprite);
-                    newExplosionSprite.createAnimation(getAnimationFrames(4));
-                    end.set(i, newExplosionSprite);
+                    powerLength = explosionRange[i];
+                    createRange(powerLength, direction, 1, 0);
                     break;
                 case UP:
-                    newExplosionSprite.createAnimation(getAnimationFrames(5));
-                    mid.set(i, newExplosionSprite);
-                    newExplosionSprite.createAnimation(getAnimationFrames(6));
-                    end.set(i, newExplosionSprite);
+                    powerLength = explosionRange[i];
+                    createRange(powerLength, direction, 0, -1);
+                    break;
+                case LEFT:
+                    powerLength = explosionRange[i];
+                    createRange(powerLength, direction, -1, 0);
                     break;
             }
+
         }
     }
 
-
-//    public void setExplosionRange(int[] ) {
-//
-//        for (int i = 0; i < 4; i++) {
-//
-//        }
-//
-//    }
-
-
+    public void createRange(int powerLength, Direction direction, int xDir, int yDir) {
+        for (int j = 0; j < powerLength - 1; j++) {
+            // mid
+            ExplosionSprite newMidSprite = new ExplosionSprite(direction, false);
+            newMidSprite.setLocation((centerX + j * xDir) * Game.BLOCK_PIXEL, (centerY + j * yDir) * Game.BLOCK_PIXEL);
+            add(newMidSprite);
+        }
+        // end
+        ExplosionSprite endMidSprite = new ExplosionSprite(direction, true);
+        endMidSprite.setLocation((centerX + powerLength * xDir) * Game.BLOCK_PIXEL, (centerY + powerLength * yDir) * Game.BLOCK_PIXEL);
+        add(endMidSprite);
+    }
 }

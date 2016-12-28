@@ -52,13 +52,13 @@ public class BackgroundCanvas extends JLayeredPane {
             }
 
             int movePixel = 4;
-//            if (Math.abs(newCanvasX - oldCanvasX) > 60 || Math.abs(newCanvasY - oldCanvasY) > 60) {
-//                timer.setDelay(5);
-//            } else if (Math.abs(newCanvasX - oldCanvasX) > 48 || Math.abs(newCanvasY - oldCanvasY) > 48) {
-//                timer.setDelay(15);
-//            } else {
-//                timer.setDelay(16);
-//            }
+            if (Math.abs(newCanvasX - oldCanvasX) > 60 || Math.abs(newCanvasY - oldCanvasY) > 60) {
+                timer.setDelay(5);
+            } else if (Math.abs(newCanvasX - oldCanvasX) > 48 || Math.abs(newCanvasY - oldCanvasY) > 48) {
+                timer.setDelay(15);
+            } else {
+                timer.setDelay(16);
+            }
 
             if (newCanvasX - oldCanvasX > 0) {
                 moveCanvas(movePixel ,0);

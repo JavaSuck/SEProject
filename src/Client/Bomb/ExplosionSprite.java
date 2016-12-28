@@ -13,18 +13,29 @@ import Server.CDC.Direction;
 public class ExplosionSprite extends Sprite {
 
     private final String imageName = "bomb.png";
-    private final int delay = 30;
-    private Sprite explosionSprite = new Sprite();
+    private final int delay = 2;
+    private int frameCount = 0;
 
     public ExplosionSprite(Direction direction, boolean isEnd) {
         loadSprite(imageName);
-        initSprites(direction, isEnd);
+        if (direction != null) {
+            initSprites(direction, isEnd);
+        }
     }
 
 
+    public int getFrameCount() {
+        return frameCount;
+    }
+
     public BufferedImage[] getAnimationFrames(int column) {
-        BufferedImage[] frames = {explosionSprite.getSprite(1, column), explosionSprite.getSprite(2, column), explosionSprite.getSprite(3, column), explosionSprite.getSprite(4, column)};
+        BufferedImage[] frames = {getSprite(1, column), getSprite(2, column), getSprite(3, column), getSprite(4, column), getSprite(4, column), getSprite(4, column), getSprite(3, column), getSprite(2, column), getSprite(1, column)};
+        frameCount = frames.length;
         return frames;
+    }
+
+    public void initCenter() {
+        createAnimation(getAnimationFrames(0));
     }
 
     public void initSprites(Direction direction, boolean isEnd) {
@@ -70,6 +81,10 @@ public class ExplosionSprite extends Sprite {
 
     public void updateAnimation() {
         animation.update();
+    }
+
+    public int getCurrentFrame() {
+        return animation.getCurrentFrame();
     }
 
 }

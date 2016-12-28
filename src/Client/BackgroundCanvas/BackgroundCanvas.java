@@ -37,7 +37,6 @@ public class BackgroundCanvas extends JLayeredPane {
     }
 
     public BackgroundCanvas() {
-
     }
 
     public void initTimer() {
@@ -61,9 +60,9 @@ public class BackgroundCanvas extends JLayeredPane {
             }
 
             if (newCanvasX - oldCanvasX > 0) {
-                moveCanvas(movePixel ,0);
+                moveCanvas(movePixel, 0);
             } else if (newCanvasX - oldCanvasX < 0) {
-                moveCanvas(movePixel * -1 ,0);
+                moveCanvas(movePixel * -1, 0);
             } else if (newCanvasY - oldCanvasY > 0) {
                 moveCanvas(0, movePixel);
             } else if (newCanvasY - oldCanvasY < 0) {

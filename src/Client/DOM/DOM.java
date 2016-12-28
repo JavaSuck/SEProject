@@ -20,6 +20,7 @@ public class DOM {
 
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private HashMap<Integer, Bomb> bombs = new HashMap<>();
+    private HashMap<Integer, Explosion> explosions = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
 
     private int localPlayerId;
@@ -49,6 +50,13 @@ public class DOM {
         for (Map.Entry<Integer, Bomb> bomb : bombs.entrySet()) {
             bomb.getValue().updateAnimation();
         }
+        for (Map.Entry<Integer, Explosion> explosion : explosions.entrySet()) {
+            explosion.getValue().updateAnimation();
+            if (explosion.getValue().getCurrentFrame() == explosion.getValue().getFrameCount() - 1) {
+                backgroundCanvas.remove(explosion.getValue());
+            }
+        }
+
     }
 
     public Point getVirtualCharacterXY() {
@@ -87,9 +95,12 @@ public class DOM {
             backgroundCanvas.remove(bomb);
             bombs.remove(bomb.getId());
 
-            Explosion newExplosion = new Explosion(power);
+            Explosion newExplosion = new Explosion(power, x, y);
             newExplosion.setExplosionRange(explosionRange);
+            explosions.put(index, newExplosion);
             backgroundCanvas.add(newExplosion);
+            newExplosion.startAnimation();
+
         }
     }
 

@@ -79,8 +79,13 @@ public class UDPClient extends Thread {
                     int power = bomb.getInt("power");
                     boolean isExist = bomb.getBoolean("isExist");
                     Point coordinate = new Point(coordinateX, coordinateY);
+                    JSONArray explosionRangeArray = bomb.getJSONArray("explosionRange");
+                    int[] explosionRange = new int[4];
+                    for (int j = 0; j < explosionRangeArray.length(); ++j) {
+                        explosionRange[j] = explosionRangeArray.optInt(j);
+                    }
                     print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime + ", isExist = " + isExist);
-                    dom.updateBomb(bombId, coordinateX, coordinateY, isExist);
+                    dom.updateBomb(bombId, coordinateX, coordinateY, isExist, explosionRange);
                 }
 
                 JSONObject gameState = messages.getJSONObject("gameState");

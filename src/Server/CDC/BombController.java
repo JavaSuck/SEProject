@@ -48,14 +48,33 @@ class BombController {
         int bombY = (int) bomb.coordinate.getY();
         int effectBlock = (GameMode.bombPower - 1) / 2;
         mapData[bombY][bombX] = 0;
-        for (int effectX = bombX - effectBlock; effectX <= bombX + effectBlock; effectX++) {
+        // Check if out of map range and stop at obstacle
+        for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                 checkPlayerDead(effectX, bombY);
+            } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
+                break;
             }
         }
-        for (int effectY = bombY - effectBlock; effectY <= bombY + effectBlock; effectY++) {
+        for (int effectX = bombX - 1; effectX >= bombX - effectBlock; effectX--) {
+            if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
+                checkPlayerDead(effectX, bombY);
+            } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
+                break;
+            }
+        }
+        for (int effectY = bombY; effectY <= bombY + effectBlock; effectY++) {
             if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
                 checkPlayerDead(bombX, effectY);
+            } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
+                break;
+            }
+        }
+        for (int effectY = bombY - 1; effectY >= bombY - effectBlock; effectY--) {
+            if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
+                checkPlayerDead(bombX, effectY);
+            } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
+                break;
             }
         }
         bombs.remove(bomb);

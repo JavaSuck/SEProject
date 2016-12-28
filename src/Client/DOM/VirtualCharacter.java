@@ -31,7 +31,6 @@ public class VirtualCharacter extends Sprite {
 
 
     public VirtualCharacter(String imageName) {
-
         loadSprite(imageName);
         for (int i = 0; i < 4; i++) {
             BufferedImage[] walking = {getSprite(i, 1), getSprite(i, 0), getSprite(i, 2)};

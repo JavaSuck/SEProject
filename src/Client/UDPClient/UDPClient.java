@@ -5,6 +5,7 @@ import Client.DOM.DOM;
 import Server.CDC.Direction;
 import Server.CDC.GameMode;
 import Server.CDC.Stage;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -61,8 +62,8 @@ public class UDPClient extends Thread {
                     int directionValue = player.getInt("direction");
                     Direction direction = Direction.getDirection(directionValue);
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
-                    if(i == 0)
-                    print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
+                    if (i == 0)
+                        print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
                     dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync);
                     if (i == dom.getLocalPlayerId()) {
                         backgroundCanvas.update(coordinateNext, shouldCharacterSync);
@@ -85,8 +86,8 @@ public class UDPClient extends Thread {
                     for (int j = 0; j < explosionRangeArray.length(); ++j) {
                         explosionRange[j] = explosionRangeArray.optInt(j);
                     }
-//                    print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime + ", isExist = " + isExist);
-                    dom.updateBomb(bombId, coordinateX, coordinateY, isExist, explosionRange);
+                    print("Get Bomb - id = " + bombId + ", playerId = " + playerId + ", coordinate = " + coordinate + ", expireTime = " + expireTime + ", isExist = " + isExist);
+                    dom.updateBomb(bombId, coordinateX, coordinateY, isExist, explosionRange, power);
                 }
 
                 JSONObject gameState = messages.getJSONObject("gameState");
@@ -98,7 +99,7 @@ public class UDPClient extends Thread {
                 // TODO: Let dom get gameState
 
                 socket.close();
-                sleep(50);
+                sleep(20);
             } catch (InterruptedIOException e) {
                 print("Timeout");
             } catch (InterruptedException | IOException e) {

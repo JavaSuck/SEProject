@@ -33,7 +33,7 @@ public class TCPClient {
             this.actionMap = new Action();
 
             //At first, Server will return JSONObject of connection information.
-            JSONObject receive = receive_data();
+            JSONObject receive = receiveData();
             assert receive != null;
             print(receive.toString());
             playerId = Integer.parseInt(receive.get("content").toString());
@@ -54,7 +54,7 @@ public class TCPClient {
     }
 
 
-    private JSONObject receive_data() {
+    private JSONObject receiveData() {
         try {
             String data = this.receiver.readLine();
 
@@ -63,7 +63,7 @@ public class TCPClient {
 
             return new JSONObject(data);
         } catch (JSONException | IOException e) {
-            error_handle(e);
+            printError(e);
             return null;
         }
     }
@@ -78,16 +78,16 @@ public class TCPClient {
             this.sender.flush();
 
             //wait the data form server.
-            JSONObject receive = this.receive_data();
+            JSONObject receive = this.receiveData();
             assert receive != null;
 //            if (Boolean.parseBoolean((String) receive.get("content")))
                 print("Request successfully");
         } catch (JSONException e) {
-            error_handle(e);
+            printError(e);
         }
     }
 
-    private void error_handle(Exception e) {
+    private void printError(Exception e) {
         String error_string = String.format("(ERROR) Connection:[%s:%s] happend error, -> %s", connection.getInetAddress(), connection.getPort(), e.toString());
         print(error_string);
     }

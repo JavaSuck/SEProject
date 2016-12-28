@@ -6,7 +6,6 @@ import Client.TCPClient.TCPClient;
 import Server.CDC.GameMode;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,7 +26,7 @@ public class Client extends JFrame implements KeyListener {
     private void initUI() {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setTitle("Ice Fire Master YPC");
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        setPreferredSize(new Dimension(WINDOW_WIDTH + 2, WINDOW_HEIGHT ));
     }
 
     public Client() {
@@ -42,13 +41,9 @@ public class Client extends JFrame implements KeyListener {
         game = new Game(tcp);
 
         initUI();
-        add(login, BorderLayout.CENTER);
-        replaceRoute("login");
-//        remove(login);
-//        add(game, BorderLayout.CENTER);
+        replaceRoute("GAME");
 
         ActionListener taskPerformer = evt -> {
-//          character.updateAnimation();
             revalidate();
             repaint();
         };
@@ -63,15 +58,25 @@ public class Client extends JFrame implements KeyListener {
 
     public void replaceRoute(String routeName) {
         // router navigator according to gameStatus
-//        scenes.each( scene => remove(scene));
-//        add(secnes.get(GameStatus.getRoute()));
-        remove(login);
+        // TODO: Read from GameState.Stage
+        //removeAll();
+        switch (routeName) {
+            case "LOGIN":
+                add(login, BorderLayout.CENTER);
+                break;
+            case "LOADING":
+                break;
+            case "GAME":
+                game.initGame();
+                game.requestFocus();
+                add(game, BorderLayout.CENTER);
+                break;
+            case "RESULT":
+                break;
+        }
+        repaint();
 //        removeKeyListener(this);
 //        setFocusable(false);
-        game.initGame();
-        game.requestFocus();
-        add(game, BorderLayout.CENTER);
-        repaint();
     }
 
     @Override

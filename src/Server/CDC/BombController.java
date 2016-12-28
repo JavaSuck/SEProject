@@ -45,7 +45,7 @@ class BombController {
         int [][] mapData = gameMap.getOriginalMap();
         int bombX = (int) bomb.coordinate.getX();
         int bombY = (int) bomb.coordinate.getY();
-        int effectBlock = (bomb.power - 1) / 2;
+        int effectBlock = bomb.power;
         mapData[bombY][bombX] = 0;
         bomb.isExist = false;
         System.out.println("Bomb" + bomb.id + " explode!");
@@ -85,14 +85,14 @@ class BombController {
                 break;
             }
         }
-        new Thread(() -> {
-            try {
-                sleep(10000);
-                bombs.remove(bomb);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                sleep(10000);
+//                bombs.remove(bomb);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 
     private void checkPlayerDead(int x, int y) {

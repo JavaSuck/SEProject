@@ -35,7 +35,8 @@ public class UDPServer extends Thread {
         do {
             sleep(100);
             clientAddresses = TCPServer.getClientIPTable();
-        } while (clientAddresses.size() < GameMode.playerCount - 3);
+        } while (clientAddresses.size() < GameMode.UdpPlayerCount);
+
         print("Get client table successfully");
         while (true) {
             JSONObject updateInfo = cdc.getUpdatingInfo();

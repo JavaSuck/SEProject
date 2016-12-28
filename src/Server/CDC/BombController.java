@@ -66,7 +66,7 @@ class BombController {
         for (Player player : players) {
             int playerX = (int) player.coordinate.getX();
             int playerY = (int) player.coordinate.getY();
-            if (playerX == x && playerY == y) {
+            if (playerX == x && playerY == y && player.deadTime == 0) {
                 player.deadTime = GameState.gameTime;
                 System.out.println("Player" + player.id + " die!");
             }

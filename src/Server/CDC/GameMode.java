@@ -8,6 +8,6 @@ public class GameMode {
     public static final int personalMaxBomb = 4;
     public static final int bombExpireTime = 5;
     public static final int bombPower = 3;
-    public static final int movePeriod = 220;
+    public static final int movePeriod = 196;
     public static final double walkSpeed = 0.5;
 }

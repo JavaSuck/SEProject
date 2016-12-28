@@ -49,13 +49,13 @@ public class VirtualCharacter extends Sprite {
                 return;
             }
 
-            int movePixel = 1;
+            int movePixel = 2;
             if (Math.abs(newSpiteX - oldSpriteX) > 60 || Math.abs(newSpiteY - oldSpriteY) > 60) {
-                timer.setDelay(1);
+                timer.setDelay(2);
             } else if (Math.abs(newSpiteX - oldSpriteX) > 48 || Math.abs(newSpiteY - oldSpriteY) > 48) {
-                timer.setDelay(3);
+                timer.setDelay(6);
             } else {
-                timer.setDelay(4);
+                timer.setDelay(8);
             }
 
             if (newSpiteX - oldSpriteX > 0) {

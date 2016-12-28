@@ -58,7 +58,7 @@ public class UDPClient extends Thread {
                     Direction direction = Direction.getDirection(directionValue);
 
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
-                    print("Get message, id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
+//                    print("Get message, id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
                     dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync);
                     backgroundCanvas.update(coordinateNext, shouldCharacterSync);
                 }

@@ -18,6 +18,7 @@ class BombController {
         // TODO: check map to put bomb
         gameMap.getOriginalMap();
         bombs.add(new Bomb(playerId, coordinate, 100));
+        System.out.println(playerId + " / " + coordinate);
     }
 
     public ArrayList<Bomb> getBombList() {

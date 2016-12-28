@@ -102,8 +102,8 @@ public class DOM {
             bombs.remove(bomb.getId());
 
             Explosion newExplosion = new Explosion(power, x, y);
-            newExplosion.setExplosionRange(explosionRange);
             newExplosion.setPower(power);
+            newExplosion.setExplosionRange(explosionRange);
             explosions.put(index, newExplosion);
 
             backgroundCanvas.add(newExplosion);

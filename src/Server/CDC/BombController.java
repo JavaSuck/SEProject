@@ -175,7 +175,7 @@ class BombController {
         Thread[] taskThread = new Thread[taskThreadNumber];
 
         int taskIndex = 0;
-        while(taskIndex < taskThread.length -1) {
+        while(taskIndex < taskThread.length) {
 
             final int jobStartIndex = taskIndex * jobLength;
             final int jobEndIndex;

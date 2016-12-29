@@ -55,11 +55,11 @@ class BombController {
         --bomb.explosionRange[0];
         --bomb.explosionRange[2];
 
-        int completeCount=0;
+        int completeCount = 0;
 
         Thread[] sideThread = new Thread[4];
 
-        sideThread[2] = new Thread(()->{
+        sideThread[2] = new Thread(() -> {
             for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
                 if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                     effectPoints.add(new Point(effectX, bombY));
@@ -73,49 +73,52 @@ class BombController {
             }
         });
 
-        sideThread[1] = new Thread(()->{
-        for (int effectX = bombX - 1; effectX >= bombX - effectBlock; effectX--) {
-            if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
-                effectPoints.add(new Point(effectX, bombY));
-                ++bomb.explosionRange[1];
-            } else if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] == 1) {
-                effectObstacles.add(new Point(effectX, bombY));
-                break;
-            } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
-                break;
+        sideThread[1] = new Thread(() -> {
+            for (int effectX = bombX - 1; effectX >= bombX - effectBlock; effectX--) {
+                if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
+                    effectPoints.add(new Point(effectX, bombY));
+                    ++bomb.explosionRange[1];
+                } else if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] == 1) {
+                    effectObstacles.add(new Point(effectX, bombY));
+                    break;
+                } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
+                    break;
+                }
             }
-        }});
+        });
 
-        sideThread[0] = new Thread(()->{
-        for (int effectY = bombY; effectY <= bombY + effectBlock; effectY++) {
-            if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
-                effectPoints.add(new Point(bombX, effectY));
-                ++bomb.explosionRange[0];
-            } else if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] == 1) {
-                effectObstacles.add(new Point(bombX, effectY));
-                break;
-            } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
-                break;
+        sideThread[0] = new Thread(() -> {
+            for (int effectY = bombY; effectY <= bombY + effectBlock; effectY++) {
+                if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
+                    effectPoints.add(new Point(bombX, effectY));
+                    ++bomb.explosionRange[0];
+                } else if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] == 1) {
+                    effectObstacles.add(new Point(bombX, effectY));
+                    break;
+                } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
+                    break;
+                }
             }
-        }});
+        });
 
-        sideThread[3] = new Thread(()->{
-        for (int effectY = bombY - 1; effectY >= bombY - effectBlock; effectY--) {
-            if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
-                effectPoints.add(new Point(bombX, effectY));
-                ++bomb.explosionRange[3];
-            } else if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] == 1) {
-                effectObstacles.add(new Point(bombX, effectY));
-                break;
-            } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
-                break;
+        sideThread[3] = new Thread(() -> {
+            for (int effectY = bombY - 1; effectY >= bombY - effectBlock; effectY--) {
+                if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
+                    effectPoints.add(new Point(bombX, effectY));
+                    ++bomb.explosionRange[3];
+                } else if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] == 1) {
+                    effectObstacles.add(new Point(bombX, effectY));
+                    break;
+                } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
+                    break;
+                }
             }
-        }});
+        });
 
-        for(int i=0; i<sideThread.length; i++)
+        for (int i = 0; i < sideThread.length; i++)
             sideThread[i].start();
 
-        while(sideThread[0].isAlive() | sideThread[1].isAlive() | sideThread[2].isAlive() | sideThread[3].isAlive());
+        while (sideThread[0].isAlive() | sideThread[1].isAlive() | sideThread[2].isAlive() | sideThread[3].isAlive()) ;
 
         checkChainBomb(effectObstacles);
         checkPlayerDead(effectPoints);
@@ -160,6 +163,7 @@ class BombController {
     }
 
     private void checkChainBomb(ArrayList<Point> effectObstacles) {
+<<<<<<< HEAD
 
         int listLength = effectObstacles.size();
         Point[] point = effectObstacles.toArray(new Point[listLength]);
@@ -207,6 +211,20 @@ class BombController {
             taskThread[taskIndex].start();
             taskIndex++;
         }
+
+//        for (Point point : effectObstacles) {
+//            int x = (int) point.getX();
+//            int y = (int) point.getY();
+//            for (Bomb bomb : bombs) {
+//                int bombX = (int) bomb.coordinate.getX();
+//                int bombY = (int) bomb.coordinate.getY();
+//                if (bomb.isExist && bombX == x && bombY == y) {
+//                    // Try to avoid thread busy
+//                    //explode(bomb);
+//                    bomb.expireTime = GameState.gameTime;
+//                }
+//            }
+//        }
 
     }
 

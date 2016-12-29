@@ -174,6 +174,9 @@ public class DOM {
     }
 
     public void setPlayerName(int id, String name) {
-        sidebar.updateAvatarBox(id, name);
+        if (id != 2)
+            sidebar.updateAvatarBox(id, name);
+        else
+            sidebar.updateAvatarBox(2, "YPC");
     }
 }

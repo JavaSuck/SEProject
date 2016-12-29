@@ -29,7 +29,6 @@ public class VirtualCharacter extends Sprite {
     private int newSpiteY;
     private boolean shouldCharacterSync = true;
 
-
     public VirtualCharacter(String imageName) {
         loadSprite(imageName);
         for (int i = 0; i < 4; i++) {

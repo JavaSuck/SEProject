@@ -47,13 +47,13 @@ public class Client extends JFrame implements KeyListener {
         initUI();
         replaceRoute("LOGIN");
 
-//        ActionListener taskPerformer = evt -> {
-//            revalidate();
-//            repaint();
-//        };
-//        Timer timer = new Timer(15, taskPerformer);
-//        timer.setRepeats(true);
-//        timer.start();
+        ActionListener taskPerformer = evt -> {
+            revalidate();
+            repaint();
+        };
+        Timer timer = new Timer(15, taskPerformer);
+        timer.setRepeats(true);
+        timer.start();
 
         // key handler
         addKeyListener(this);
@@ -77,7 +77,7 @@ public class Client extends JFrame implements KeyListener {
                 add(login, BorderLayout.CENTER);
                 break;
             case "LOADING":
-                Loading loading = new Loading();
+                Loading loading = new Loading(this);
                 currentScene = loading;
 //                scenes.put("LOADING", loading);
                 add(loading, BorderLayout.CENTER);

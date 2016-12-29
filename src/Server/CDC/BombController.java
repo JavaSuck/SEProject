@@ -163,7 +163,6 @@ class BombController {
     }
 
     private void checkChainBomb(ArrayList<Point> effectObstacles) {
-<<<<<<< HEAD
 
         int listLength = effectObstacles.size();
         Point[] point = effectObstacles.toArray(new Point[listLength]);

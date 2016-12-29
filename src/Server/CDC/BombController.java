@@ -168,12 +168,14 @@ class BombController {
         //The smaller the value of jobLength, the higher the parallelism.
         int jobLength = 10;
 
+        //Calculate how many thread in needs.
         int taskThreadNumber = listLength/jobLength;
-        if(listLength % jobLength == 0)
+        if(listLength % jobLength != 0)
             taskThreadNumber++;
 
         Thread[] taskThread = new Thread[taskThreadNumber];
 
+        //Start Dispatch job to thread.
         int taskIndex = 0;
         while(taskIndex < taskThread.length) {
 
@@ -184,7 +186,7 @@ class BombController {
                 jobEndIndex = listLength - 1;
             }
             else {
-                jobEndIndex = jobStartIndex + jobStartIndex + jobLength - 1;
+                jobEndIndex = jobStartIndex + jobLength - 1;
             }
 
             taskThread[taskIndex] = new Thread(() -> {
@@ -205,12 +207,6 @@ class BombController {
             taskThread[taskIndex].start();
             taskIndex++;
         }
-
-        for(Thread currentThread: taskThread){
-            while(currentThread.isAlive());
-        }
-
-
 
     }
 

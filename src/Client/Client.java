@@ -3,6 +3,7 @@ package Client;
 import Client.Scene.Game;
 import Client.Scene.Loading;
 import Client.Scene.Login;
+import Client.Scene.Result;
 import Client.TCPClient.TCPClient;
 import Server.CDC.GameMode;
 import Server.CDC.Stage;
@@ -47,6 +48,7 @@ public class Client extends JFrame implements KeyListener {
         game = new Game(tcp);
 
         initUI();
+
         replaceRoute(Stage.LOGIN);
 
         ActionListener taskPerformer = evt -> {
@@ -89,6 +91,9 @@ public class Client extends JFrame implements KeyListener {
                 add(game, BorderLayout.CENTER);
                 break;
             case RESULT:
+                Result result = new Result();
+                currentScene = result;
+                add(result, BorderLayout.CENTER);
                 break;
         }
         repaint();

@@ -47,19 +47,21 @@ public class DOM {
     }
 
     public void updateAllAnimationFrame() {
-        for (Map.Entry<Integer, VirtualCharacter> character : characters.entrySet()) {
-            character.getValue().updateAnimation();
-        }
-        for (Map.Entry<Integer, Bomb> bomb : bombs.entrySet()) {
-            bomb.getValue().updateAnimation();
-        }
-
+//        for (Map.Entry<Integer, VirtualCharacter> character : characters.entrySet()) {
+//            character.getValue().updateAnimation();
+//        }
+//        for (Map.Entry<Integer, Bomb> bomb : bombs.entrySet()) {
+//            bomb.getValue().updateAnimation();
+//        }
+//
         int[] removeList = new int[100];
         int count = 0;
         for (Map.Entry<Integer, Explosion> explosion : explosions.entrySet()) {
-            explosion.getValue().updateAnimation();
-            if (explosion.getValue().getCurrentFrame() == explosion.getValue().getFrameCount() - 1) {
+//            explosion.getValue().updateAnimation();
+            System.out.println(explosion.getValue().getCurrentFrame() + " , " + (explosion.getValue().getTotalFrames() - 1));
+            if (explosion.getValue().getCurrentFrame() == explosion.getValue().getTotalFrames() - 1) {
                 removeList[count++] = explosion.getKey();
+//                explosions.remove(explosion.getKey());
                 backgroundCanvas.remove(explosion.getValue());
             }
         }

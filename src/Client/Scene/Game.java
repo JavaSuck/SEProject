@@ -10,6 +10,7 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;

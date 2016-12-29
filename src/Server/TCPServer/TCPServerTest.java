@@ -1,5 +1,6 @@
 package Server.TCPServer;
 
+import Client.Client;
 import Client.TCPClient.TCPClient;
 import Server.CDC.CDC;
 import Server.CDC.GameMode;
@@ -21,6 +22,7 @@ public class TCPServerTest {
     private String _serverName = "localhost";
     private int _port;
     private int _limitedConnections = 4;
+    private Client c = new Client();
 
     private CDC _cdc;
 
@@ -78,7 +80,7 @@ public class TCPServerTest {
         int ConnectionNumber = GameMode.playerCount;
 
         for(int i=0; i<ConnectionNumber; i++){
-            TCPClient client = new TCPClient();
+            TCPClient client = new TCPClient(c);
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }
@@ -102,7 +104,7 @@ public class TCPServerTest {
 
 
         for(int i=0; i<AddConnectionNumber; i++){
-            TCPClient client = new TCPClient();
+            TCPClient client = new TCPClient(c);
             InetAddress ipAddr = InetAddress.getByName(_serverName);
             client.connectServer(ipAddr);
         }

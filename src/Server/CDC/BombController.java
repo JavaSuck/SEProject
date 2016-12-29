@@ -22,7 +22,6 @@ class BombController {
                     for (Bomb bomb : bombs) {
                         if (bomb.isExist && GameState.gameTime >= bomb.expireTime) {
                             explode(bomb);
-                            break;
                         }
                     }
                     sleep(50);
@@ -42,6 +41,7 @@ class BombController {
     }
 
     private void explode(Bomb bomb) {
+        new Thread(() -> {
         int[][] mapData = gameMap.getOriginalMap();
         int bombX = (int) bomb.coordinate.getX();
         int bombY = (int) bomb.coordinate.getY();
@@ -130,6 +130,7 @@ class BombController {
 //                e.printStackTrace();
 //            }
 //        }).start();
+        }).start();
     }
 
     private void checkPlayerDead(ArrayList<Point> effectPoints) {

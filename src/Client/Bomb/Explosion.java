@@ -155,8 +155,8 @@ public class Explosion extends JPanel {
         return center.getCurrentFrame();
     }
 
-    public int getFrameCount() {
-        return center.getFrameCount();
+    public int getTotalFrames() {
+        return center.getTotalFrames();
     }
 
 }

@@ -74,7 +74,7 @@ public class Game extends JPanel {
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
-//            dom.updateAllAnimationFrame();
+            dom.updateAllAnimationFrame();
             revalidate();
 //            backgroundCanvas.repaint();
             repaint();

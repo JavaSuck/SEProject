@@ -13,7 +13,7 @@ import Server.CDC.Direction;
 public class ExplosionSprite extends Sprite {
 
     private final String imageName = "bomb.png";
-    private final int delay = 2;
+    private final int delay = 100;
     private int frameCount = 0;
 
     public ExplosionSprite(Direction direction, boolean isEnd) {
@@ -24,8 +24,8 @@ public class ExplosionSprite extends Sprite {
     }
 
 
-    public int getFrameCount() {
-        return frameCount;
+    public int getTotalFrames() {
+        return animation.getTotalFrames();
     }
 
     public BufferedImage[] getAnimationFrames(int column) {

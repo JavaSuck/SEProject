@@ -8,13 +8,13 @@ import static java.lang.Thread.sleep;
 @SuppressWarnings("InfiniteLoopStatement")
 class BombController {
     private GameMap gameMap;
-    private PlayerController playerController;
+    private ArrayList<Player> players;
     private ArrayList<Bomb> bombs;
     private int bombCount = 0;
 
     BombController(GameMap gameMap, PlayerController playerController) {
         this.gameMap = gameMap;
-        this.playerController = playerController;
+        this.players = playerController.getPlayerList();
         this.bombs = new ArrayList<>();
         new Thread(() -> {
             try {
@@ -42,10 +42,11 @@ class BombController {
     }
 
     private void explode(Bomb bomb) {
-        int [][] mapData = gameMap.getOriginalMap();
+        int[][] mapData = gameMap.getOriginalMap();
         int bombX = (int) bomb.coordinate.getX();
         int bombY = (int) bomb.coordinate.getY();
         int effectBlock = bomb.power;
+        ArrayList<Point> effectPoints = new ArrayList<>();
         mapData[bombY][bombX] = 0;
         bomb.isExist = false;
         System.out.println("Bomb" + bomb.id + " explode!");
@@ -54,10 +55,9 @@ class BombController {
         --bomb.explosionRange[0];
         --bomb.explosionRange[2];
 
-
         for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
-                checkPlayerDead(effectX, bombY);
+                effectPoints.add(new Point(effectX, bombY));
                 ++bomb.explosionRange[2];
             } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
                 break;
@@ -65,7 +65,7 @@ class BombController {
         }
         for (int effectX = bombX - 1; effectX >= bombX - effectBlock; effectX--) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
-                checkPlayerDead(effectX, bombY);
+                effectPoints.add(new Point(effectX, bombY));
                 ++bomb.explosionRange[1];
             } else if (effectX < 0 || effectX >= 17 || mapData[bombY][effectX] == 1) {
                 break;
@@ -73,7 +73,7 @@ class BombController {
         }
         for (int effectY = bombY; effectY <= bombY + effectBlock; effectY++) {
             if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
-                checkPlayerDead(bombX, effectY);
+                effectPoints.add(new Point(bombX, effectY));
                 ++bomb.explosionRange[0];
             } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
                 break;
@@ -81,12 +81,13 @@ class BombController {
         }
         for (int effectY = bombY - 1; effectY >= bombY - effectBlock; effectY--) {
             if (effectY >= 0 && effectY < 17 && mapData[effectY][bombX] != 1) {
-                checkPlayerDead(bombX, effectY);
+                effectPoints.add(new Point(bombX, effectY));
                 ++bomb.explosionRange[3];
             } else if (effectY < 0 || effectY >= 17 || mapData[effectY][bombX] == 1) {
                 break;
             }
         }
+        checkPlayerDead(effectPoints);
 //        new Thread(() -> {
 //            try {
 //                sleep(10000);
@@ -97,29 +98,34 @@ class BombController {
 //        }).start();
     }
 
-    private void checkPlayerDead(int x, int y) {
-
-        int endExplosionTime = GameState.gameTime + GameMode.bombExplosionDuration;
-
+    private void checkPlayerDead(ArrayList<Point> effectPoints) {
+        updatePlayerByExplode(effectPoints, players);
         new Thread(() -> {
-
-            ArrayList<Player> players = playerController.getPlayerList();
-
-            try{
-                while(GameState.gameTime <= endExplosionTime){
-                    for (Player player : players) {
-                        int playerX = (int) player.coordinate.getX();
-                        int playerY = (int) player.coordinate.getY();
-                        if (playerX == x && playerY == y && player.deadTime == 0) {
-                            player.deadTime = GameState.gameTime;
-                            player.shouldCharacterSync = true;
-                            System.out.println("Player" + player.id + " die!");
-                        }
-                    }
+            try {
+                int endExplosionTime = GameState.gameTime + GameMode.bombExplosionDuration;
+                while (GameState.gameTime <= endExplosionTime) {
+                    updatePlayerByExplode(effectPoints, players);
                     sleep(50);
                 }
-            }catch (InterruptedException e){}
+            } catch (InterruptedException ignored) {
+            }
         }).start();
+    }
+
+    private void updatePlayerByExplode(ArrayList<Point> effectPoints, ArrayList<Player> players) {
+        for (Point point : effectPoints) {
+            int x = (int) point.getX();
+            int y = (int) point.getY();
+            for (Player player : players) {
+                int playerX = (int) player.coordinate.getX();
+                int playerY = (int) player.coordinate.getY();
+                if (playerX == x && playerY == y && player.deadTime == 0) {
+                    player.deadTime = GameState.gameTime;
+                    player.shouldCharacterSync = true;
+                    System.out.println("Player" + player.id + " die!");
+                }
+            }
+        }
     }
 
     ArrayList<Bomb> getBombList() {

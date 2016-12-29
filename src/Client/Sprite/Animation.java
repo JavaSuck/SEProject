@@ -18,7 +18,7 @@ public class Animation {
     private int frameInterval;              // animation direction (i.e counting forward or backward)
     private int totalFrames;                // total amount of frames for your animation
     private boolean stopped;                // has animations stopped
-    private boolean isRepeat;
+    private boolean isRepeat = true;
     private Timer timer;
 
     private List<AnimationFrame> frames = new ArrayList<AnimationFrame>();    // Arraylist of frames
@@ -42,10 +42,15 @@ public class Animation {
             if (!stopped) {
                 int currentFrameIndex = currentFrame.get();
                 currentFrameIndex++;
-                if (isRepeat || (!isRepeat && currentFrameIndex != totalFrames)) {
+                if (isRepeat) {
                     currentFrame.set(currentFrameIndex % totalFrames);
-                } else if (!isRepeat && currentFrameIndex == totalFrames) {
-                    timer.stop();
+                } else {
+                    System.out.println(currentFrame.get());
+                    if (currentFrameIndex == totalFrames) {
+                        timer.stop();
+                    } else {
+                        currentFrame.set(currentFrameIndex % totalFrames);
+                    }
                 }
             }
         };
@@ -79,7 +84,7 @@ public class Animation {
         }
 
         timer.stop();
-        currentFrame.set(0);
+//        currentFrame.set(0);
 
         stopped = true;
     }

@@ -1,20 +1,18 @@
 package Client.Scene;
 
-import java.awt.*;
-import java.awt.event.ActionListener;
+import Client.ImagePanel.ImagePanel;
+import Client.TCPClient.TCPClient;
 
 import javax.swing.*;
-
-import Client.Client;
-import Client.ImagePanel.ImagePanel;
-import javafx.scene.layout.Background;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class Loading extends JPanel {
 
     private int height = 720;
     private int width = 900;
 
-    public Loading(Client client) {
+    public Loading(TCPClient tcp) {
         setLayout(null);
         setSize(900, 720);
 
@@ -28,7 +26,7 @@ public class Loading extends JPanel {
         NameLabel.setForeground(Color.WHITE);
 
         ActionListener taskPerformer = evt -> {
-            client.replaceRoute("GAME");
+            tcp.getGameState();
         };
         Timer timer = new Timer(500, taskPerformer);
         timer.setRepeats(false);

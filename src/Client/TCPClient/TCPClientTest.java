@@ -1,5 +1,7 @@
 package Client.TCPClient;
 
+import Client.Client;
+
 import java.net.InetAddress;
 
 import static org.junit.Assert.assertFalse;
@@ -13,13 +15,14 @@ public class TCPClientTest {
     private TCPClient _client;
     private int _port;
     private String _correctIP;
+    private Client client;
 
 
     @org.junit.Before
     public void setUp() throws Exception {
 
         _correctIP = "localhost";
-        _client = new TCPClient();
+        _client = new TCPClient(client);
 
     }
 
@@ -55,7 +58,7 @@ public class TCPClientTest {
             if(currentIP.compareTo(_correctIP) == 0) {
                 assertTrue(_client.connectServer(ipAddr));
                 _client = null;
-                _client = new TCPClient();
+                _client = new TCPClient(client);
             }
             else{
                 System.out.println(currentIP);
@@ -66,7 +69,7 @@ public class TCPClientTest {
 //        assertTrue(_client.connectServer(ipAddr));
 
         _client = null;
-        _client = new TCPClient();
+        _client = new TCPClient(client);
 
 
 
@@ -100,7 +103,7 @@ public class TCPClientTest {
         _client.callAction(7);
 
         _client = null;
-        _client = new TCPClient();
+        _client = new TCPClient(client);
 
     }
 //

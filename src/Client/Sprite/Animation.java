@@ -1,25 +1,29 @@
-package Client.Sprite; /**
- * Created by DMOON on 2016/10/25.
- */
+package Client.Sprite;
 
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.swing.*;
 
 
 public class Animation {
 
     private int frameCount;                 // Counts ticks for change
     private int frameDelay;                 // frame delay 1-12 (You will have to play around with this)
-    private int currentFrame;               // animations current frame
+    private AtomicInteger currentFrame = new AtomicInteger(0);               // animations current frame
     private int frameInterval;              // animation direction (i.e counting forward or backward)
     private int totalFrames;                // total amount of frames for your animation
-
     private boolean stopped;                // has animations stopped
+    private Timer timer;
 
     private List<AnimationFrame> frames = new ArrayList<AnimationFrame>();    // Arraylist of frames
 
     public Animation(BufferedImage[] frames, int frameDelay) {
+
         this.frameDelay = frameDelay;
         this.stopped = true;
 
@@ -29,10 +33,24 @@ public class Animation {
 
         this.frameCount = 0;
         this.frameDelay = frameDelay;
-        this.currentFrame = 0;
+        this.currentFrame.set(0);
         this.frameInterval = 1;
         this.totalFrames = this.frames.size();
 
+        ActionListener taskPerformer = evt -> {
+            if (!stopped) {
+                int currentFrameIndex = currentFrame.get();
+                currentFrameIndex++;
+                currentFrame.set(currentFrameIndex % totalFrames);
+            }
+        };
+
+        timer = new Timer(frameDelay, taskPerformer);
+        timer.setRepeats(true);
+    }
+
+    public void setIsRepeat(boolean isRepeat) {
+        timer.setRepeats(isRepeat);
     }
 
     public void start() {
@@ -44,13 +62,19 @@ public class Animation {
             return;
         }
 
+        timer.start();
+
         stopped = false;
+
     }
 
     public void stop() {
         if (frames.size() == 0) {
             return;
         }
+
+        timer.stop();
+        currentFrame.set(0);
 
         stopped = true;
     }
@@ -61,13 +85,13 @@ public class Animation {
         }
 
         stopped = false;
-        currentFrame = 0;
+        currentFrame.set(0);
     }
 
     public void reset() {
         this.stopped = true;
         this.frameCount = 0;
-        this.currentFrame = 0;
+        this.currentFrame.set(0);
     }
 
     private void addFrame(BufferedImage frame, int duration) {
@@ -77,34 +101,34 @@ public class Animation {
         }
 
         frames.add(new AnimationFrame(frame, duration));
-        currentFrame = 0;
+        currentFrame.set(0);
     }
 
     public BufferedImage getSprite() {
-        return frames.get(currentFrame).getFrame();
+        return frames.get(currentFrame.get()).getFrame();
     }
 
     public void update() {
-        if (!stopped) {
-            frameCount++;
-
-            if (frameCount > frameDelay) {
-                frameCount = 0;
-                currentFrame += frameInterval;
-                if (currentFrame < 0) {
-                    currentFrame = totalFrames - 1;
-                }
-                currentFrame = currentFrame % totalFrames;
+//        if (!stopped) {
+//            frameCount++;
+//
+//            if (frameCount > frameDelay) {
+//                frameCount = 0;
+//                currentFrame += frameInterval;
+//                if (currentFrame < 0) {
+//                    currentFrame = totalFrames - 1;
+//                }
+//                currentFrame = currentFrame % totalFrames;
 //                if (currentFrame > totalFrames - 1) {
 //                    currentFrame = 0;
 //                } else
-            }
-        }
+//            }
+//        }
 
     }
 
     public int getCurrentFrame() {
-        return currentFrame;
+        return currentFrame.get();
     }
 
 }

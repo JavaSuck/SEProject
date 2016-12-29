@@ -1,6 +1,8 @@
 package Client.TCPClient;
 
+import Client.Client;
 import Server.CDC.GameMode;
+import Server.CDC.Stage;
 import Server.TCPServer.Action;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,7 +22,13 @@ public class TCPClient {
     private BufferedReader receiver;
     private PrintWriter sender;
     private Action actionMap;
+    private Client client;
     public int playerId;
+    public Stage stage = Stage.LOGIN;
+
+    public TCPClient(Client client) {
+        this.client = client;
+    }
 
     public boolean connectServer(InetAddress ipAddress) {
         try {
@@ -67,6 +75,29 @@ public class TCPClient {
             assert receive != null;
 //            if (Boolean.parseBoolean((String) receive.get("content")))
             print("SetPlayerName successfully");
+            int stageValue = receive.getInt("stage");
+            stage = Stage.getStage(stageValue);
+            print("Stage: " + stage);
+            client.replaceRoute(stage);
+        } catch (JSONException e) {
+            printError(e);
+        }
+    }
+
+    public void getGameState(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("type", "GETSTATE");
+            this.sender.println(jsonObject);
+            this.sender.flush();
+            JSONObject receive = this.receiveData();
+            assert receive != null;
+            boolean playersAttendance = receive.getBoolean("content");
+            print(playersAttendance ? "Players are in attendance" : "Players are not in attendance");
+            int stageValue = receive.getInt("stage");
+            stage = Stage.getStage(stageValue);
+            print("Stage: " + stage);
+            client.replaceRoute(stage);
         } catch (JSONException e) {
             printError(e);
         }

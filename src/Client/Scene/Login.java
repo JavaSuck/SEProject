@@ -1,11 +1,9 @@
 package Client.Scene;
 
-import Client.Client;
 import Client.ImagePanel.ImagePanel;
 import Client.TCPClient.TCPClient;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 public class Login extends JPanel {
@@ -14,7 +12,7 @@ public class Login extends JPanel {
     private int width = 720;
     private TCPClient tcp;
 
-    public Login(TCPClient tcp, Client client) {
+    public Login(TCPClient tcp) {
         this.tcp = tcp;
         setSize(1000, 1000);
         setLayout(null);
@@ -29,7 +27,6 @@ public class Login extends JPanel {
         BtnLogin.addActionListener(e -> {
             if (NameField.getText() != null) {
                 tcp.setPlayerName(NameField.getText());
-                client.replaceRoute("LOADING");
             } else {
                 //JOptionPane.showMessageDialog("Eggs are not supposed to be green.")
             }

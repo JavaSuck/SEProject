@@ -10,6 +10,7 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -73,7 +74,7 @@ public class Game extends JPanel {
         add(sidebar, BorderLayout.EAST);
 
         ActionListener taskPerformer = evt -> {
-            dom.updateAllAnimationFrame();
+//            dom.updateAllAnimationFrame();
             revalidate();
 //            backgroundCanvas.repaint();
             repaint();

@@ -68,6 +68,7 @@ public class ExplosionSprite extends Sprite {
 
     public void createAnimation(BufferedImage[] frames) {
         animation = new Animation(frames, delay);
+        animation.setIsRepeat(false);
     }
 
     public void start() {

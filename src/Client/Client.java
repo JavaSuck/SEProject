@@ -6,6 +6,7 @@ import Client.Scene.Login;
 import Client.Scene.Result;
 import Client.TCPClient.TCPClient;
 import Server.CDC.GameMode;
+import Server.CDC.Stage;
 
 import javax.swing.*;
 
@@ -25,6 +26,7 @@ public class Client extends JFrame implements KeyListener {
     private HashMap<String, JPanel> scenes = new HashMap<>();
     private JPanel currentScene = null;
     private Login login;
+    private Loading loading;
     private Game game;
     private TCPClient tcp;
 
@@ -35,18 +37,19 @@ public class Client extends JFrame implements KeyListener {
     }
 
     public Client() {
-        tcp = new TCPClient();
+        tcp = new TCPClient(this);
         try {
             tcp.connectServer(InetAddress.getByName(GameMode.serverAddress));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
 
-        login = new Login(tcp, this);
+        login = new Login(tcp);
         game = new Game(tcp);
 
         initUI();
-        replaceRoute("RESULT");
+
+        replaceRoute(Stage.LOGIN);
 
         ActionListener taskPerformer = evt -> {
             revalidate();
@@ -61,35 +64,33 @@ public class Client extends JFrame implements KeyListener {
         setFocusable(true);
     }
 
-    public void replaceRoute(String routeName) {
+    public void replaceRoute(Stage stage) {
         // router navigator according to gameStatus
-        // TODO: Read from GameState.Stage
-        //removeAll();
         System.out.print("Replace current scene.");
 
         if (currentScene != null) {
             remove(currentScene);
         }
 
-        switch (routeName) {
-            case "LOGIN":
+        switch (stage) {
+            case LOGIN:
 //                scenes.put("LOGIN", login);
                 currentScene = login;
                 add(login, BorderLayout.CENTER);
                 break;
-            case "LOADING":
-                Loading loading = new Loading(this);
+            case LOADING:
+                loading = new Loading(tcp);
                 currentScene = loading;
 //                scenes.put("LOADING", loading);
                 add(loading, BorderLayout.CENTER);
                 break;
-            case "GAME":
+            case GAME:
                 game.initGame();
                 game.requestFocus();
                 currentScene = game;
                 add(game, BorderLayout.CENTER);
                 break;
-            case "RESULT":
+            case RESULT:
                 Result result = new Result();
                 currentScene = result;
                 add(result, BorderLayout.CENTER);

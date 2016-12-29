@@ -13,7 +13,7 @@ import Server.CDC.Direction;
 public class ExplosionSprite extends Sprite {
 
     private final String imageName = "bomb.png";
-    private final int delay = 100;
+    private final int delay = 50;
     private int frameCount = 0;
 
     public ExplosionSprite(Direction direction, boolean isEnd) {

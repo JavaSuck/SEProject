@@ -20,7 +20,7 @@ public class VirtualCharacter extends Sprite {
     private Point coordinateNext;
     private final int walkingFrameAmount = 6;
 
-    private int delay = 100;
+    private int delay = 150;
     Animation[] walk = new Animation[4];
 
     private Timer timer;

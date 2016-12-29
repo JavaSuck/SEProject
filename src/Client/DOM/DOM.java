@@ -117,11 +117,11 @@ public class DOM {
         return dynamicObjects;
     }
 
-    public HashMap<Integer, VirtualCharacter> getCharacters() {
+    public ConcurrentHashMap<Integer, VirtualCharacter> getCharacters() {
         return characters;
     }
 
-    public HashMap<Integer, Bomb> getBombs() {
+    public ConcurrentHashMap<Integer, Bomb> getBombs() {
         return bombs;
     }
 

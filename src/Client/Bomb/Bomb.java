@@ -10,7 +10,7 @@ public class Bomb extends Sprite {
 
     private int id;
     private int positionX, positionY;
-    private int delay = 100;
+    private int delay = 200;
     private Animation explosion, bomb;
 
     public Bomb(int id) {

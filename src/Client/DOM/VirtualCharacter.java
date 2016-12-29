@@ -107,10 +107,12 @@ public class VirtualCharacter extends Sprite {
         currentDirection = direction;
         this.shouldCharacterSync = shouldCharacterSync;
         if (coordinateOld.x != coordinateNext.x || coordinateOld.y != coordinateNext.y) {
-            coordinateOld = coordinateNext;
+            new Thread(() -> {
+                coordinateOld = coordinateNext;
 
-            newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL;
-            newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL;
+                newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL;
+                newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL;
+            }).start();
         }
 
         if (!shouldCharacterSync) {
@@ -129,7 +131,7 @@ public class VirtualCharacter extends Sprite {
     }
 
     public void dead() {
-        new Timer(200, e -> {
+        new Timer(350, e -> {
             loadSprite("dead.png");
             BufferedImage[] deadImage = {getSprite(0, 0)};
             animation = new Animation(deadImage, 10);

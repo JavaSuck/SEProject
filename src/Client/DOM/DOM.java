@@ -73,28 +73,30 @@ public class DOM {
     }
 
     public void updateVirtualCharacter(int playerId, Direction dir, Point coordinateNext, boolean shouldCharacterSync, int deadTime) {
-        new Thread(() -> {
+
             if (deadTime != 0) {
                 characters.get(playerId).dead();
                 sidebar.updateAvatarBox(playerId);
             } else {
                 characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
             }
-        }).start();
     }
 
 
     public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange, int power) {
-        new Thread(() -> {
-            // Create exist bomb
-            if (bombs.get(index) == null && isExist) {
+
+        // Create exist bomb
+        if (bombs.get(index) == null && isExist) {
+            new Thread(() -> {
                 Bomb newBomb = new Bomb(index);
                 newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
                 bombs.put(index, newBomb);
                 backgroundCanvas.add(newBomb);
-            }
-            // Exist, do explode
-            else if (bombs.get(index) != null && !isExist) {
+            }).start();
+        }
+        // Exist, do explode
+        else if (bombs.get(index) != null && !isExist) {
+            new Thread(() -> {
                 Bomb bomb = bombs.get(index);
                 bomb.stop();
                 backgroundCanvas.remove(bomb);
@@ -105,8 +107,9 @@ public class DOM {
                 explosions.put(index, newExplosion);
                 backgroundCanvas.add(newExplosion);
                 newExplosion.startAnimation();
-            }
-        }).start();
+            }).start();
+        }
+
     }
 
     public HashMap<Integer, Item> getAllDynamicObjects() {

@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class DOM {
@@ -21,7 +22,7 @@ public class DOM {
 
     private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
     private HashMap<Integer, Bomb> bombs = new HashMap<>();
-    private HashMap<Integer, Explosion> explosions = new HashMap<>();
+    private ConcurrentHashMap<Integer, Explosion> explosions = new ConcurrentHashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private Sidebar sidebar;
 

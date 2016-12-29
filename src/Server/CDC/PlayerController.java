@@ -75,8 +75,13 @@ public class PlayerController {
                 while (nextBlock != OBSTACLE && player.deadTime == 0) {
                     player.coordinateNext = getNextCoordinate(player.coordinate, direction);
                     sleep(GameMode.movePeriod);
-                    player.coordinate = player.coordinateNext;
-//                    sleep((long)(GameMode.movePeriod * 0.3));
+
+                    if (nextBlock != OBSTACLE && player.deadTime == 0) {
+                        player.coordinate = player.coordinateNext;
+                    } else {
+                        player.coordinateNext = player.coordinate;
+                        break;
+                    }
 
                     nextBlock = getNextBlock(player.coordinate, direction);
                 }

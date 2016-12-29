@@ -2,8 +2,12 @@ package Server.TCPServer.Tool;
 
 import Server.CDC.CDC;
 import Server.CDC.Direction;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import Server.CDC.GameState;
+import Server.CDC.Stage;
 import Server.TCPServer.Action;
 
 import java.io.BufferedReader;
@@ -114,11 +118,10 @@ public class ServerThread implements Runnable {
                 }
 
 
-            }
-            else if(type.compareTo("SETNAME") == 0) {
-                    String playerName = (String) request.get("content");
-                    requestResult = cdc.setPlayerName(clientToken, playerName);
-
+            } else if (type.compareTo("SETNAME") == 0) {
+                String playerName = (String) request.get("content");
+                requestResult = cdc.setPlayerName(clientToken, playerName);
+                GameState.stage = Stage.LOADING;
             }
 
             JSONObject jsonObject = new JSONObject();

@@ -53,6 +53,8 @@ class BombController {
         // Check if out of map range and stop at obstacle
         --bomb.explosionRange[0];
         --bomb.explosionRange[2];
+
+
         for (int effectX = bombX; effectX <= bombX + effectBlock; effectX++) {
             if (effectX >= 0 && effectX < 17 && mapData[bombY][effectX] != 1) {
                 checkPlayerDead(effectX, bombY);
@@ -96,16 +98,28 @@ class BombController {
     }
 
     private void checkPlayerDead(int x, int y) {
-        ArrayList<Player> players = playerController.getPlayerList();
-        for (Player player : players) {
-            int playerX = (int) player.coordinate.getX();
-            int playerY = (int) player.coordinate.getY();
-            if (playerX == x && playerY == y && player.deadTime == 0) {
-                player.deadTime = GameState.gameTime;
-                player.shouldCharacterSync = true;
-                System.out.println("Player" + player.id + " die!");
-            }
-        }
+
+        int endExplosionTime = GameState.gameTime + GameMode.bombExplosionDuration;
+
+        new Thread(() -> {
+
+            ArrayList<Player> players = playerController.getPlayerList();
+
+            try{
+                while(GameState.gameTime <= endExplosionTime){
+                    for (Player player : players) {
+                        int playerX = (int) player.coordinate.getX();
+                        int playerY = (int) player.coordinate.getY();
+                        if (playerX == x && playerY == y && player.deadTime == 0) {
+                            player.deadTime = GameState.gameTime;
+                            player.shouldCharacterSync = true;
+                            System.out.println("Player" + player.id + " die!");
+                        }
+                    }
+                    sleep(50);
+                }
+            }catch (InterruptedException e){}
+        }).start();
     }
 
     ArrayList<Bomb> getBombList() {

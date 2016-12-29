@@ -45,7 +45,6 @@ public class Animation {
                 if (isRepeat) {
                     currentFrame.set(currentFrameIndex % totalFrames);
                 } else {
-                    System.out.println(currentFrame.get());
                     if (currentFrameIndex == totalFrames) {
                         timer.stop();
                     } else {

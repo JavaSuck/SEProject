@@ -74,6 +74,7 @@ public class DOM {
     public void updateVirtualCharacter(int playerId, Direction dir, Point coordinateNext, boolean shouldCharacterSync, int deadTime) {
         if (deadTime != 0) {
             characters.get(playerId).dead();
+            sidebar.updateAvatarBox(playerId);
         } else {
             characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
         }
@@ -175,8 +176,8 @@ public class DOM {
 
     public void setPlayerName(int id, String name) {
         if (id != 2)
-            sidebar.updateAvatarBox(id, name);
+            sidebar.addAvatarBox(id, name);
         else
-            sidebar.updateAvatarBox(2, "YPC");
+            sidebar.addAvatarBox(2, "YPC");
     }
 }

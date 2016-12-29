@@ -95,29 +95,29 @@ public class DOM {
     }
 
     public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange, int power) {
-        // Create exist bomb
-        if (bombs.get(index) == null && isExist) {
-            Bomb newBomb = new Bomb(index);
-            newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-            bombs.put(index, newBomb);
-            backgroundCanvas.add(newBomb);
-        }
-        // Exist, do explode
-        else if (bombs.get(index) != null && !isExist) {
-            Bomb bomb = bombs.get(index);
-            bomb.stop();
-            backgroundCanvas.remove(bomb);
-            bombs.remove(bomb.getId());
+        new Thread(() -> {
+            // Create exist bomb
+            if (bombs.get(index) == null && isExist) {
+                Bomb newBomb = new Bomb(index);
+                newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
+                bombs.put(index, newBomb);
+                backgroundCanvas.add(newBomb);
+            }
+            // Exist, do explode
+            else if (bombs.get(index) != null && !isExist) {
+                Bomb bomb = bombs.get(index);
+                bomb.stop();
+                backgroundCanvas.remove(bomb);
+                bombs.remove(bomb.getId());
+                Explosion newExplosion = new Explosion(power, x, y);
+                newExplosion.setPower(power);
+                newExplosion.setExplosionRange(explosionRange);
+                explosions.put(index, newExplosion);
+                backgroundCanvas.add(newExplosion);
+                newExplosion.startAnimation();
+            }
 
-            Explosion newExplosion = new Explosion(power, x, y);
-            newExplosion.setPower(power);
-            newExplosion.setExplosionRange(explosionRange);
-            explosions.put(index, newExplosion);
-
-            backgroundCanvas.add(newExplosion);
-            newExplosion.startAnimation();
-
-        }
+        }).start();
     }
 
     public void bombExplode(int index) {

@@ -8,7 +8,7 @@ public class GameMode {
     public static final int UdpPlayerCount = 1;
     public static final int playerMaxBomb = 4;
     public static final int bombExpireTime = 3000;
-    public static final int bombPower = 4;
-    public static final int bombExplosionDuration = 650;
+    public static final int bombPower = 3;
+    public static final int bombExplosionDuration = 600;
     public static final int movePeriod = 200;
 }

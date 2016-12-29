@@ -64,7 +64,7 @@ public class Client extends JFrame implements KeyListener {
         // router navigator according to gameStatus
         // TODO: Read from GameState.Stage
         //removeAll();
-        System.out.print("replace");
+        System.out.print("Replace current scene.");
 
         if (currentScene != null) {
             remove(currentScene);
@@ -96,21 +96,17 @@ public class Client extends JFrame implements KeyListener {
 //        setFocusable(false);
     }
 
-
     @Override
     public void keyReleased(KeyEvent e) {
-        //        System.out.println("keyReleased");
         game.keyReleased(e);
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        //        System.out.println("keyTyped");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // switch gameMode
         game.keyPressed(e);
     }
 }

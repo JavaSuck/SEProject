@@ -92,6 +92,7 @@ public class CDC {
       for (Player player : playerController.getPlayerList()) {
         JSONObject playerObject = new JSONObject();
         playerObject.put("playerId", player.id);
+        playerObject.put("name", player.name);
         playerObject.put("coordinateNextX", player.coordinateNext.getX());
         playerObject.put("coordinateNextY", player.coordinateNext.getY());
         playerObject.put("deadTime", player.deadTime);

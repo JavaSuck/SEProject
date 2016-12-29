@@ -6,6 +6,7 @@ import Client.Objects.Item;
 import Client.Scene.Game;
 import Client.TCPClient.TCPClient;
 import Client.Bomb.Bomb;
+import Client.UIComponents.Sidebar;
 import Server.CDC.Direction;
 
 import java.awt.*;
@@ -22,6 +23,7 @@ public class DOM {
     private HashMap<Integer, Bomb> bombs = new HashMap<>();
     private HashMap<Integer, Explosion> explosions = new HashMap<>();
     private BackgroundCanvas backgroundCanvas;
+    private Sidebar sidebar;
 
     private int localPlayerId;
     public VirtualCharacter localPlayer;
@@ -165,5 +167,13 @@ public class DOM {
 
     public int getLocalPlayerId() {
         return localPlayerId;
+    }
+
+    public void setSidebar(Sidebar sidebar) {
+        this.sidebar = sidebar;
+    }
+
+    public void setPlayerName(int id, String name) {
+        sidebar.updateAvatarBox(id, name);
     }
 }

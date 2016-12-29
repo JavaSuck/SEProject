@@ -1,7 +1,6 @@
 package Client.Scene;
 
 import Client.BackgroundCanvas.BackgroundCanvas;
-import Client.Bomb.Bomb;
 import Client.DOM.DOM;
 import Client.DOM.VirtualCharacter;
 import Client.SDM.SDM;
@@ -11,11 +10,9 @@ import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.Map;
 
 public class Game extends JPanel {
 
@@ -60,6 +57,7 @@ public class Game extends JPanel {
         JLayeredPane content = new JLayeredPane();
         content.setLayout(null);
         content.setPreferredSize(new Dimension(CAMERA_WIDTH, CAMERA_HEIGHT));
+        dom.setSidebar(sidebar);
 
         backgroundCanvas.initCanvasPosition();
         backgroundCanvas.initTimer();

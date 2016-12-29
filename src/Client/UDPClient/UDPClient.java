@@ -54,6 +54,7 @@ public class UDPClient extends Thread {
                 for (int i = 0; i < players.length(); i++) {
                     JSONObject player = players.getJSONObject(i);
                     int playerId = player.getInt("playerId");
+                    String name = player.getString("name");
                     int coordinateNextX = player.getInt("coordinateNextX");
                     int coordinateNextY = player.getInt("coordinateNextY");
                     int deadTime = player.getInt("deadTime");
@@ -62,9 +63,9 @@ public class UDPClient extends Thread {
                     int directionValue = player.getInt("direction");
                     Direction direction = Direction.getDirection(directionValue);
                     Point coordinateNext = new Point(coordinateNextX, coordinateNextY);
-//                    if (i == 0)
 //                        print("Get Player - id = " + playerId + ", coordinateNext = " + coordinateNext + ", direction = " + direction + ", shouldCharacterSync = " + shouldCharacterSync);
                     dom.updateVirtualCharacter(playerId, direction, coordinateNext, shouldCharacterSync, deadTime);
+                    dom.setPlayerName(playerId, name);
                     if (i == dom.getLocalPlayerId()) {
                         backgroundCanvas.update(coordinateNext, shouldCharacterSync);
                     }

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Client.Client;
 import Client.ImagePanel.ImagePanel;
 import javafx.scene.layout.Background;
 
@@ -13,7 +14,7 @@ public class Loading extends JPanel {
     private int height = 720;
     private int width = 900;
 
-    public Loading() {
+    public Loading(Client client) {
         setLayout(null);
         setSize(900, 720);
 
@@ -27,10 +28,10 @@ public class Loading extends JPanel {
         NameLabel.setForeground(Color.WHITE);
 
         ActionListener taskPerformer = evt -> {
-
+            client.replaceRoute("GAME");
         };
-        Timer timer = new Timer(20, taskPerformer);
-        timer.setRepeats(true);
+        Timer timer = new Timer(500, taskPerformer);
+        timer.setRepeats(false);
         timer.start();
 
 

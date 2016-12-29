@@ -130,8 +130,10 @@ public class VirtualCharacter extends Sprite {
     }
 
     public void dead() {
-        loadSprite("dead.png");
-        BufferedImage[] deadImage = {getSprite(0, 0)};
-        animation = new Animation(deadImage, 10);
+        new Timer(200, e -> {
+            loadSprite("dead.png");
+            BufferedImage[] deadImage = {getSprite(0, 0)};
+            animation = new Animation(deadImage, 10);
+        }).start();
     }
 }

@@ -13,6 +13,7 @@ public class AvatarBox extends JPanel {
     private int AVATAR_CROP_SIZE = 144;
     private ImagePanel avatar;
     private JLabel label;
+    private String avatarName = "";
 
     public AvatarBox(String name, String avatarName) {
 
@@ -33,11 +34,15 @@ public class AvatarBox extends JPanel {
     }
 
     public void updateAvatar(String avatarName) {
-        avatar = new ImagePanel(avatarName, AVATAR_SIZE, AVATAR_SIZE, AVATAR_CROP_SIZE);
-        removeAll();
-        add(avatar, BorderLayout.CENTER);
-        add(label, BorderLayout.SOUTH);
-        revalidate();
-        repaint();
+        if (!this.avatarName.equals(avatarName)) {
+            this.avatarName = avatarName;
+
+            avatar = new ImagePanel(avatarName, AVATAR_SIZE, AVATAR_SIZE, AVATAR_CROP_SIZE);
+            removeAll();
+            add(avatar, BorderLayout.CENTER);
+            add(label, BorderLayout.SOUTH);
+            revalidate();
+            repaint();
+        }
     }
 }

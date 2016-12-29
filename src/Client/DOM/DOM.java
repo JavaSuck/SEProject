@@ -20,8 +20,8 @@ public class DOM {
     private TCPClient tcp;
     private HashMap<Integer, Item> dynamicObjects = new HashMap<>();
 
-    private HashMap<Integer, VirtualCharacter> characters = new HashMap<>();
-    private HashMap<Integer, Bomb> bombs = new HashMap<>();
+    private ConcurrentHashMap<Integer, VirtualCharacter> characters = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Bomb> bombs = new ConcurrentHashMap<>();
     private ConcurrentHashMap<Integer, Explosion> explosions = new ConcurrentHashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private Sidebar sidebar;
@@ -84,7 +84,6 @@ public class DOM {
 
 
     public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange, int power) {
-
         // Create exist bomb
         if (bombs.get(index) == null && isExist) {
             new Thread(() -> {

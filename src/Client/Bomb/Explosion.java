@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.swing.*;
 
+import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.DOM.VirtualCharacter;
 import Client.Scene.Game;
 import Client.Sprite.Sprite;
@@ -35,7 +36,7 @@ public class Explosion extends JPanel {
         this.centerY = centerY;
         setLayout(null);
         setOpaque(false);
-        setLocation((centerX - power) * Game.BLOCK_PIXEL, (centerY - power) * Game.BLOCK_PIXEL);
+        setLocation((centerX - power) * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetX, (centerY - power) * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetY);
         center = new ExplosionSprite(null, false);
         center.initCenter();
         center.setLocation(power * Game.BLOCK_PIXEL, power * Game.BLOCK_PIXEL);

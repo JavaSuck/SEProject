@@ -94,7 +94,7 @@ public class DOM {
         if (receiveBomb == null && isExist) {
             creatBombThread[index % 4] = new Thread(() -> {
                 Bomb newBomb = new Bomb(index);
-                newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
+                newBomb.setLocation(x * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetX, y * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetY);
                 if (bombs.get(index) == null) {
                     bombs.put(index, newBomb);
                     backgroundCanvas.add(newBomb);

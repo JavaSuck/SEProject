@@ -47,10 +47,15 @@ public class Result extends JPanel {
         int temp[] = new int[4];
         for (int i = 0; i < 4; i++) {
             temp[i] = playerTime[i];
+            prize[i] = 0;
         }
         Arrays.sort(temp);
         for (int i = 0; i < 4; i++) {
-            prize[i] = Arrays.asList(temp).indexOf(playerTime[i]) + 1;
+            for (int j = 0; j < 4; j++) {
+                if (temp[i] == playerTime[j]) {
+                    prize[i] = j + 1;
+                }
+            }
         }
 
         JLabel[] prizeLabels = new JLabel[4];

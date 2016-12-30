@@ -175,4 +175,8 @@ public class DOM {
         else
             sidebar.addAvatarBox(2, "YPC");
     }
+
+    public void gameEnd() {
+        tcp.gameEnd();
+    }
 }

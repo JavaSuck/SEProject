@@ -97,7 +97,9 @@ public class UDPClient extends Thread {
                 int stageValue = gameState.getInt("stage");
                 Stage stage = Stage.getStage(stageValue);
 //                print("Get gameState - gameTime = " + gameTime + ", livedPlayer = " + livedPlayer + ", stage = " + stage);
-                // TODO: Let dom get gameState
+                if (stage == Stage.RESULT) {
+                    dom.gameEnd();
+                }
 
                 socket.close();
                 sleep(20);

@@ -1,12 +1,9 @@
 package Client.TCPClient;
 
-import static java.lang.Thread.sleep;
-
 import Client.Client;
 import Server.CDC.GameMode;
 import Server.CDC.Stage;
 import Server.TCPServer.Action;
-import java.net.SocketException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,10 +11,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
+
+import static java.lang.Thread.sleep;
 
 public class TCPClient {
 
@@ -152,6 +148,14 @@ public class TCPClient {
         } catch (JSONException e) {
             printError(e);
         }
+    }
+
+    public void gameEnd() {
+        if (stage == Stage.RESULT) {
+            return;
+        }
+        client.replaceRoute(Stage.RESULT);
+        stage = Stage.RESULT;
     }
 
     private void printError(Exception e) {

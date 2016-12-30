@@ -20,13 +20,17 @@ class GameController {
             try {
                 ArrayList<Player> players = playerController.getPlayerList();
                 while (true) {
-                    int livePlayer = 4;
+                    int livePlayer = 0;
                     for (Player player : players) {
-                        if (player.deadTime != 0)
-                            --livePlayer;
+                        if (player.deadTime == 0) {
+                            ++livePlayer;
+                        }
                     }
                     GameState.livedPlayer = livePlayer;
                     GameState.gameTime = (int) new Date().getTime();
+                    if (GameMode.UdpPlayerCount != 1 && livePlayer == 1 && GameState.stage == Stage.GAME) {
+                        GameState.stage = Stage.RESULT;
+                    }
                     sleep(10);
                 }
             } catch (InterruptedException e) {

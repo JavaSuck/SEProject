@@ -29,6 +29,8 @@ public class DOM {
     private int localPlayerId;
     public VirtualCharacter localPlayer;
 
+    private Thread[] creatBombThread = new Thread[4];
+
     public DOM(TCPClient tcp, BackgroundCanvas backgroundCanvas) {
         this.tcp = tcp;
         this.backgroundCanvas = backgroundCanvas;
@@ -88,13 +90,17 @@ public class DOM {
 
         // Create exist bomb
         Bomb receiveBomb = bombs.get(index);
+
         if (receiveBomb == null && isExist) {
-            Bomb newBomb = new Bomb(index);
-            newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-            if (bombs.get(index) == null) {
-                bombs.put(index, newBomb);
-                backgroundCanvas.add(newBomb);
-            }
+            creatBombThread[index % 4] = new Thread(() -> {
+                Bomb newBomb = new Bomb(index);
+                newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
+                if (bombs.get(index) == null) {
+                    bombs.put(index, newBomb);
+                    backgroundCanvas.add(newBomb);
+                }
+            });
+            creatBombThread[index % 4].start();
         }
 
         // Exist, do explode

@@ -8,6 +8,8 @@ import Client.TCPClient.TCPClient;
 import Client.UDPClient.UDPClient;
 import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import javax.swing.*;
 
@@ -58,6 +60,7 @@ public class Game extends JPanel {
         JLayeredPane content = new JLayeredPane();
         content.setLayout(null);
         content.setPreferredSize(new Dimension(CAMERA_WIDTH, CAMERA_HEIGHT));
+
         dom.setSidebar(sidebar);
 
         backgroundCanvas.initCanvasPosition();

@@ -99,15 +99,12 @@ public class DOM {
         Bomb receiveBomb = bombs.get(index);
 
         if (receiveBomb == null && isExist) {
-            creatBombThread[index % 4] = new Thread(() -> {
-                Bomb newBomb = new Bomb(index);
-                newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-                if (bombs.get(index) == null) {
-                    bombs.put(index, newBomb);
-                    backgroundCanvas.add(newBomb);
-                }
-            });
-            creatBombThread[index % 4].start();
+            Bomb newBomb = new Bomb(index);
+            newBomb.setLocation(x * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetX, y * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetY);
+            if (bombs.get(index) == null) {
+                bombs.put(index, newBomb);
+                backgroundCanvas.add(newBomb);
+            }
         }
 
         // Exist, do explode
@@ -188,7 +185,7 @@ public class DOM {
             sidebar.addAvatarBox(2, "YPC");
     }
 
-    public void gameEnd() {
-        tcp.gameEnd();
+    public void gameEnd(String[] playerName, int[] playerTime) {
+        tcp.gameEnd(playerName, playerTime);
     }
 }

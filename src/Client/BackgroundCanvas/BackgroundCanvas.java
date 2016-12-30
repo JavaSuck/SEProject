@@ -10,13 +10,18 @@ import Client.Scene.Game;
 public class BackgroundCanvas extends JLayeredPane {
     public Image mapImage;
 
-    public final static int CANVAS_WIDTH = 816;
-    public final static int CANVAS_HEIGHT = 816;
+    public final static int CANVAS_WIDTH = 1488;
+    public final static int CANVAS_HEIGHT = 1488;
 
     public Point coordinateOld = new Point(0, 0);
 
-    public final int canvasBasicOffsetX = (Game.CAMERA_WIDTH / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;
-    public final int canvasBasicOffsetY = (Game.CAMERA_HEIGHT / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL;
+
+
+    public final static int canvasInnerOffsetX = 336;
+    public final static int canvasInnerOffsetY = 336;
+
+    public final int canvasBasicOffsetX = (Game.CAMERA_WIDTH / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL - BackgroundCanvas.canvasInnerOffsetX;
+    public final int canvasBasicOffsetY = (Game.CAMERA_HEIGHT / Game.BLOCK_PIXEL - 1) / 2 * Game.BLOCK_PIXEL - BackgroundCanvas.canvasInnerOffsetY;
     private Timer timer;
 
     private int newCanvasX;

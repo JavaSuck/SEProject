@@ -16,7 +16,7 @@ public class SDM {
 
     public void loadMap(){
         try {
-            backgroundCanvas.mapImage = ImageIO.read(new File("src/Client/Assets/Images/map001.png"));
+            backgroundCanvas.mapImage = ImageIO.read(new File("src/Client/Assets/Images/map002.png"));
         }
         catch (Exception ex) {
             System.out.println("No map001.png!!");

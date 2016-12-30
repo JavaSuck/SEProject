@@ -53,7 +53,24 @@ public class Result extends JPanel {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (temp[i] == playerTime[j]) {
-                    prize[i] = 5 - j + 1;
+                    //prize[i] = j + 1;
+                    switch (j + 1) {
+                        case 1:
+                            prize[i] = 4;
+                            break;
+
+                        case 2:
+                            prize[i] = 3;
+                            break;
+
+                        case 3:
+                            prize[i] = 2;
+                            break;
+
+                        case 4:
+                            prize[i] = 1;
+                            break;
+                    }
                 }
             }
         }

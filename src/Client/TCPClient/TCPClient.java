@@ -62,6 +62,9 @@ public class TCPClient {
     }
 
     public void setPlayerName(String playerName){
+
+        assert playerName == null;
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("type", "SETNAME");
@@ -81,6 +84,8 @@ public class TCPClient {
             client.replaceRoute(stage);
         } catch (JSONException e) {
             printError(e);
+        } catch (NullPointerException e){
+            print("Server is out of connection.");
         }
     }
 

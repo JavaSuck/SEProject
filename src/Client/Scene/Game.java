@@ -87,7 +87,9 @@ public class Game extends JPanel {
 
     public void keyReleased(KeyEvent e) {
         //        System.out.println("keyReleased");
-        dom.keyReleased(e);
+        try {
+            dom.keyReleased(e);
+        }catch (NullPointerException exp){}
     }
 
     public void keyTyped(KeyEvent e) {
@@ -95,6 +97,8 @@ public class Game extends JPanel {
     }
 
     public void keyPressed(KeyEvent e) {
-        dom.keyPressed(e);
+        try {
+            dom.keyPressed(e);
+        }catch (NullPointerException exp){}
     }
 }

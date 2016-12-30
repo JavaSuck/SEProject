@@ -1,8 +1,11 @@
 package Server.TCPServer.Tool;
 
 
+import static java.lang.Thread.sleep;
+
 import Server.CDC.*;
 
+import java.net.SocketException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,6 +47,17 @@ public class ServerThread implements Runnable {
         } catch (IOException e) {
             printError(e);
         }
+
+        new Thread(()->{
+            try {
+                while (connection.getKeepAlive()) {
+                    sleep(1000);
+                }
+
+                closeConnection();
+            }
+            catch (SocketException | InterruptedException e){}
+        });
     }
 
     public void run() {

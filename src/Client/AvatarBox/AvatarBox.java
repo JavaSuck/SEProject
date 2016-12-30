@@ -3,6 +3,7 @@ package Client.AvatarBox;
 import Client.ImagePanel.ImagePanel;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class AvatarBox extends JPanel {
@@ -16,7 +17,8 @@ public class AvatarBox extends JPanel {
     private String avatarName = "";
 
     public AvatarBox(String name, String avatarName) {
-
+        this.name = name;
+        this.avatarName = avatarName;
         initUI();
         setLayout(new BorderLayout());
         avatar = new ImagePanel(avatarName, AVATAR_SIZE, AVATAR_SIZE, AVATAR_CROP_SIZE);
@@ -33,6 +35,10 @@ public class AvatarBox extends JPanel {
         setBackground(Color.WHITE);
     }
 
+    public void setAVATAR_SIZE(int size) {
+        this.AVATAR_SIZE = size;
+    }
+
     public void updateAvatar(String avatarName) {
         if (!this.avatarName.equals(avatarName)) {
             this.avatarName = avatarName;
@@ -44,5 +50,16 @@ public class AvatarBox extends JPanel {
             revalidate();
             repaint();
         }
+    }
+
+    public void update() {
+        removeAll();
+        avatar = new ImagePanel(avatarName, AVATAR_SIZE, AVATAR_SIZE, AVATAR_CROP_SIZE);
+        label = new JLabel(name, SwingConstants.CENTER);
+        label.setFont(new Font("Serif", Font.PLAIN, 24));
+        add(avatar, BorderLayout.CENTER);
+        add(label, BorderLayout.SOUTH);
+        revalidate();
+        repaint();
     }
 }

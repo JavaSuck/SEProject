@@ -49,15 +49,19 @@ public class UDPClient extends Thread {
                 }
                 String receiveMessages = new String(buffer, 0, packet.getLength());
                 JSONObject messages = new JSONObject(receiveMessages);
+                String[] playerName = new String[4];
+                int[] playerTime = new int[4];
 
                 JSONArray players = messages.getJSONArray("players");
                 for (int i = 0; i < players.length(); i++) {
                     JSONObject player = players.getJSONObject(i);
                     int playerId = player.getInt("playerId");
                     String name = player.getString("name");
+                    playerName[i] = name;
                     int coordinateNextX = player.getInt("coordinateNextX");
                     int coordinateNextY = player.getInt("coordinateNextY");
                     int deadTime = player.getInt("deadTime");
+                    playerTime[i] = -deadTime;
                     int usedBomb = player.getInt("usedBomb");
                     boolean shouldCharacterSync = player.getBoolean("shouldCharacterSync");
                     int directionValue = player.getInt("direction");
@@ -98,7 +102,11 @@ public class UDPClient extends Thread {
                 Stage stage = Stage.getStage(stageValue);
 //                print("Get gameState - gameTime = " + gameTime + ", livedPlayer = " + livedPlayer + ", stage = " + stage);
                 if (stage == Stage.RESULT) {
-                    dom.gameEnd();
+                    for (int i = 0; i < 4; i++) {
+                        if (playerTime[i] != 0)
+                            playerTime[i] += gameTime;
+                    }
+                    dom.gameEnd(playerName, playerTime);
                 }
 
                 socket.close();

@@ -1,5 +1,6 @@
 package Client.DOM;
 
+import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.Scene.Game;
 import Client.Sprite.Animation;
 import Client.Sprite.Sprite;
@@ -108,8 +109,8 @@ public class VirtualCharacter extends Sprite {
         this.shouldCharacterSync = shouldCharacterSync;
         if (coordinateOld.x != coordinateNext.x || coordinateOld.y != coordinateNext.y) {
             coordinateOld = coordinateNext;
-            newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL;
-            newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL;
+            newSpiteX = coordinateNext.x * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetX;
+            newSpiteY = coordinateNext.y * Game.BLOCK_PIXEL + BackgroundCanvas.canvasInnerOffsetY;
         }
 
         if (!shouldCharacterSync) {

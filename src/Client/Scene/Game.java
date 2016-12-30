@@ -8,6 +8,8 @@ import Client.TCPClient.TCPClient;
 import Client.UDPClient.UDPClient;
 import Client.UIComponents.FixedCanvas;
 import Client.UIComponents.Sidebar;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import javax.swing.*;
 

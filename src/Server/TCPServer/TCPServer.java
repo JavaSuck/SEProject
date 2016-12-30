@@ -21,6 +21,7 @@ public class TCPServer {
     private TokenRing tokenRing;
     private ArrayList<InetAddress> connectionList;
     private CDC cdc;
+    public static int loadingCount =0;
 
     public TCPServer(CDC cdc) throws IOException {
         this.server = new ServerSocket(GameMode.TCPPort);

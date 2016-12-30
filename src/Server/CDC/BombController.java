@@ -150,6 +150,9 @@ class BombController {
 
     private void updateObjectState(ArrayList<Point> effectPoints) {
         for (Point point : effectPoints) {
+            if(point==null)
+                continue;
+
             int x = (int) point.getX();
             int y = (int) point.getY();
             for (Player player : players) {

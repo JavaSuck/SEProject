@@ -1,5 +1,6 @@
 package Client.DOM;
 
+import Client.Assets.Audios.Audios;
 import Client.BackgroundCanvas.BackgroundCanvas;
 import Client.Bomb.Explosion;
 import Client.Objects.Item;
@@ -25,6 +26,8 @@ public class DOM {
     private ConcurrentHashMap<Integer, Explosion> explosions = new ConcurrentHashMap<>();
     private BackgroundCanvas backgroundCanvas;
     private Sidebar sidebar;
+
+    private Audios audio = new Audios();
 
     private int localPlayerId;
     public VirtualCharacter localPlayer;
@@ -80,6 +83,10 @@ public class DOM {
         if (deadTime != 0) {
             characters.get(playerId).dead();
             sidebar.updateAvatarBox(playerId);
+
+//            new Thread(()->{
+//               audio.playDeadSound();
+//            }).start();
         } else {
             characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
         }
@@ -105,6 +112,7 @@ public class DOM {
 
         // Exist, do explode
         else if (receiveBomb != null && !isExist) {
+
             new Thread(() -> {
                 Bomb bomb = receiveBomb;
                 bomb.stop();
@@ -119,6 +127,10 @@ public class DOM {
                     newExplosion.startAnimation();
                 }
             }).start();
+
+//            new Thread(() -> {
+//                audio.playBombSound();
+//            }).start();
         }
 
     }

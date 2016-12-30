@@ -90,11 +90,11 @@ public class Client extends JFrame implements KeyListener {
                 currentScene = game;
                 add(game, BorderLayout.CENTER);
                 break;
-//            case RESULT:
-//                Result result = new Result(playerName, playerTime);
-//                currentScene = result;
-//                add(result, BorderLayout.CENTER);
-//                break;
+            case RESULT:
+                Result result = new Result(playerName, playerTime);
+                currentScene = result;
+                add(result, BorderLayout.CENTER);
+                break;
         }
         repaint();
 //        removeKeyListener(this);
@@ -103,6 +103,7 @@ public class Client extends JFrame implements KeyListener {
 
     private String[] playerName;
     private int[] playerTime;
+
     public void setGameEnd(String[] playerName, int[] playerTime) {
         this.playerName = playerName;
         this.playerTime = playerTime;

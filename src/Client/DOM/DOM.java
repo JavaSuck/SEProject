@@ -29,6 +29,8 @@ public class DOM {
     private int localPlayerId;
     public VirtualCharacter localPlayer;
 
+    private Thread[] creatBombThread = new Thread[4];
+
     public DOM(TCPClient tcp, BackgroundCanvas backgroundCanvas) {
         this.tcp = tcp;
         this.backgroundCanvas = backgroundCanvas;
@@ -75,38 +77,48 @@ public class DOM {
 
     public void updateVirtualCharacter(int playerId, Direction dir, Point coordinateNext, boolean shouldCharacterSync, int deadTime) {
 
-            if (deadTime != 0) {
-                characters.get(playerId).dead();
-                sidebar.updateAvatarBox(playerId);
-            } else {
-                characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
-            }
+        if (deadTime != 0) {
+            characters.get(playerId).dead();
+            sidebar.updateAvatarBox(playerId);
+        } else {
+            characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
+        }
     }
 
 
     public void updateBomb(int index, int x, int y, boolean isExist, int[] explosionRange, int power) {
+
         // Create exist bomb
-        if (bombs.get(index) == null && isExist) {
-            new Thread(() -> {
+        Bomb receiveBomb = bombs.get(index);
+
+        if (receiveBomb == null && isExist) {
+            creatBombThread[index % 4] = new Thread(() -> {
                 Bomb newBomb = new Bomb(index);
                 newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-                bombs.put(index, newBomb);
-                backgroundCanvas.add(newBomb);
-            }).start();
+                if (bombs.get(index) == null) {
+                    bombs.put(index, newBomb);
+                    backgroundCanvas.add(newBomb);
+                }
+            });
+            creatBombThread[index % 4].start();
         }
+
         // Exist, do explode
-        else if (bombs.get(index) != null && !isExist) {
+        else if (receiveBomb != null && !isExist) {
             new Thread(() -> {
-                Bomb bomb = bombs.get(index);
+                Bomb bomb = receiveBomb;
                 bomb.stop();
                 backgroundCanvas.remove(bomb);
                 bombs.remove(bomb.getId());
-                Explosion newExplosion = new Explosion(power, x, y);
-                newExplosion.setPower(power);
-                newExplosion.setExplosionRange(explosionRange);
-                explosions.put(index, newExplosion);
-                backgroundCanvas.add(newExplosion);
-                newExplosion.startAnimation();
+                if (explosions.get(index) == null) {
+                    Explosion newExplosion = new Explosion(power, x, y);
+                    newExplosion.setPower(power);
+                    newExplosion.setExplosionRange(explosionRange);
+                    explosions.put(index, newExplosion);
+                    backgroundCanvas.add(newExplosion);
+                    newExplosion.startAnimation();
+                }
+                return;
             }).start();
         }
 

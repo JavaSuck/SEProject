@@ -92,15 +92,15 @@ public class DOM {
         Bomb receiveBomb = bombs.get(index);
 
         if (receiveBomb == null && isExist) {
-            creatBombThread[index % 4] = new Thread(() -> {
-                Bomb newBomb = new Bomb(index);
-                newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
-                if (bombs.get(index) == null) {
-                    bombs.put(index, newBomb);
-                    backgroundCanvas.add(newBomb);
-                }
-            });
-            creatBombThread[index % 4].start();
+//            creatBombThread[index % 4] = new Thread(() -> {
+            Bomb newBomb = new Bomb(index);
+            newBomb.setLocation(x * Game.BLOCK_PIXEL, y * Game.BLOCK_PIXEL);
+            if (bombs.get(index) == null) {
+                bombs.put(index, newBomb);
+                backgroundCanvas.add(newBomb);
+            }
+//            });
+//            creatBombThread[index % 4].start();
         }
 
         // Exist, do explode

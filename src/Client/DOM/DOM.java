@@ -176,7 +176,7 @@ public class DOM {
             sidebar.addAvatarBox(2, "YPC");
     }
 
-    public void gameEnd() {
-        tcp.gameEnd();
+    public void gameEnd(String[] playerName, int[] playerTime) {
+        tcp.gameEnd(playerName, playerTime);
     }
 }

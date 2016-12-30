@@ -91,7 +91,7 @@ public class Client extends JFrame implements KeyListener {
                 add(game, BorderLayout.CENTER);
                 break;
             case RESULT:
-                Result result = new Result();
+                Result result = new Result(playerName, playerTime);
                 currentScene = result;
                 add(result, BorderLayout.CENTER);
                 break;
@@ -99,6 +99,13 @@ public class Client extends JFrame implements KeyListener {
         repaint();
 //        removeKeyListener(this);
 //        setFocusable(false);
+    }
+
+    private String[] playerName;
+    private int[] playerTime;
+    public void setGameEnd(String[] playerName, int[] playerTime) {
+        this.playerName = playerName;
+        this.playerTime = playerTime;
     }
 
     @Override

@@ -150,10 +150,11 @@ public class TCPClient {
         }
     }
 
-    public void gameEnd() {
+    public void gameEnd(String[] playerName, int[] playerTime) {
         if (stage == Stage.RESULT) {
             return;
         }
+        client.setGameEnd(playerName, playerTime);
         client.replaceRoute(Stage.RESULT);
         stage = Stage.RESULT;
     }

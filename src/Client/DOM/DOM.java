@@ -79,7 +79,7 @@ public class DOM {
 
         if (deadTime != 0) {
             characters.get(playerId).dead();
-//            sidebar.updateAvatarBox(playerId);
+            sidebar.updateAvatarBox(playerId);
         } else {
             characters.get(playerId).updateCharacter(dir, coordinateNext, shouldCharacterSync);
         }

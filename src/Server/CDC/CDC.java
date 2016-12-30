@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.awt.*;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CDC {
 
@@ -43,7 +44,7 @@ public class CDC {
     // Check if player can put bomb
     int placedBombs = 0;
 
-    ArrayList<Bomb> bombs = bombController.getBombList();
+      CopyOnWriteArrayList<Bomb> bombs = bombController.getBombList();
     for (Bomb bomb : bombs) {
       if (bomb.isExist && bomb.playerId == playerId) {
         ++placedBombs;

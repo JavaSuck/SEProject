@@ -2,6 +2,7 @@ package Server.CDC;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static java.lang.Thread.sleep;
 
@@ -9,13 +10,13 @@ import static java.lang.Thread.sleep;
 class BombController {
     private GameMap gameMap;
     private ArrayList<Player> players;
-    private ArrayList<Bomb> bombs;
+    private CopyOnWriteArrayList<Bomb> bombs;
     private int bombCount = 0;
 
     BombController(GameMap gameMap, PlayerController playerController) {
         this.gameMap = gameMap;
         this.players = playerController.getPlayerList();
-        this.bombs = new ArrayList<>();
+        this.bombs = new CopyOnWriteArrayList<>();
         new Thread(() -> {
             try {
                 while (true) {
@@ -231,7 +232,7 @@ class BombController {
 
     }
 
-    ArrayList<Bomb> getBombList() {
+    CopyOnWriteArrayList<Bomb> getBombList() {
         return bombs;
     }
 }

@@ -1,9 +1,12 @@
 package Client.TCPClient;
 
+import static java.lang.Thread.sleep;
+
 import Client.Client;
 import Server.CDC.GameMode;
 import Server.CDC.Stage;
 import Server.TCPServer.Action;
+import java.net.SocketException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,6 +48,16 @@ public class TCPClient {
             assert receive != null;
             print(receive.toString());
             playerId = Integer.parseInt(receive.get("content").toString());
+
+            new Thread(()->{
+                try {
+                    while (!connection.getKeepAlive()) {
+                        print("Disconnect with server.");
+                        sleep(1000);
+                    }
+                }
+                catch (SocketException | InterruptedException e){}
+            });
         } catch (IOException | NullPointerException | JSONException e) {
             return false;
         }
@@ -62,6 +75,9 @@ public class TCPClient {
     }
 
     public void setPlayerName(String playerName){
+
+        assert playerName == null;
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("type", "SETNAME");
@@ -81,6 +97,8 @@ public class TCPClient {
             client.replaceRoute(stage);
         } catch (JSONException e) {
             printError(e);
+        } catch (NullPointerException e){
+            print("Server is out of connection.");
         }
     }
 

@@ -66,7 +66,7 @@ public class Client extends JFrame implements KeyListener {
 
     public void replaceRoute(Stage stage) {
         // router navigator according to gameStatus
-        System.out.print("Replace current scene.");
+        System.out.println("[Client]: Replace current scene.");
 
         if (currentScene != null) {
             remove(currentScene);

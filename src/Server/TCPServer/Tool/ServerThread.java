@@ -29,7 +29,8 @@ public class ServerThread implements Runnable {
     private PrintWriter sender;
     private Action actionMap;
     private TokenRing tokenRing;
-    private CDC cdc;
+    private CDC cdc;;
+    private int loadingCount = 0;
 
     public ServerThread(Socket connection, ArrayList<InetAddress> connectionList, int clientToken, TokenRing tokenRing, CDC cdc) {
         //Handle yourself connection
@@ -136,9 +137,10 @@ public class ServerThread implements Runnable {
                 String playerName = (String) request.get("content");
                 requestResult = cdc.setPlayerName(clientToken, playerName);
                 GameState.stage = Stage.LOADING;
+                ++loadingCount;
             } else if (type.compareTo("GETSTATE") == 0) {
                 requestResult = connectionList.size() == GameMode.UdpPlayerCount;
-                if (requestResult)
+                if (requestResult && loadingCount == GameMode.UdpPlayerCount)
                     GameState.stage = Stage.GAME;
             }
 

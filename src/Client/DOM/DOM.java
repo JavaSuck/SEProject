@@ -58,7 +58,6 @@ public class DOM {
         int count = 0;
         for (Map.Entry<Integer, Explosion> explosion : explosions.entrySet()) {
 //            explosion.getValue().updateAnimation();
-            System.out.println(explosion.getValue().getCurrentFrame() + " , " + (explosion.getValue().getTotalFrames() - 1));
             if (explosion.getValue().getCurrentFrame() == explosion.getValue().getTotalFrames() - 1) {
                 removeList[count++] = explosion.getKey();
 //                explosions.remove(explosion.getKey());

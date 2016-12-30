@@ -49,7 +49,7 @@ public class Client extends JFrame implements KeyListener {
 
         initUI();
 
-        replaceRoute(Stage.LOGIN);
+        replaceRoute(Stage.RESULT);
 
         ActionListener taskPerformer = evt -> {
             revalidate();
@@ -91,7 +91,9 @@ public class Client extends JFrame implements KeyListener {
                 add(game, BorderLayout.CENTER);
                 break;
             case RESULT:
-                Result result = new Result();
+                String[] names = {"1", "2", "3", "4"};
+                int[] times = {1, 2, 3, 4};
+                Result result = new Result(names, times);
                 currentScene = result;
                 add(result, BorderLayout.CENTER);
                 break;

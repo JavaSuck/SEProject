@@ -49,11 +49,28 @@ public class Result extends JPanel {
             temp[i] = playerTime[i];
             prize[i] = 0;
         }
+
         Arrays.sort(temp);
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (temp[i] == playerTime[j]) {
-                    prize[i] = 5 - j + 1;
+                    switch (i+ 1) {
+                        case 1:
+                            prize[i] = 4;
+                            break;
+
+                        case 2:
+                            prize[i] = 3;
+                            break;
+
+                        case 3:
+                            prize[i] = 2;
+                            break;
+
+                        case 4:
+                            prize[i] = 1;
+                            break;
+                    }
                 }
             }
         }
@@ -71,3 +88,5 @@ public class Result extends JPanel {
 
     }
 }
+// 1 4
+// 2

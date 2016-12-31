@@ -125,9 +125,9 @@ public class DOM {
                 }
             }).start();
 
-//            new Thread(() -> {
-//                audio.playBombSound();
-//            }).start();
+            new Thread(() -> {
+                audio.playBombSound();
+            }).start();
         }
 
     }
